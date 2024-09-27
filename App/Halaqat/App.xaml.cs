@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 using Velopack;
+using Halaqat.Data;
 
 namespace Halaqat
 {
@@ -63,6 +64,7 @@ namespace Halaqat
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureData();
             services.ConfigureUsersFeature();
             services.ConfigureAppService();
             services.ConfigureAuthFeature();
