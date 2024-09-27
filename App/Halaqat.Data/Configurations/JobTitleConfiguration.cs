@@ -1,0 +1,27 @@
+﻿using Halaqat.Shared.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+
+namespace Halaqat.Data.Configurations
+{
+    internal class JobTitleConfiguration : IEntityTypeConfiguration<JobTitle>
+    {
+        public void Configure(EntityTypeBuilder<JobTitle> builder)
+        {
+            builder.HasKey(x => x.Id);
+
+            builder.Property(x => x.Name)
+                .HasColumnType("NVARCHAR(20)");
+
+            builder.HasIndex(x => x.Name)
+                .IsUnique();
+
+            builder.HasData(
+            [
+                new JobTitle { Id = 1, Name = "معلم", DateCreated = DateTime.Parse("2024-01-01") },
+                new JobTitle { Id = 2, Name = "إداري", DateCreated = DateTime.Parse("2024-01-02") }
+            ]);
+        }
+    }
+}

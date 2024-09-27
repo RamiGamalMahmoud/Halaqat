@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="BlackColor">#2c3e50</Color>
+    <Color x:Key="BlueColor">#3498db</Color>
+    <Color x:Key="WhiteColor">#ecf0f1</Color>
+
+    <Color x:Key="WarningColor">#ff9800</Color>
+    <Color x:Key="DangerColor">#e57373</Color>
+    <Color x:Key="SuccessColor">#27ae60</Color>
+
+    <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource BlueColor}" />
+    <SolidColorBrush x:Key="LightBlueBrush" Color="#64b5f6" />
+    <SolidColorBrush x:Key="WhiteBrush" Color="#ecf0f1" />
+    <SolidColorBrush x:Key="BlackBrush" Color="#2c3e50" />
+
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}" />
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerColor}" />
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}" />
+
+    <SolidColorBrush x:Key="MaterialDesign.Brush.Primary" Color="{StaticResource BlueColor}" />
+</ResourceDictionary>

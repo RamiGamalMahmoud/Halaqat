@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Halaqat.Data\Halaqat.Data.csproj" />
+	  <ProjectReference Include="..\Halaqat.Resources\Halaqat.Resources.csproj" />
+	  <ProjectReference Include="..\Halaqat.Services\Halaqat.Services.csproj" />
+	  <ProjectReference Include="..\Halaqat.Shared\Halaqat.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>Halaqat.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+</Project>
