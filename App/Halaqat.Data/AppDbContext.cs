@@ -13,6 +13,7 @@ namespace Halaqat.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
