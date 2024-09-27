@@ -19,8 +19,8 @@ namespace Halaqat.Data.Configurations
 
             builder.HasData(
             [
-                new JobTitle { Id = 1, Name = "معلم", DateCreated = DateTime.Parse("2024-01-01") },
-                new JobTitle { Id = 2, Name = "إداري", DateCreated = DateTime.Parse("2024-01-02") }
+                new { Id = 1, Name = "معلم", DateCreated = DateTime.Parse("2024-01-01") },
+                new { Id = 2, Name = "إداري", DateCreated = DateTime.Parse("2024-01-02") }
             ]);
         }
     }

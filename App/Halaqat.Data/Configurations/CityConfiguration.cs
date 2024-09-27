@@ -17,9 +17,9 @@ namespace Halaqat.Data.Configurations
 #if DEBUG
             builder.HasData(
                 [
-                new City(){ Id = 1, Name = "مدينة 1"},
-                new City(){ Id = 2, Name = "مدينة 2"},
-                new City(){ Id = 3, Name = "مدينة 3"},
+                new { Id = 1, Name = "مدينة 1"},
+                new { Id = 2, Name = "مدينة 2"},
+                new { Id = 3, Name = "مدينة 3"},
                 ]);
 #endif 
         }

@@ -2,7 +2,7 @@
 {
     public class ModelBase
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         public override bool Equals(object obj)
         {

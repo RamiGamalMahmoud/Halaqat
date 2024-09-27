@@ -15,10 +15,10 @@ namespace Halaqat.Data.Configurations
 #if DEBUG
             builder.HasData(
                 [
-                    new AcademicQualification() { Id = 1, Name = "جامعي" },
-                    new AcademicQualification() { Id = 2, Name = "متوسط" },
-                    new AcademicQualification() { Id = 3, Name = "دكتوراه" },
-                    new AcademicQualification() { Id = 4, Name = "بدون" },
+                    new { Id = 1, Name = "جامعي" },
+                    new { Id = 2, Name = "متوسط" },
+                    new { Id = 3, Name = "دكتوراه" },
+                    new { Id = 4, Name = "بدون" },
                 ]);
 #endif
         }
