@@ -27,6 +27,7 @@ namespace Halaqat.Features.Employees
                 City = model.Address.City;
                 Street = Address.Street;
                 Phones = new ObservableCollection<Phone>(model.Phones);
+                Gender = model.Gender;
 
             }
             Phones.CollectionChanged += Phones_CollectionChanged;
@@ -45,6 +46,7 @@ namespace Halaqat.Features.Employees
             model.Address.Street = Street;
             model.AcademicQualification = AcademicQualification;
             model.JobTitle = JobTitle;
+            model.Gender = Gender;
             model.Phones.Clear();
 
             foreach(Phone phone in Phones)
@@ -93,6 +95,12 @@ namespace Halaqat.Features.Employees
         [NotifyDataErrorInfo]
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private string _street;
+
+        [ObservableProperty]
+        [Required(ErrorMessage = "حقل مطلوب")]
+        [NotifyDataErrorInfo]
+        [NotifyPropertyChangedFor(nameof(IsValid))]
+        private Gender _gender;
 
         public ObservableCollection<Phone> Phones { get; } = [];
 

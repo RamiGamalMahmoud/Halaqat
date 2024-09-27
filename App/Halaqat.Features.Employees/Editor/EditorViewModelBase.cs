@@ -25,6 +25,7 @@ namespace Halaqat.Features.Employees.Editor
             AcademicQualifications = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<AcademicQualification>(false));
             JobTitles = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<JobTitle>(false));
             Cities = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<City>(false));
+            Genders = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Gender>(false));
         }
 
         [ObservableProperty]
@@ -35,5 +36,8 @@ namespace Halaqat.Features.Employees.Editor
 
         [ObservableProperty]
         private IEnumerable<City> _cities;
+
+        [ObservableProperty]
+        private IEnumerable<Gender> _genders;
     }
 }

@@ -59,6 +59,11 @@
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+
                             <StackPanel
                                 Grid.Column="0"
                                 MinWidth="200"
@@ -97,6 +102,22 @@
                                     IsEnabled="False"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     Text="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                MinWidth="200"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="النوع" />
+                                <ComboBox
+                                    Padding="5"
+                                    Cursor="Hand"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding Genders}"
+                                    SelectedItem="{Binding DataModel.Gender}"
+                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                             </StackPanel>
 
                         </Grid>

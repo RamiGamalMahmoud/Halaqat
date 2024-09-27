@@ -67,12 +67,12 @@
             AutoGenerateColumns="False"
             FontWeight="Bold"
             IsReadOnly="True"
-            
             ItemsSource="{Binding Employees}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
+                <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
                 <DataGridTextColumn Binding="{Binding JobTitle.Name}" Header="الوظيفة" />
                 <DataGridTextColumn Binding="{Binding AcademicQualification.Name}" Header="المؤهل" />
                 <DataGridTextColumn Binding="{Binding DateCreated}" Header="تاريخ التسجيل" />
