@@ -4,6 +4,7 @@ using Halaqat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240927112816_AddGenderToEmployees")]
+    partial class AddGenderToEmployees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("PhonesId");
 
-                    b.ToTable("EmployeePhone", (string)null);
+                    b.ToTable("EmployeePhone");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.AcademicQualification", b =>
@@ -54,7 +57,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("AcademicQualifications", (string)null);
+                    b.ToTable("AcademicQualifications");
 
                     b.HasData(
                         new
@@ -98,7 +101,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.City", b =>
@@ -118,7 +121,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
 
                     b.HasData(
                         new
@@ -185,7 +188,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("JobTitleId");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Gender", b =>
@@ -202,7 +205,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gender", (string)null);
+                    b.ToTable("Gender");
 
                     b.HasData(
                         new
@@ -237,7 +240,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("JobTitles", (string)null);
+                    b.ToTable("JobTitles");
 
                     b.HasData(
                         new
@@ -268,7 +271,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phones", (string)null);
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.User", b =>
@@ -295,7 +298,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
