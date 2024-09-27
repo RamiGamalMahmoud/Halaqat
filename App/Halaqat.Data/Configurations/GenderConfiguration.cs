@@ -1,7 +1,6 @@
 ﻿using Halaqat.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace Halaqat.Data.Configurations
 {
@@ -11,6 +10,12 @@ namespace Halaqat.Data.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasColumnType("NVARCHAR(5)");
+
+            builder.HasData(new[]
+            {
+                new { Id = 1, Name = "ذكر" },
+                new { Id = 2, Name = "أنثى" }
+            });
         }
     }
 }
