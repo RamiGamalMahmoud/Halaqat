@@ -30,6 +30,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Halaqat.Auth\Halaqat.Auth.csproj" />
 		<ProjectReference Include="..\Halaqat.Data\Halaqat.Data.csproj" />
+		<ProjectReference Include="..\Halaqat.Features.Circles\Halaqat.Features.Circles.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Employees\Halaqat.Features.Employees.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Students\Halaqat.Features.Students.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Users\Halaqat.Features.Users.csproj" />
