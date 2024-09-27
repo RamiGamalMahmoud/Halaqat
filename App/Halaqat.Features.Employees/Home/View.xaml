@@ -78,8 +78,9 @@
                 <DataGridTextColumn Binding="{Binding DateCreated}" Header="تاريخ التسجيل" />
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
-                        <MultiBinding StringFormat="{}{0} - {1}">
+                        <MultiBinding StringFormat="{}{0} - {1} - {2}">
                             <Binding Path="Address.City.Name" />
+                            <Binding Path="Address.District" />
                             <Binding Path="Address.Street" />
                         </MultiBinding>
                     </DataGridTextColumn.Binding>

@@ -138,6 +138,7 @@
                                 <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock
@@ -150,7 +151,7 @@
 
                             <StackPanel
                                 Grid.Column="1"
-                                MinWidth="200"
+                                MinWidth="100"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المدينة" />
@@ -165,7 +166,19 @@
 
                             <StackPanel
                                 Grid.Column="2"
-                                MinWidth="200"
+                                MinWidth="100"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الحي" />
+                                <TextBox
+                                    Padding="5"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    Text="{Binding DataModel.District, UpdateSourceTrigger=PropertyChanged}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="3"
+                                MinWidth="100"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الشارع" />

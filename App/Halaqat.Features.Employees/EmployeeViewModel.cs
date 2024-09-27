@@ -25,6 +25,7 @@ namespace Halaqat.Features.Employees
                 DateCreated = model.DateCreated;
                 Address = model.Address;
                 City = model.Address.City;
+                District = model.Address.District;
                 Street = Address.Street;
                 Phones = new ObservableCollection<Phone>(model.Phones);
                 Gender = model.Gender;
@@ -43,6 +44,7 @@ namespace Halaqat.Features.Employees
         {
             model.Name = Name;
             model.Address.City = City;
+            model.Address.District = District;
             model.Address.Street = Street;
             model.AcademicQualification = AcademicQualification;
             model.JobTitle = JobTitle;
@@ -89,6 +91,12 @@ namespace Halaqat.Features.Employees
         [NotifyDataErrorInfo]
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private City _city;
+
+        [ObservableProperty]
+        [Required(ErrorMessage = "حقل مطلوب")]
+        [NotifyDataErrorInfo]
+        [NotifyPropertyChangedFor(nameof(IsValid))]
+        private string _district;
 
         [ObservableProperty]
         [Required(ErrorMessage = "حقل مطلوب")]

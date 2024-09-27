@@ -73,6 +73,7 @@ namespace Halaqat.Features.Employees
                     Address = new Address()
                     {
                         CityId = dataModel.City.Id,
+                        District = dataModel.District,
                         Street = dataModel.Street
                     }
                 };
@@ -107,6 +108,7 @@ namespace Halaqat.Features.Employees
                 await dbContext.Entry(storedEmployee).Collection(x => x.Phones).LoadAsync();
 
                 address.CityId = dataModel.City.Id;
+                address.District = dataModel.District;
                 address.Street = dataModel.Street;
 
                 storedEmployee.Phones.Clear();
