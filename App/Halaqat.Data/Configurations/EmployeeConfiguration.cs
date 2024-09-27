@@ -17,9 +17,7 @@ namespace Halaqat.Data.Configurations
 
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
 
-            builder.Property(x => x.DateCreated)
-                .IsRequired()
-                .HasDefaultValue(DateTime.Now);
+            builder.Property(x => x.DateCreated).IsRequired();
 
             builder.HasOne(x => x.JobTitle)
                 .WithMany()
