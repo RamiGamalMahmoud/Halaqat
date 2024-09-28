@@ -141,5 +141,30 @@ namespace Halaqat.Features.Employees
                 return Result.Success;
             }
         }
+
+        public async Task<IEnumerable<Employee>> GetTeachers()
+        {
+            if (_entities is not null)
+            {
+                return _entities.Where(x => x.JobTitle.Name == "معلم");
+            }
+
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                IEnumerable<Employee> employees = await dbContext
+                    .Employees
+                    .Include(x => x.Gender)
+                    .Include(x => x.AcademicQualification)
+                    .Include(x => x.JobTitle)
+                    .Include(x => x.Address)
+                    .ThenInclude(x => x.City)
+                    .Include(x => x.Phones)
+                    .Where(x => !x.IsDeleted)
+                    .Where(x => x.JobTitle.Name == "معلم")
+                    .ToArrayAsync();
+
+                return employees;
+            }
+        }
     }
 }
