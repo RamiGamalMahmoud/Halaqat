@@ -10,6 +10,7 @@ namespace Halaqat.Data.Configurations
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasColumnType("varchar(50)").IsRequired();
+            builder.HasIndex(x => x.Name).IsUnique();
         }
     }
 }
