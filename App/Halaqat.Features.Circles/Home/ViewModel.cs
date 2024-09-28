@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Halaqat.Features.Circles.Home
 {
-    internal class ViewModel(IMediator mediator, IMessenger messenger) : HomeViewModelBase<Circle>(mediator, messenger)
+    internal partial class ViewModel(IMediator mediator, IMessenger messenger) : HomeViewModelBase<Circle>(mediator, messenger)
     {
-        public override Task LoadDataAsync(bool isReload)
+        public override async Task LoadDataAsync(bool isReload)
         {
-            return Task.CompletedTask;
+            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(false));
         }
     }
 }
