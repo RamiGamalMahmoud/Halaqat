@@ -18,7 +18,7 @@ namespace Halaqat.MainWindow
                 new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView)),
                 new ViewItem("المستخدمين", typeof(object)),
                 new ViewItem("التقارير", typeof(object)),
-                new ViewItem("الحلقات", typeof(object)),
+                new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView)),
                 new ViewItem("الماليات", typeof(object)),
             };
             _serviceProvider = serviceProvider;

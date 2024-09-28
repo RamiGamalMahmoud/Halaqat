@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Velopack;
 using Halaqat.Data;
+using Halaqat.Features.Circles;
 
 namespace Halaqat
 {
@@ -64,6 +65,7 @@ namespace Halaqat
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureCirclesFeature();
             services.ConfigureData();
             services.ConfigureUsersFeature();
             services.ConfigureAppService();
