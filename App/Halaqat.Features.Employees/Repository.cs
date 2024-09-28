@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Halaqat.Features.Employees
 {
-    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Employee>(dbContextFactory)
+    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Employee, EmployeeViewModel>(dbContextFactory)
     {
         public async Task<IEnumerable<Employee>> GetByName(string name)
         {
@@ -59,7 +59,7 @@ namespace Halaqat.Features.Employees
             return _entities;
         }
 
-        public async Task<Result<Employee>> Create(EmployeeViewModel dataModel)
+        public override async Task<Result<Employee>> Create(EmployeeViewModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -93,7 +93,7 @@ namespace Halaqat.Features.Employees
             }
         }
 
-        public async Task<Result> Update(EmployeeViewModel dataModel)
+        public override async Task<Result> Update(EmployeeViewModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -130,7 +130,7 @@ namespace Halaqat.Features.Employees
             return await Task.FromResult(new Result(true, ""));
         }
 
-        public async Task<Result> Remove(Employee employee)
+        public override async Task<Result> Remove(Employee employee)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {

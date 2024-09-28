@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Halaqat.Features.Students
 {
-    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student>(dbContextFactory)
+    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student, StudentDataModel>(dbContextFactory)
     {
         public override async Task<IEnumerable<Student>> GetAll(bool reload)
         {
@@ -56,7 +56,7 @@ namespace Halaqat.Features.Students
             }
         }
 
-        public async Task<Result<Student>> Create(StudentDataModel dataModel)
+        public override async Task<Result<Student>> Create(StudentDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -88,7 +88,7 @@ namespace Halaqat.Features.Students
             }
         }
 
-        public async Task<Result> Update(StudentDataModel dataModel)
+        public override async Task<Result> Update(StudentDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -124,7 +124,7 @@ namespace Halaqat.Features.Students
             return await Task.FromResult(Result.Success);
         }
 
-        public async Task<Result> Remove(Student student)
+        public override async Task<Result> Remove(Student student)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
