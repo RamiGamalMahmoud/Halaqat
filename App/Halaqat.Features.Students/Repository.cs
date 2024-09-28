@@ -12,7 +12,7 @@ namespace Halaqat.Features.Students
 {
     internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student>(dbContextFactory)
     {
-        public async Task<IEnumerable<Student>> GetAll(bool reload)
+        public override async Task<IEnumerable<Student>> GetAll(bool reload)
         {
             if (!_isLoaded || reload)
             {

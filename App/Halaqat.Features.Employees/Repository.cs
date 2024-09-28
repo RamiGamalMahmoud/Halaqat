@@ -36,7 +36,7 @@ namespace Halaqat.Features.Employees
             }
         }
 
-        public async Task<IEnumerable<Employee>> GetAll(bool reload)
+        public override async Task<IEnumerable<Employee>> GetAll(bool reload)
         {
             if (!_isLoaded || reload)
             {
