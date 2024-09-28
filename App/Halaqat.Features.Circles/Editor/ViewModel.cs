@@ -1,12 +1,14 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
 using MediatR;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Halaqat.Features.Circles.Editor
 {
-    internal abstract class ViewModel : ViewModelBase<CircleDataModel>
+    internal abstract partial class ViewModel : ViewModelBase<CircleDataModel>
     {
         protected ViewModel(IMediator mediator, IMessenger messenger, Circle model) : base(mediator, messenger)
         {
@@ -17,9 +19,12 @@ namespace Halaqat.Features.Circles.Editor
 
         public override bool CanSave() => HasChangesObject.HasChanges && DataModel.IsValid;
 
-        public override Task LoadDataAsync()
+        public override async Task LoadDataAsync()
         {
-            return Task.CompletedTask;
+            Teachers = await _mediator.Send(new Shared.Commands.Employees.GetTeachersCommand());
         }
+
+        [ObservableProperty]
+        private IEnumerable<Employee> _teachers;
     }
 }
