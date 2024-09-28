@@ -10,6 +10,8 @@
         <ResourceDictionary>
             <FontFamily x:Key="FontFamily">Arial</FontFamily>
             <sys:Double x:Key="FontSize">14</sys:Double>
+            <sys:Boolean x:Key="True">True</sys:Boolean>
+            <sys:Boolean x:Key="False">False</sys:Boolean>
 
             <ResourceDictionary.MergedDictionaries>
 
