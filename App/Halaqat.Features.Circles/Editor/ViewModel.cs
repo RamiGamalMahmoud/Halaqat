@@ -19,7 +19,7 @@ namespace Halaqat.Features.Circles.Editor
 
         public override Task LoadDataAsync()
         {
-            throw new System.NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
