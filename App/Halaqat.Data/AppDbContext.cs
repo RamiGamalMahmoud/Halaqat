@@ -14,6 +14,7 @@ namespace Halaqat.Data
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Circle> Circles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
