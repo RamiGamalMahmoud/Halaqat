@@ -7,7 +7,7 @@ namespace Halaqat.Helpers
 {
     internal class AppHelper
     {
-        public AppHelper(IMessenger messenger, ILogger<AppHelper> logger)
+        public AppHelper(IMessenger messenger, ILogger logger)
         {
             messenger.Register<Messages.Logging.LogErrorMessage>(this, (r, m) => logger.Log(LogLevel.Error, m.Message));
 
