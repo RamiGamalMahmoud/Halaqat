@@ -37,7 +37,8 @@ namespace Halaqat
 
             _messenger.Register<Messages.Users.LoginFailed>(this, (r, m) =>
             {
-                MessageBox.Show("login failed");
+            _messenger.Send(new Messages.Logging.LogErrorMessage("Login Failed"));
+                MessageBox.Show("اسم المستخدم غير موجود أو كلمة مرور خاطئة");
             });
 
         }
@@ -49,7 +50,9 @@ namespace Halaqat
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+#if DEBUG
             MessageBox.Show(e.Exception.Message);
+#endif
 #if !DEBUG
             e.Handled = true;
 #endif
