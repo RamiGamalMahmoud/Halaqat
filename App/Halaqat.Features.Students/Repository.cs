@@ -23,6 +23,8 @@ namespace Halaqat.Features.Students
                         .ThenInclude(x => x.City)
                         .Include(x => x.Gender)
                         .Include(x => x.Phones)
+                        .Include(x => x.Circle)
+                        .ThenInclude(x => x.Teacher)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
 
@@ -31,6 +33,17 @@ namespace Halaqat.Features.Students
 
             }
             return _entities;
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsWithNoCircle()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Students
+                    .Where(x => !x.IsDeleted)
+                    .Where(x => x.Circle == null).ToListAsync();
+            }
         }
 
         public async Task<IEnumerable<Student>> GetByName(string name)
@@ -47,6 +60,7 @@ namespace Halaqat.Features.Students
                     .Include(x => x.Gender)
                     .Include(x => x.Address)
                     .ThenInclude(x => x.City)
+                    .Include(x => x.Circle)
                     .Include(x => x.Phones)
                     .Where(x => !x.IsDeleted)
                     .Where(x => x.Name.Contains(name))
@@ -73,6 +87,7 @@ namespace Halaqat.Features.Students
                 student.DateCreated = dataModel.DateCreated;
                 student.GenderId = dataModel.Gender.Id;
                 student.Address = studentAddress;
+                student.CircleId = dataModel.Circle.Id;
 
                 foreach (Phone phone in dataModel.Phones)
                 {
@@ -115,6 +130,7 @@ namespace Halaqat.Features.Students
                 stored.Name = dataModel.Name;
                 stored.GenderId = dataModel.Gender.Id;
                 stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
+                stored.CircleId = dataModel.Circle.Id;
 
                 dbContext.Students.Update(stored);
                 await dbContext.SaveChangesAsync();

@@ -10,9 +10,10 @@ namespace Halaqat.Features.Employees.Home
 {
     internal partial class ViewModel(IMediator mediator, IMessenger messenger) : ObservableObject
     {
-        public async Task LoadDataAsync(bool reload = false)
+        [RelayCommand]
+        public async Task LoadDataAsync(bool reload )
         {
-            Employees = await mediator.Send(new Shared.Commands.Common.GetAllCommand<Employee>(false));
+            Employees = await mediator.Send(new Shared.Commands.Common.GetAllCommand<Employee>(reload));
         }
 
         [RelayCommand]

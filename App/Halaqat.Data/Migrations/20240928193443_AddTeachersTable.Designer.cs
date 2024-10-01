@@ -4,6 +4,7 @@ using Halaqat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240928193443_AddTeachersTable")]
+    partial class AddTeachersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,9 +323,6 @@ namespace Halaqat.Data.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CircleId")
-                        .HasColumnType("int");
-
                     b.Property<DateOnly>("DateCreated")
                         .HasColumnType("date");
 
@@ -347,8 +347,6 @@ namespace Halaqat.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("CircleId");
 
                     b.HasIndex("GenderId");
 
@@ -491,11 +489,6 @@ namespace Halaqat.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Halaqat.Shared.Models.Circle", "Circle")
-                        .WithMany("Students")
-                        .HasForeignKey("CircleId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Halaqat.Shared.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
@@ -503,8 +496,6 @@ namespace Halaqat.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
-
-                    b.Navigation("Circle");
 
                     b.Navigation("Gender");
                 });
@@ -531,11 +522,6 @@ namespace Halaqat.Data.Migrations
                         .HasForeignKey("Halaqat.Shared.Models.Teacher", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Halaqat.Shared.Models.Circle", b =>
-                {
-                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Teacher", b =>

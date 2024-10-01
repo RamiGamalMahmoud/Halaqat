@@ -11,6 +11,8 @@ namespace Halaqat.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasColumnType("varchar(50)").IsRequired();
             builder.HasIndex(x => x.Name).IsUnique();
+
+            builder.HasMany(x => x.Students).WithOne(x => x.Circle).HasForeignKey(x => x.CircleId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Halaqat.Features.Circles.Home
     {
         public override async Task LoadDataAsync(bool isReload)
         {
-            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(false));
+            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
         }
 
         async partial void OnSearchTermChanged(string oldValue, string newValue)

@@ -90,8 +90,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
-                <DataGridTextColumn Header="المعلم" />
-                <DataGridTextColumn Header="عدد الطلبة" />
+                <DataGridTextColumn Binding="{Binding Teacher.Name}" Header="المعلم" />
+                <DataGridTextColumn Binding="{Binding Students.Count}" Header="عدد الطلبة" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
 
                 <DataGridTemplateColumn>

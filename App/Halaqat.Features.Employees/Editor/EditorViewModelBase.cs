@@ -27,6 +27,8 @@ namespace Halaqat.Features.Employees.Editor
             Genders = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Gender>(false));
         }
 
+        public bool EnableJobTitles { get; protected set; } = false;
+
         [ObservableProperty]
         private IEnumerable<AcademicQualification> _academicQualifications;
 

@@ -22,6 +22,7 @@ namespace Halaqat.Features.Students.Editor
         {
             Cities = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<City>(false));
             Genders = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Gender>(false));
+            Circles = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(false));
         }
 
         [RelayCommand(CanExecute = nameof(CanInsertPhone))]
@@ -44,6 +45,9 @@ namespace Halaqat.Features.Students.Editor
 
         [ObservableProperty]
         private IEnumerable<Gender> _genders;
+
+        [ObservableProperty]
+        private IEnumerable<Circle> _circles;
 
         public override bool CanSave() => HasChangesObject.HasChanges && DataModel.IsValid;
     }

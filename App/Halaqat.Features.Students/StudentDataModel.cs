@@ -25,6 +25,7 @@ namespace Halaqat.Features.Students
                 City = model.Address.City;
                 District = model.Address.District;
                 Street = Address.Street;
+                Circle = model.Circle;
                 Phones = new ObservableCollection<Phone>(model.Phones);
                 Gender = model.Gender;
             }
@@ -45,6 +46,7 @@ namespace Halaqat.Features.Students
             model.Address.District = District;
             model.Address.Street = Street;
             model.Gender = Gender;
+            model.Circle = Circle;
             model.Phones.Clear();
             model.DateOfBirth =(DateTime) DateOfBirth;
 
@@ -102,6 +104,12 @@ namespace Halaqat.Features.Students
         [NotifyDataErrorInfo]
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private Gender _gender;
+
+        [ObservableProperty]
+        [Required(ErrorMessage = "حقل مطلوب")]
+        [NotifyDataErrorInfo]
+        [NotifyPropertyChangedFor(nameof(IsValid))]
+        private Circle _circle;
 
         public ObservableCollection<Phone> Phones { get; } = [];
     }

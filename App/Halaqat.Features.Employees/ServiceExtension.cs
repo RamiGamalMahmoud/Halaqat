@@ -10,6 +10,7 @@ namespace Halaqat.Features.Employees
             services.AddMediatR((cfg) => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddSingleton<Repository>();
+            services.AddSingleton<Teachers.Repository>();
 
             services.AddSingleton<Shared.Abstraction.Features.Employees.IHomeView, Home.View>();
             services.AddSingleton<Home.ViewModel>();
