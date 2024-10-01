@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Halaqat.Features.Users
+namespace Halaqat.Features.Users.CommandHandlers
 {
     internal class GetUserByUserNameAndPasswordCommandHandler(Repository repository) : IRequestHandler<Shared.Commands.Users.GetUserByUserNameAndPassword, Result<User>>
     {
