@@ -33,6 +33,8 @@ namespace Halaqat.Shared.Models
         public Gender Gender { get => _gender; set => SetProperty(ref _gender, value); }
         private Gender _gender;
 
+        public User User { get; set; }
+
         public Collection<Phone> Phones { get; } = [];
 
     }

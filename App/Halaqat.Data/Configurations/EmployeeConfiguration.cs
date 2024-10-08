@@ -37,6 +37,12 @@ namespace Halaqat.Data.Configurations
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
 
+            builder.HasOne(x => x.User)
+                .WithOne()
+                .HasForeignKey<Employee>("UserId")
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasMany(x => x.Phones)
                 .WithMany();
         }
