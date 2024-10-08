@@ -19,10 +19,13 @@ namespace Halaqat.Data.Configurations
                 .HasColumnType("NVARCHAR(20)")
                 .IsRequired();
 
+            builder.Property(x => x.IsActive)
+                .HasDefaultValue(true);
+
             builder.HasIndex(x => x.UserName)
                 .IsUnique();
 
-            builder.HasData(new { Id = 1, DateCreated = DateTime.Parse("2024-01-01"), UserName = "admin", Password = "admin" });
+            builder.HasData(new { Id = 1, DateCreated = DateTime.Parse("2024-01-01"), UserName = "admin", Password = "admin", IsActive = true });
         }
     }
 }
