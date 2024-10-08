@@ -46,6 +46,10 @@ namespace Halaqat.Shared.Models
         public Circle Circle { get => _circle; set => SetProperty(ref _circle, value); }
         private Circle _circle;
 
+        public int? ProgramId { get; set; }
+        public Program Program { get => _program; set => SetProperty(ref _program, value); }
+        private Program _program;
+
         public ICollection<Phone> Phones { get; private set; } = [];
     }
 }

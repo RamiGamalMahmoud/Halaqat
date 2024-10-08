@@ -137,6 +137,23 @@
                                     Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                             </StackPanel>
 
+                            <StackPanel
+                                IsEnabled="{Binding CanChangeProgram}"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                MinWidth="200"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="برنامج الحفظ" />
+                                <ComboBox
+                                    Padding="5"
+                                    Cursor="Hand"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding Programs}"
+                                    SelectedItem="{Binding DataModel.Program}"
+                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                            </StackPanel>
+
                         </Grid>
 
                     </Border>

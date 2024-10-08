@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Halaqat.Shared.Models
 {
@@ -13,5 +14,7 @@ namespace Halaqat.Shared.Models
 
         [ObservableProperty]
         private string _notes;
+
+        public Collection<ProgramDay> ProgramDays { get; } = [];
     }
 }

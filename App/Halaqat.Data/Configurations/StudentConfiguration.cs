@@ -32,6 +32,11 @@ namespace Halaqat.Data.Configurations
 
             builder.HasMany(x => x.Phones)
                 .WithMany();
+
+            builder.HasOne(x => x.Program)
+                .WithMany()
+                .HasForeignKey(x => x.ProgramId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

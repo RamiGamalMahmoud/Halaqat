@@ -14,6 +14,7 @@ using System.Windows.Threading;
 using Velopack;
 using Halaqat.Data;
 using Halaqat.Features.Circles;
+using Halaqat.Features.Programs;
 
 namespace Halaqat
 {
@@ -68,6 +69,7 @@ namespace Halaqat
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureProgramsFeature();
             services.ConfigureCirclesFeature();
             services.ConfigureData();
             services.ConfigureUsersFeature();
@@ -87,6 +89,7 @@ namespace Halaqat
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            await _appHelper.ApplyMigrations();
             MainWindow = _host.Services.GetRequiredService<Shared.Abstraction.Features.Auth.ILoginView>() as Window;
             MainWindow.Show();
             base.OnStartup(e);

@@ -5,6 +5,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Scripts\sorahs.sql" />
+	  <None Remove="Scripts\verses.sql" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Scripts\sorahs.sql" />
+	  <EmbeddedResource Include="Scripts\verses.sql" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="MediatR" Version="12.4.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
 			<PrivateAssets>all</PrivateAssets>

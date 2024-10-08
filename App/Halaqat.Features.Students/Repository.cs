@@ -25,6 +25,7 @@ namespace Halaqat.Features.Students
                         .Include(x => x.Phones)
                         .Include(x => x.Circle)
                         .ThenInclude(x => x.Teacher)
+                        .Include(x => x.Program)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
 
@@ -88,6 +89,7 @@ namespace Halaqat.Features.Students
                 student.GenderId = dataModel.Gender.Id;
                 student.Address = studentAddress;
                 student.CircleId = dataModel.Circle.Id;
+                student.ProgramId = dataModel.Program?.Id;
 
                 foreach (Phone phone in dataModel.Phones)
                 {
@@ -131,6 +133,7 @@ namespace Halaqat.Features.Students
                 stored.GenderId = dataModel.Gender.Id;
                 stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
                 stored.CircleId = dataModel.Circle.Id;
+                stored.ProgramId = dataModel.Program?.Id;
 
                 dbContext.Students.Update(stored);
                 await dbContext.SaveChangesAsync();

@@ -28,6 +28,7 @@ namespace Halaqat.Features.Students
                 Circle = model.Circle;
                 Phones = new ObservableCollection<Phone>(model.Phones);
                 Gender = model.Gender;
+                Program = model.Program;
             }
 
             Phones.CollectionChanged += Phones_CollectionChanged;
@@ -49,6 +50,7 @@ namespace Halaqat.Features.Students
             model.Circle = Circle;
             model.Phones.Clear();
             model.DateOfBirth =(DateTime) DateOfBirth;
+            model.Program = Program;
 
             foreach (Phone phone in Phones)
             {
@@ -111,6 +113,8 @@ namespace Halaqat.Features.Students
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private Circle _circle;
 
+        [ObservableProperty]
+        private Program _program;
         public ObservableCollection<Phone> Phones { get; } = [];
     }
 }

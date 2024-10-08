@@ -16,10 +16,11 @@ namespace Halaqat.MainWindow
             {
                 new ViewItem("العاملين", typeof(Shared.Abstraction.Features.Employees.IHomeView)),
                 new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView)),
-                new ViewItem("المستخدمين", typeof(object)),
-                new ViewItem("التقارير", typeof(object)),
                 new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView)),
+                new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView)),
+                new ViewItem("التقارير", typeof(object)),
                 new ViewItem("الماليات", typeof(object)),
+                new ViewItem("المستخدمين", typeof(object)),
             };
             _serviceProvider = serviceProvider;
         }
