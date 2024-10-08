@@ -14,6 +14,13 @@ namespace Halaqat.Data
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Circle> Circles { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Program> Programs { get; set; }
+        public DbSet<ProgramDay> ProgramDays { get; set; }
+        public DbSet<Sorah> Sorahs { get; set; }
+        public DbSet<Verse> Verses { get; set; }
+        public DbSet<ProgramDayItem> ProgramDayItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

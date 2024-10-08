@@ -8,6 +8,12 @@
             Error = error;
         }
 
+        public Result(string errorMessage = "")
+        {
+            IsSuccess = false;
+            Error = errorMessage;
+        }
+
         public bool IsSuccess { get; }
         public string Error { get; }
 

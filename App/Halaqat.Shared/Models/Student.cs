@@ -42,6 +42,14 @@ namespace Halaqat.Shared.Models
         public Gender Gender { get => _gender; set => SetProperty(ref _gender, value); }
         private Gender _gender;
 
+        public int? CircleId { get; set; }
+        public Circle Circle { get => _circle; set => SetProperty(ref _circle, value); }
+        private Circle _circle;
+
+        public int? ProgramId { get; set; }
+        public Program Program { get => _program; set => SetProperty(ref _program, value); }
+        private Program _program;
+
         public ICollection<Phone> Phones { get; private set; } = [];
     }
 }

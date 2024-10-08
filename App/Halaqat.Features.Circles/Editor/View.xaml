@@ -1,0 +1,166 @@
+﻿<Window
+    x:Class="Halaqat.Features.Circles.Editor.View"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Halaqat.Features.Circles.Editor"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="View"
+    Height="500"
+    d:DataContext="{d:DesignInstance Type=local:ViewModel}"
+    x:ClassModifier="internal"
+    FontFamily="{StaticResource FontFamily}"
+    FontSize="{StaticResource FontSize}"
+    FontWeight="Bold"
+    Loaded="Window_Loaded"
+    SizeToContent="Width"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Border
+        Padding="10"
+        HorizontalAlignment="Center"
+        CornerRadius="5"
+        FlowDirection="RightToLeft">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    Margin="0,10"
+                    Padding="5"
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    CornerRadius="5">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel
+                            Grid.Column="0"
+                            MinWidth="200"
+                            Margin="5"
+                            Orientation="Vertical">
+                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الاسم" />
+                            <TextBox
+                                Padding="5"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding DataModel.Name, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+
+                        <StackPanel
+                            Grid.Column="1"
+                            MinWidth="200"
+                            Margin="5"
+                            Orientation="Vertical">
+                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المعلم" />
+                            <ComboBox
+                                Padding="5"
+                                DisplayMemberPath="Name"
+                                ItemsSource="{Binding Teachers}"
+                                SelectedItem="{Binding DataModel.Teacher}"
+                                Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
+                                    Margin="5,0"
+                                    Foreground="{StaticResource MaterialDesign.Brush.Primary}"
+                                    Text="{Binding AllStudentsCount}" />
+                                <TextBlock
+                                    Margin="5,0"
+                                    Foreground="{StaticResource MaterialDesign.Brush.Primary}"
+                                    Text="{Binding StudentsWithNoCircleCount}" />
+                                <TextBlock
+                                    Margin="5,0"
+                                    Foreground="{StaticResource MaterialDesign.Brush.Primary}"
+                                    Text="{Binding SelectedStudents}" />
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    Margin="0,10"
+                    Padding="5"
+                    BorderBrush="LightGray"
+                    BorderThickness="1"
+                    CornerRadius="5">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl ItemsSource="{Binding Students}">
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Vertical" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox
+                                        MinWidth="150"
+                                        Content="{Binding Value.Name}"
+                                        Cursor="Hand"
+                                        IsChecked="{Binding IsSelected}"
+                                        Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                </Border>
+
+                <StackPanel
+                    Grid.Row="2"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button Command="{Binding SelectAllCommand}" Content="اختيار الكل" />
+                    <Button Command="{Binding DeSelectAllCommand}" Content="الغاء الكل" />
+                </StackPanel>
+
+            </Grid>
+
+            <Button
+                Grid.Row="1"
+                Width="100"
+                Margin="0,10,0,0"
+                Command="{Binding SaveCommand}"
+                Content="حفظ"
+                Cursor="Hand"
+                FontFamily="Arial"
+                FontSize="18"
+                FontWeight="Bold"
+                IsDefault="True" />
+
+        </Grid>
+
+    </Border>
+
+</Window>

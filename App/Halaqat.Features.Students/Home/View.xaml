@@ -6,16 +6,10 @@
     xmlns:local="clr-namespace:Halaqat.Features.Students.Home"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:s="clr-namespace:System;assembly=mscorlib"
     d:DataContext="{d:DesignInstance Type=local:ViewModel}"
     x:ClassModifier="internal"
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
-
-    <UserControl.Resources>
-        <s:Boolean x:Key="True">True</s:Boolean>
-        <s:Boolean x:Key="False">False</s:Boolean>
-    </UserControl.Resources>
 
     <Grid>
 
@@ -95,6 +89,8 @@
                 <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
                 <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
+                <DataGridTextColumn Binding="{Binding Circle.Name}" Header="الحلقة" />
+                <DataGridTextColumn Binding="{Binding Circle.Teacher.Name}" Header="المعلم" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
                 <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ الميلاد" />
 
@@ -109,9 +105,29 @@
                 </DataGridTextColumn>
 
                 <DataGridTemplateColumn>
+
                     <DataGridTemplateColumn.CellTemplate>
+
                         <DataTemplate>
+
                             <StackPanel Orientation="Horizontal">
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    Foreground="{StaticResource BlackBrush}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Brain" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="جدول الحفظ" />
+                                    </StackPanel>
+                                </Button>
+
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
@@ -142,10 +158,15 @@
                                             Text="حذف" />
                                     </StackPanel>
                                 </Button>
+
                             </StackPanel>
+
                         </DataTemplate>
+
                     </DataGridTemplateColumn.CellTemplate>
+
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
 
         </DataGrid>

@@ -16,6 +16,7 @@ namespace Halaqat.Features.Users
                 User user = await dbContext
                     .Users
                     .Where(u => u.UserName == userName)
+                    .Where(x => EF.Property<string>(x, "Password") == password)
                     .FirstOrDefaultAsync();
 
                 return new Result<User>(user, user is not null, "");

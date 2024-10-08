@@ -1,15 +1,13 @@
 ﻿using Halaqat.Shared.Abstraction.MainWindow;
-using Microsoft.Extensions.Logging;
 using System.Windows;
 
 namespace Halaqat.MainWindow
 {
     internal partial class View : Window, IMainWindowView
     {
-        public View(ViewModel viewModel, ILogger logger)
+        public View(ViewModel viewModel)
         {
             InitializeComponent();
-            logger.Log(LogLevel.Information, this.ToString());
             DataContext = viewModel;
         }
 

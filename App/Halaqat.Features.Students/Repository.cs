@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Halaqat.Features.Students
 {
-    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student>(dbContextFactory)
+    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student, StudentDataModel>(dbContextFactory)
     {
-        public async Task<IEnumerable<Student>> GetAll(bool reload)
+        public override async Task<IEnumerable<Student>> GetAll(bool reload)
         {
             if (!_isLoaded || reload)
             {
@@ -23,6 +23,9 @@ namespace Halaqat.Features.Students
                         .ThenInclude(x => x.City)
                         .Include(x => x.Gender)
                         .Include(x => x.Phones)
+                        .Include(x => x.Circle)
+                        .ThenInclude(x => x.Teacher)
+                        .Include(x => x.Program)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
 
@@ -31,6 +34,17 @@ namespace Halaqat.Features.Students
 
             }
             return _entities;
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsWithNoCircle()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Students
+                    .Where(x => !x.IsDeleted)
+                    .Where(x => x.Circle == null).ToListAsync();
+            }
         }
 
         public async Task<IEnumerable<Student>> GetByName(string name)
@@ -47,6 +61,7 @@ namespace Halaqat.Features.Students
                     .Include(x => x.Gender)
                     .Include(x => x.Address)
                     .ThenInclude(x => x.City)
+                    .Include(x => x.Circle)
                     .Include(x => x.Phones)
                     .Where(x => !x.IsDeleted)
                     .Where(x => x.Name.Contains(name))
@@ -56,7 +71,7 @@ namespace Halaqat.Features.Students
             }
         }
 
-        public async Task<Result<Student>> Create(StudentDataModel dataModel)
+        public override async Task<Result<Student>> Create(StudentDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -73,6 +88,8 @@ namespace Halaqat.Features.Students
                 student.DateCreated = dataModel.DateCreated;
                 student.GenderId = dataModel.Gender.Id;
                 student.Address = studentAddress;
+                student.CircleId = dataModel.Circle.Id;
+                student.ProgramId = dataModel.Program?.Id;
 
                 foreach (Phone phone in dataModel.Phones)
                 {
@@ -88,7 +105,7 @@ namespace Halaqat.Features.Students
             }
         }
 
-        public async Task<Result> Update(StudentDataModel dataModel)
+        public override async Task<Result> Update(StudentDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -115,6 +132,8 @@ namespace Halaqat.Features.Students
                 stored.Name = dataModel.Name;
                 stored.GenderId = dataModel.Gender.Id;
                 stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
+                stored.CircleId = dataModel.Circle.Id;
+                stored.ProgramId = dataModel.Program?.Id;
 
                 dbContext.Students.Update(stored);
                 await dbContext.SaveChangesAsync();
@@ -124,7 +143,7 @@ namespace Halaqat.Features.Students
             return await Task.FromResult(Result.Success);
         }
 
-        public async Task<Result> Remove(Student student)
+        public override async Task<Result> Remove(Student student)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {

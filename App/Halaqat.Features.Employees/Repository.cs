@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Halaqat.Features.Employees
 {
-    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Employee>(dbContextFactory)
+    internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Employee, EmployeeViewModel>(dbContextFactory)
     {
         public async Task<IEnumerable<Employee>> GetByName(string name)
         {
@@ -36,7 +36,7 @@ namespace Halaqat.Features.Employees
             }
         }
 
-        public async Task<IEnumerable<Employee>> GetAll(bool reload)
+        public override async Task<IEnumerable<Employee>> GetAll(bool reload)
         {
             if (!_isLoaded || reload)
             {
@@ -59,7 +59,7 @@ namespace Halaqat.Features.Employees
             return _entities;
         }
 
-        public async Task<Result<Employee>> Create(EmployeeViewModel dataModel)
+        public override async Task<Result<Employee>> Create(EmployeeViewModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -93,7 +93,7 @@ namespace Halaqat.Features.Employees
             }
         }
 
-        public async Task<Result> Update(EmployeeViewModel dataModel)
+        public override async Task<Result> Update(EmployeeViewModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -130,7 +130,7 @@ namespace Halaqat.Features.Employees
             return await Task.FromResult(new Result(true, ""));
         }
 
-        public async Task<Result> Remove(Employee employee)
+        public override async Task<Result> Remove(Employee employee)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
@@ -139,6 +139,31 @@ namespace Halaqat.Features.Employees
                 await dbContext.SaveChangesAsync();
                 _entities.Remove(employee);
                 return Result.Success;
+            }
+        }
+
+        public async Task<IEnumerable<Employee>> GetTeachers()
+        {
+            if (_entities is not null)
+            {
+                return _entities.Where(x => x.JobTitle.Name == "معلم");
+            }
+
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                IEnumerable<Employee> employees = await dbContext
+                    .Employees
+                    .Include(x => x.Gender)
+                    .Include(x => x.AcademicQualification)
+                    .Include(x => x.JobTitle)
+                    .Include(x => x.Address)
+                    .ThenInclude(x => x.City)
+                    .Include(x => x.Phones)
+                    .Where(x => !x.IsDeleted)
+                    .Where(x => x.JobTitle.Name == "معلم")
+                    .ToArrayAsync();
+
+                return employees;
             }
         }
     }
