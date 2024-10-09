@@ -50,6 +50,7 @@ namespace Halaqat.Features.Employees
                         .Include(x => x.Address)
                         .ThenInclude(x => x.City)
                         .Include(x => x.Phones)
+                        .Include(x => x.User)
                         .Where(x => !x.IsDeleted)
                         .ToArrayAsync();
                     SetEntities(employees);
@@ -63,6 +64,18 @@ namespace Halaqat.Features.Employees
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
+                User user = null;
+                if (dataModel.UserName is not null && dataModel.Password is not null)
+                {
+                    user = new User()
+                    {
+                        UserName = dataModel.UserName,
+                        Password = dataModel.Password,
+                        DateCreated = dataModel.DateCreated,
+                        IsActive = true
+                    };
+                }
+
                 Employee employee = new Employee()
                 {
                     Name = dataModel.Name,
@@ -75,7 +88,8 @@ namespace Halaqat.Features.Employees
                         CityId = dataModel.City.Id,
                         District = dataModel.District,
                         Street = dataModel.Street
-                    }
+                    },
+                    User = user
                 };
 
                 foreach (Phone phone in dataModel.Phones)
@@ -104,8 +118,35 @@ namespace Halaqat.Features.Employees
                 IEnumerable<Phone> oldPhones = dbContext.Set<Phone>().Where(x => phonesIds.Contains(x.Id));
                 IEnumerable<Phone> phones = newPhones.Concat(oldPhones);
 
-                Employee storedEmployee = await dbContext.Employees.FindAsync(dataModel.Model.Id);
-                await dbContext.Entry(storedEmployee).Collection(x => x.Phones).LoadAsync();
+                Employee storedEmployee = await dbContext
+                    .Employees
+                    .Include(x => x.Phones)
+                    .Include(x => x.User)
+                    .Where(x => x.Id == dataModel.Model.Id)
+                    .FirstOrDefaultAsync();
+
+                if(!string.IsNullOrEmpty(dataModel.UserName) && !string.IsNullOrEmpty(dataModel.Password))
+                {
+                    if(storedEmployee.User is not null)
+                    {
+                        storedEmployee.User.UserName = dataModel.UserName;
+                        storedEmployee.User.Password = dataModel.Password;
+                        storedEmployee.User.IsActive = dataModel.IsActive;
+                    }
+
+                    else
+                    {
+                        User user = new User()
+                        {
+                            UserName = dataModel.UserName,
+                            Password = dataModel.Password,
+                            DateCreated = dataModel.DateCreated,
+                            IsActive = dataModel.IsActive
+                        };
+
+                        storedEmployee.User = user;
+                    }
+                }
 
                 address.CityId = dataModel.City.Id;
                 address.District = dataModel.District;

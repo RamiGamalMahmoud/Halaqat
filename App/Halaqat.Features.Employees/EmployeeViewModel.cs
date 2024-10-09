@@ -10,7 +10,7 @@ namespace Halaqat.Features.Employees
     {
         public EmployeeViewModel(Employee model)
         {
-            if(model is null)
+            if (model is null)
             {
                 Model = new Employee();
                 DateCreated = DateTime.Now;
@@ -29,6 +29,9 @@ namespace Halaqat.Features.Employees
                 Street = Address.Street;
                 Phones = new ObservableCollection<Phone>(model.Phones);
                 Gender = model.Gender;
+                UserName = model.User?.UserName;
+                Password = model.User?.Password;
+                IsActive = model.User is not null && model.User.IsActive;
 
             }
             Phones.CollectionChanged += Phones_CollectionChanged;
@@ -50,8 +53,12 @@ namespace Halaqat.Features.Employees
             model.JobTitle = JobTitle;
             model.Gender = Gender;
             model.Phones.Clear();
+            if (model.User is not null)
+            {
+                model.User.IsActive = IsActive;
+            }
 
-            foreach(Phone phone in Phones)
+            foreach (Phone phone in Phones)
             {
                 model.Phones.Add(phone);
             }
@@ -109,6 +116,15 @@ namespace Halaqat.Features.Employees
         [NotifyDataErrorInfo]
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private Gender _gender;
+
+        [ObservableProperty]
+        private string _userName;
+
+        [ObservableProperty]
+        private string _password;
+
+        [ObservableProperty]
+        private bool _isActive;
 
         public ObservableCollection<Phone> Phones { get; } = [];
 

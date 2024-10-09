@@ -14,6 +14,18 @@ namespace Halaqat.Features.Employees.Teachers
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
             {
+                User user = null;
+                if (dataModel.UserName is not null && dataModel.Password is not null)
+                {
+                    user = new User()
+                    {
+                        UserName = dataModel.UserName,
+                        Password = dataModel.Password,
+                        DateCreated = dataModel.DateCreated,
+                        IsActive = true
+                    };
+                }
+
                 Teacher teacher = new Teacher()
                 {
                     Name = dataModel.Name,
@@ -26,7 +38,8 @@ namespace Halaqat.Features.Employees.Teachers
                         CityId = dataModel.City.Id,
                         District = dataModel.District,
                         Street = dataModel.Street
-                    }
+                    },
+                    User = user
                 };
 
                 foreach (Phone phone in dataModel.Phones)

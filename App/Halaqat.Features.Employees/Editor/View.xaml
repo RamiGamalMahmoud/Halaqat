@@ -372,6 +372,7 @@
                                 Margin="0,5"
                                 HorizontalAlignment="Left"
                                 Content="مستخدم للنظام"
+                                IsChecked="{Binding DataModel.IsActive}"
                                 Cursor="Hand"
                                 FlowDirection="LeftToRight"
                                 Style="{StaticResource MaterialDesignLightCheckBox}" />
@@ -399,7 +400,7 @@
                                     <TextBox
                                         Padding="5"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Text="{Binding DataModel.Address.Street, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding DataModel.UserName, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
 
                                 <StackPanel
@@ -411,7 +412,7 @@
                                     <TextBox
                                         Padding="5"
                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                        Text="{Binding DataModel.Address.Street, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding DataModel.Password, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
 
                             </StackPanel>

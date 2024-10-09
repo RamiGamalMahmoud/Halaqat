@@ -34,7 +34,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("PhonesId");
 
-                    b.ToTable("EmployeePhone");
+                    b.ToTable("EmployeePhone", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.AcademicQualification", b =>
@@ -54,7 +54,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("AcademicQualifications");
+                    b.ToTable("AcademicQualifications", (string)null);
 
                     b.HasData(
                         new
@@ -102,7 +102,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Circle", b =>
@@ -136,7 +136,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Circles");
+                    b.ToTable("Circles", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.City", b =>
@@ -156,7 +156,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities", (string)null);
 
                     b.HasData(
                         new
@@ -228,7 +228,7 @@ namespace Halaqat.Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
 
                     b.UseTptMappingStrategy();
                 });
@@ -247,7 +247,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gender");
+                    b.ToTable("Gender", (string)null);
 
                     b.HasData(
                         new
@@ -282,7 +282,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("JobTitles");
+                    b.ToTable("JobTitles", (string)null);
 
                     b.HasData(
                         new
@@ -313,7 +313,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phones");
+                    b.ToTable("Phones", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Program", b =>
@@ -336,7 +336,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Programs");
+                    b.ToTable("Programs", (string)null);
 
                     b.HasData(
                         new
@@ -365,7 +365,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramDays");
+                    b.ToTable("ProgramDays", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayItem", b =>
@@ -403,7 +403,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("VerseToId");
 
-                    b.ToTable("ProgramDayItems");
+                    b.ToTable("ProgramDayItems", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayItemType", b =>
@@ -448,7 +448,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sorahs");
+                    b.ToTable("Sorahs", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Student", b =>
@@ -499,7 +499,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.User", b =>
@@ -531,7 +531,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -580,7 +580,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("SorahId");
 
-                    b.ToTable("Verses");
+                    b.ToTable("Verses", (string)null);
                 });
 
             modelBuilder.Entity("PhoneStudent", b =>
@@ -595,7 +595,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("PhoneStudent");
+                    b.ToTable("PhoneStudent", (string)null);
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Teacher", b =>
