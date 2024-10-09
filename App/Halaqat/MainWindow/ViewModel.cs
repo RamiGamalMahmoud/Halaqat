@@ -20,7 +20,7 @@ namespace Halaqat.MainWindow
                 new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView)),
                 new ViewItem("التقارير", typeof(object)),
                 new ViewItem("الماليات", typeof(object)),
-                new ViewItem("المستخدمين", typeof(object)),
+                new ViewItem("المستخدمين", typeof(Shared.Abstraction.Features.Users.IHomeView)),
             };
             _serviceProvider = serviceProvider;
         }
