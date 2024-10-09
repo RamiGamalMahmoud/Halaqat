@@ -15,7 +15,7 @@ namespace Halaqat.Data.Configurations
                 .HasColumnType("NVARCHAR(20)")
                 .IsRequired();
 
-            builder.Property<string>("Password")
+            builder.Property(x => x.Password)
                 .HasColumnType("NVARCHAR(20)")
                 .IsRequired();
 
