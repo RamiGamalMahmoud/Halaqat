@@ -6,8 +6,10 @@ namespace Halaqat.Shared.Models
     [ObservableObject]
     public partial class User : ModelBase
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        [ObservableProperty]
+        private string _userName;
+        [ObservableProperty]
+        private string _password;
         public DateTime DateCreated { get; set; }
 
         [ObservableProperty]
