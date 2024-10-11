@@ -64,5 +64,13 @@ namespace Halaqat.Shared.Models
                 CanRead = true;
             }
         }
+
+        public void UpdateFrom(Privileges source)
+        {
+            CanCreate = source.CanCreate;
+            CanDelete = source.CanDelete;
+            CanRead = source.CanRead;
+            CanUpdate = source.CanUpdate;
+        }
     }
 }
