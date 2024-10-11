@@ -15,6 +15,7 @@ using Velopack;
 using Halaqat.Data;
 using Halaqat.Features.Circles;
 using Halaqat.Features.Programs;
+using Halaqat.Shared.Models;
 
 namespace Halaqat
 {
@@ -31,8 +32,14 @@ namespace Halaqat
             _appHelper = _host.Services.GetRequiredService<AppHelper>();
             _messenger = _host.Services.GetRequiredService<IMessenger>();
 
+            _messenger.Register<Messages.Users.LoggedInUserRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user);
+            });
+
             _messenger.Register<Messages.Users.LoginSucceded>(this, (r, m) =>
             {
+                _user = m.User;
                 ShowMaindWindow();
             });
 
@@ -110,6 +117,7 @@ namespace Halaqat
         private readonly IHost _host;
         private readonly AppHelper _appHelper;
         private readonly IMessenger _messenger;
+        private User _user;
     }
 
 }
