@@ -91,18 +91,20 @@ namespace Halaqat.Features.Users
                 stored.UserName = dataModel.UserName;
                 stored.Password = dataModel.Password;
                 stored.IsActive = dataModel.IsActive;
-                stored.UsersManagementPrivileges = dataModel.UsersManagementPrivileges;
-                stored.EmployeesManagementPrivileges = dataModel.EmployeesManagementPrivileges;
-                stored.StudentsManagementPrivileges = dataModel.StudentsManagementPrivileges;
-                stored.CirclesManagementPrivileges = dataModel.CirclesManagementPrivileges;
-                stored.ProgramsManagementPrivileges = dataModel.ProgramsManagementPrivileges;
-                stored.ReportsManagementPrivileges = dataModel.ReportsManagementPrivileges;
+
+                stored.UsersManagementPrivileges.UpdateFrom(dataModel.UsersManagementPrivileges);
+                stored.EmployeesManagementPrivileges.UpdateFrom(dataModel.EmployeesManagementPrivileges);
+                stored.StudentsManagementPrivileges.UpdateFrom(dataModel.StudentsManagementPrivileges);
+                stored.CirclesManagementPrivileges.UpdateFrom(dataModel.CirclesManagementPrivileges);
+                stored.ProgramsManagementPrivileges.UpdateFrom(dataModel.ProgramsManagementPrivileges);
+                stored.ReportsManagementPrivileges.UpdateFrom(dataModel.ReportsManagementPrivileges);
 
                 dbContext.Users.Update(stored);
 
                 try
                 {
                     await dbContext.SaveChangesAsync();
+                    dataModel.Update();
                     return Result.Success;
                 }
                 catch (System.Exception)
