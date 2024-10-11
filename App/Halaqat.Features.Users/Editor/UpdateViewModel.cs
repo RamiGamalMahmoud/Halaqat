@@ -14,11 +14,12 @@ namespace Halaqat.Features.Users.Editor
 
             if(result.IsSuccess)
             {
-
+                _messenger.Send(new Shared.Messages.Notifications.SuccessNotification());
+                _messenger.Send(new Shared.Messages.Common.EntityUpdatedMessage<User>());
             }
             else
             {
-
+                _messenger.Send(new Shared.Messages.Notifications.FailureNotification());
             }
         }
     }
