@@ -1,27 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Resources;
 using Halaqat.Shared.Abstraction;
+using Halaqat.Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Halaqat.MainWindow
 {
     internal partial class ViewModel : ObservableObject
     {
-        public ViewModel(IServiceProvider serviceProvider)
+        public ViewModel(IServiceProvider serviceProvider, IMessenger messenger)
         {
-            ViewItems = new ObservableCollection<ViewItem>()
+            User user = messenger.Send(new Shared.Messages.Users.LoggedInUserRequestMessage()).Response;
+            IEnumerable<ViewItem> viewItems = new ObservableCollection<ViewItem>()
             {
-                new ViewItem("العاملين", typeof(Shared.Abstraction.Features.Employees.IHomeView)),
-                new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView)),
-                new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView)),
-                new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView)),
-                new ViewItem("التقارير", typeof(object)),
-                new ViewItem("الماليات", typeof(object)),
-                new ViewItem("المستخدمين", typeof(Shared.Abstraction.Features.Users.IHomeView)),
+                new ViewItem("العاملين", typeof(Shared.Abstraction.Features.Employees.IHomeView), user.EmployeesManagementPrivileges.CanRead),
+                new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView), user.StudentsManagementPrivileges.CanRead),
+                new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView), user.CirclesManagementPrivileges.CanRead),
+                new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView), user.ProgramsManagementPrivileges.CanRead),
+                new ViewItem("التقارير", typeof(object), user.ReportsManagementPrivileges.CanRead),
+                new ViewItem("الماليات", typeof(object), user.UsersManagementPrivileges.CanRead),
+                new ViewItem("المستخدمين", typeof(Shared.Abstraction.Features.Users.IHomeView), user.UsersManagementPrivileges.CanRead),
             };
+
+            ViewItems = viewItems.Where(x => x.IsEnabled);
+
             _serviceProvider = serviceProvider;
         }
 
@@ -49,5 +56,5 @@ namespace Halaqat.MainWindow
         private readonly IServiceProvider _serviceProvider;
     }
 
-    record ViewItem(string Title, Type View);
+    record ViewItem(string Title, Type View, bool IsEnabled);
 }
