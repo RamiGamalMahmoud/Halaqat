@@ -1,4 +1,5 @@
-﻿using Halaqat.Shared.Models;
+﻿using CommunityToolkit.Mvvm.Messaging.Messages;
+using Halaqat.Shared.Models;
 
 namespace Halaqat.Shared
 {
@@ -22,6 +23,7 @@ namespace Halaqat.Shared
         {
             public record LoginSucceded(User User);
             public record LoginFailed();
+            public class LoggedInUserRequestMessage() : RequestMessage<User>;
         }
 
         public static class Logging
