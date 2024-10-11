@@ -16,7 +16,7 @@ namespace Halaqat.Data
         public abstract Task<IEnumerable<TModel>> GetAll(bool reload);
         public abstract Task<Result<TModel>> Create(TDataModel dataModel);
         public abstract Task<Result> Update(TDataModel dataModel);
-        public abstract Task<Result> Remove(TModel circle);
+        public abstract Task<Result> Remove(TModel model);
 
         protected readonly IAppDbContextFactory _dbContextFactory = appDbContextFactory;
         protected static ObservableCollection<TModel> _entities;

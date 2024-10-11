@@ -4,6 +4,7 @@ using Halaqat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009203825_AddUserManagementPrivileges")]
+    partial class AddUserManagementPrivileges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -769,195 +772,22 @@ namespace Halaqat.Data.Migrations
 
             modelBuilder.Entity("Halaqat.Shared.Models.User", b =>
                 {
-                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "CirclesManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "EmployeesManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "ProgramsManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "ReportsManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "StudentsManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
                     b.OwnsOne("Halaqat.Shared.Models.Privileges", "UsersManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
 
                             b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
+                                .HasColumnType("bit");
 
                             b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
+                                .HasColumnType("bit");
 
                             b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
+                                .HasColumnType("bit");
 
                             b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
+                                .HasColumnType("bit");
 
                             b1.HasKey("UserId");
 
@@ -966,16 +796,6 @@ namespace Halaqat.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
-
-                    b.Navigation("CirclesManagementPrivileges");
-
-                    b.Navigation("EmployeesManagementPrivileges");
-
-                    b.Navigation("ProgramsManagementPrivileges");
-
-                    b.Navigation("ReportsManagementPrivileges");
-
-                    b.Navigation("StudentsManagementPrivileges");
 
                     b.Navigation("UsersManagementPrivileges");
                 });
