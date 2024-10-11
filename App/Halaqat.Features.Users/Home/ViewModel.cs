@@ -10,7 +10,7 @@ namespace Halaqat.Features.Users.Home
     {
         public override async Task LoadDataAsync(bool isReload)
         {
-            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<User>(false));
+            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<User>(isReload));
         }
     }
 }
