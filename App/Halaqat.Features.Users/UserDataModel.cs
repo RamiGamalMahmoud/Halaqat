@@ -40,9 +40,19 @@ namespace Halaqat.Features.Users
             OnPropertyChanged();
         }
 
-        public override void Update(User model)
+        public override void Update(User model = null)
         {
-            throw new System.NotImplementedException();
+            User userModelToUpdate = model is null ? Model : model;
+
+            userModelToUpdate.UserName = UserName;
+            userModelToUpdate.Password = Password;
+            userModelToUpdate.UsersManagementPrivileges = UsersManagementPrivileges;
+            userModelToUpdate.EmployeesManagementPrivileges = EmployeesManagementPrivileges;
+            userModelToUpdate.StudentsManagementPrivileges = StudentsManagementPrivileges;
+            userModelToUpdate.CirclesManagementPrivileges = CirclesManagementPrivileges;
+            userModelToUpdate.ProgramsManagementPrivileges = ProgramsManagementPrivileges;
+            userModelToUpdate.ReportsManagementPrivileges = ReportsManagementPrivileges;
+
         }
 
         [ObservableProperty]
