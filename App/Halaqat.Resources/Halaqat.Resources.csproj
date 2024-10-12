@@ -6,12 +6,33 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Images\quran-128.png" />
+	  <None Remove="Images\quran-256.png" />
+	  <None Remove="Images\quran-64.png" />
+	  <None Remove="Images\quran.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="Icons\" />
-		<Folder Include="Images\" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="MaterialDesignThemes" Version="5.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Images\quran-128.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\quran-256.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\quran-64.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Images\quran.png">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 </Project>
