@@ -2,6 +2,7 @@
     x:Class="Halaqat.MainWindow.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:commonComponents="clr-namespace:Halaqat.Resources.Components;assembly=Halaqat.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Halaqat.MainWindow"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -30,12 +31,33 @@
                 BorderBrush="LightGray"
                 BorderThickness="1"
                 CornerRadius="0 5 5 0">
-                <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Grid Grid.Column="0">
 
-                    <Image Height="100" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        Margin="0,10,0,0"
+                        Padding="5"
+                        HorizontalAlignment="Center"
+                        BorderBrush="LightGray"
+                        BorderThickness="1"
+                        CornerRadius="5">
+
+                        <Image
+                            Grid.Row="0"
+                            Height="64"
+                            Cursor="Hand"
+                            Opacity="0.5"
+                            Source="/Halaqat.Resources;Component/Images/quran-64.png" />
+                    </Border>
 
                     <ListBox
                         x:Name="Views"
+                        Grid.Row="1"
                         Cursor="Hand"
                         ItemsSource="{Binding ViewItems}"
                         SelectedItem="{Binding ViewItem}"
@@ -54,13 +76,23 @@
 
                     </ListBox>
 
-                </StackPanel>
+                    <TextBlock
+                        Grid.Row="2"
+                        Height="50"
+                        HorizontalAlignment="Center"
+                        Foreground="{StaticResource BlueBrush}"
+                        Text="{Binding UserName}" />
+
+                </Grid>
             </Border>
 
-            <Border Grid.Column="1" Padding="5">
+            <Grid Grid.Column="1">
+                <commonComponents:QuranBackground />
+                <Border Padding="5">
+                    <ContentControl Content="{Binding CurrentView}" />
+                </Border>
+            </Grid>
 
-                <ContentControl Content="{Binding CurrentView}" />
-            </Border>
 
         </Grid>
 
