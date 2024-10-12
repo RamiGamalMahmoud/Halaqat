@@ -116,7 +116,7 @@
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowStudentMemorizingAndReviewTableCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource BlackBrush}"
                                     Style="{StaticResource MaterialDesignFlatButton}">

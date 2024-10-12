@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Commands;
 using Halaqat.Shared.Common;
@@ -16,6 +17,12 @@ namespace Halaqat.Features.Students.Home
             {
                 Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Student>(isReload));
             }
+        }
+
+        [RelayCommand]
+        private async Task ShowStudentMemorizingAndReviewTable(Student student)
+        {
+            await _mediator.Send(new Shared.Commands.MemorizingAndReviewCommands.ShowMemorizingAndReviewViewCommand(student));
         }
 
         async partial void OnSearchTermChanged(string oldValue, string newValue)
