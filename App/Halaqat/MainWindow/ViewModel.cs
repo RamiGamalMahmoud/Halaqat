@@ -16,6 +16,7 @@ namespace Halaqat.MainWindow
         public ViewModel(IServiceProvider serviceProvider, IMessenger messenger)
         {
             User user = messenger.Send(new Shared.Messages.Users.LoggedInUserRequestMessage()).Response;
+            UserName = user.UserName;
             IEnumerable<ViewItem> viewItems = new ObservableCollection<ViewItem>()
             {
                 new ViewItem("العاملين", typeof(Shared.Abstraction.Features.Employees.IHomeView), user.EmployeesManagementPrivileges.CanRead),
@@ -54,6 +55,8 @@ namespace Halaqat.MainWindow
         [ObservableProperty]
         private ViewItem _viewItem;
         private readonly IServiceProvider _serviceProvider;
+
+        public string UserName { get; private set; }
     }
 
     record ViewItem(string Title, Type View, bool IsEnabled);
