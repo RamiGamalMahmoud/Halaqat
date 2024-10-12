@@ -1,10 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Auth;
+using Halaqat.Data;
+using Halaqat.Features.Circles;
 using Halaqat.Features.Employees;
-using Halaqat.Features.Users;
+using Halaqat.Features.MemorizingAndReview;
+using Halaqat.Features.Programs;
 using Halaqat.Features.Students;
+using Halaqat.Features.Users;
 using Halaqat.Helpers;
 using Halaqat.Shared;
+using Halaqat.Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -12,10 +17,6 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 using Velopack;
-using Halaqat.Data;
-using Halaqat.Features.Circles;
-using Halaqat.Features.Programs;
-using Halaqat.Shared.Models;
 
 namespace Halaqat
 {
@@ -84,6 +85,7 @@ namespace Halaqat
             services.ConfigureAuthFeature();
             services.ConfigureEmployeesFeature();
             services.ConfigureStudentsFeature();
+            services.ConfigureMemorizingAndReviewFeature();
         }
 
         private void ShowMaindWindow()
