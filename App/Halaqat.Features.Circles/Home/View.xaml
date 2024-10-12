@@ -83,6 +83,7 @@
             d:ItemsSource="{d:SampleData}"
             materialDesign:DataGridAssist.CornerRadius="5"
             AutoGenerateColumns="False"
+            Background="Transparent"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">

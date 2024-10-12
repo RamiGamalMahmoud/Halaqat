@@ -79,6 +79,7 @@
             Grid.Row="1"
             d:ItemsSource="{d:SampleData}"
             AutoGenerateColumns="False"
+            Background="Transparent"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">
@@ -86,7 +87,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
                 <DataGridTextColumn Binding="{Binding ExpectedDuration}" Header="المدة المتوقعة" />
-                <DataGridTextColumn Binding="{Binding Notes}" Header="ملاحظات" MaxWidth="200" />
+                <DataGridTextColumn
+                    MaxWidth="200"
+                    Binding="{Binding Notes}"
+                    Header="ملاحظات" />
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>

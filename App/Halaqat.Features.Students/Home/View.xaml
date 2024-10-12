@@ -81,6 +81,7 @@
             d:ItemsSource="{d:SampleData}"
             materialDesign:DataGridAssist.CornerRadius="5"
             AutoGenerateColumns="False"
+            Background="Transparent"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">
@@ -116,8 +117,8 @@
                                     Margin="5,0"
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
-                                    Foreground="{StaticResource BlackBrush}"
                                     CommandParameter="{Binding}"
+                                    Foreground="{StaticResource BlackBrush}"
                                     Style="{StaticResource MaterialDesignFlatButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="Brain" />

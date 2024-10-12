@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:Halaqat.Features.Users.Home"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:Background="White"
     d:DataContext="{d:DesignInstance Type=local:ViewModel}"
     x:ClassModifier="internal"
     mc:Ignorable="d">
@@ -80,6 +81,7 @@
             d:ItemsSource="{d:SampleData}"
             materialDesign:DataGridAssist.CornerRadius="5"
             AutoGenerateColumns="False"
+            Background="Transparent"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">
@@ -87,7 +89,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding UserName}" Header="اسم المستخدم" />
                 <DataGridCheckBoxColumn Binding="{Binding IsActive}" Header="نشط" />
-                <DataGridCheckBoxColumn Binding="{Binding UsersManagementPrivileges.CanCreate}" Header="نشط" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
 
                 <DataGridTemplateColumn>

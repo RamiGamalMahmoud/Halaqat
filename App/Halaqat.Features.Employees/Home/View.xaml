@@ -79,6 +79,7 @@
             Grid.Row="1"
             d:ItemsSource="{d:SampleData}"
             AutoGenerateColumns="False"
+            Background="Transparent"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Employees}">
