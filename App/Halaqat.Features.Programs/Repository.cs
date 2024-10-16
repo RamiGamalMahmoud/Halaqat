@@ -66,6 +66,33 @@ namespace Halaqat.Features.Programs
             return _entities;
         }
 
+        public async Task<Program> Get(int id)
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Programs
+
+                        .Include(x => x.ProgramDays)
+                        .ThenInclude(x => x.ProgramDayItems)
+                        .ThenInclude(x => x.Sorah)
+
+                        .Include(x => x.ProgramDays)
+                        .ThenInclude(x => x.ProgramDayItems)
+                        .ThenInclude(x => x.ProgramDayItemType)
+
+                        .Include(x => x.ProgramDays)
+                        .ThenInclude(x => x.ProgramDayItems)
+                        .ThenInclude(x => x.VerseFrom)
+
+                        .Include(x => x.ProgramDays)
+                        .ThenInclude(x => x.ProgramDayItems)
+                        .ThenInclude(x => x.VerseTo)
+                    .Where(x => x.Id == id)
+                    .FirstOrDefaultAsync();
+            }
+        }
+
         public async Task<IEnumerable<ProgramDayItemType>> GetProgramDayItemTypes(bool reload)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
