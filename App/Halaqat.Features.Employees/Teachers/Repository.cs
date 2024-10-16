@@ -80,6 +80,26 @@ namespace Halaqat.Features.Employees.Teachers
             }
         }
 
+        public async Task<Result<Teacher>> GetLoggedInTeacher(int userId)
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                Teacher teacher = await dbContext
+                    .Teachers
+                    .Include(x => x.Circles)
+                    .Where(x => x.User.Id == userId)
+                    .FirstOrDefaultAsync();
+
+                if(teacher is null)
+                {
+                    return new Result<Teacher>(null, false, "المستخدم ليس معلم");
+                }
+
+                return new Result<Teacher>(teacher, true, null);
+            }
+        }
+
+
         public override Task<Result> Remove(Teacher circle)
         {
             throw new System.NotImplementedException();
