@@ -28,6 +28,7 @@ namespace Halaqat.Features.MemorizingAndReview
             OnPropertyChanged(nameof(Teacher));
             _messenger.Register<DayItemAppreciatedMessage>(this, (r, m) =>
             {
+                HasChanges = true;
                 if(m.ProgramDayItemViewModel.CanSetMemorizingAppreciation || m.ProgramDayItemViewModel.CanSetReviewAppreciation)
                 {
                     return;
@@ -64,6 +65,26 @@ namespace Halaqat.Features.MemorizingAndReview
             }
             firstEnabled.IsEnabled = true;
         }
+
+        [RelayCommand(CanExecute = nameof(CanSave))]
+        private Task Save()
+        {
+            return Task.CompletedTask;
+        }
+
+        private bool CanSave() => HasChanges;
+
+        public bool HasChanges
+        {
+            get => _hasChanges;
+            private set
+            {
+                SetProperty(ref _hasChanges, value);
+                SaveCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        private bool _hasChanges;
 
         public Student Student { get; }
         public Teacher Teacher { get; }
