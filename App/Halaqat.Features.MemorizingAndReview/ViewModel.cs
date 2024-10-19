@@ -14,6 +14,7 @@ namespace Halaqat.Features.MemorizingAndReview
     internal partial class ViewModel : ObservableObject
     {
         private readonly IMediator _mediator;
+        private readonly IMessenger _messenger;
 
         public ViewModel(Student student, Teacher teacher, IMediator mediator, IMessenger messenger)
         {
@@ -22,8 +23,24 @@ namespace Halaqat.Features.MemorizingAndReview
             Student = student;
             Teacher = teacher;
             _mediator = mediator;
+            _messenger = messenger;
             OnPropertyChanged(nameof(Student));
             OnPropertyChanged(nameof(Teacher));
+            _messenger.Register<DayItemAppreciatedMessage>(this, (r, m) =>
+            {
+                if(m.ProgramDayItemViewModel.CanSetMemorizingAppreciation || m.ProgramDayItemViewModel.CanSetReviewAppreciation)
+                {
+                    return;
+                }
+
+                int currentIndex = ProgramDays.IndexOf(m.ProgramDayItemViewModel);
+                if(currentIndex >= (ProgramDays.Count - 1))
+                {
+                    return;
+                }
+                ProgramDayItemViewModel next = ProgramDays.ElementAt(currentIndex + 1);
+                next.IsEnabled = true;
+            });
         }
 
         public async Task LoadDataAsync(bool isReload = false)
@@ -32,24 +49,32 @@ namespace Halaqat.Features.MemorizingAndReview
             {
                 Program program = await _mediator.Send(new Shared.Commands.Programs.GetProgram(Student.Program.Id));
                 Appreciations = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Appreciation>(isReload));
-                ProgramDays = program.ProgramDays.Select(x => new ProgramDayItemViewModel(x));
+                _programDayItemTypes = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<ProgramDayItemType>(false));
+                ProgramDays = program.ProgramDays.Select(x => new ProgramDayItemViewModel(x, _programDayItemTypes, _messenger)).ToList();
+                EnableFirstProgramDayItemViewModel();
             }
         }
 
-        [RelayCommand]
-        private void SetMemorizingAppreciation(ProgramDayItemViewModel programDayItemViewModel)
+        private void EnableFirstProgramDayItemViewModel()
         {
-
+            ProgramDayItemViewModel firstEnabled = ProgramDays.Where(x => x.IsEnabled).FirstOrDefault();
+            foreach (ProgramDayItemViewModel item in ProgramDays)
+            {
+                item.IsEnabled = false;
+            }
+            firstEnabled.IsEnabled = true;
         }
 
         public Student Student { get; }
         public Teacher Teacher { get; }
 
         [ObservableProperty]
-        private IEnumerable<ProgramDayItemViewModel> _programDays;
+        private List<ProgramDayItemViewModel> _programDays;
 
         [ObservableProperty]
         private IEnumerable<Appreciation> _appreciations;
+
+        private IEnumerable<ProgramDayItemType> _programDayItemTypes;
 
         public DoBusyWork DoBusyWork { get; } = new DoBusyWork();
     }
