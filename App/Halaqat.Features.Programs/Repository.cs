@@ -59,6 +59,10 @@ namespace Halaqat.Features.Programs
                         .ThenInclude(x => x.ProgramDayItems)
                         .ThenInclude(x => x.VerseTo)
 
+                        .Include(x => x.ProgramDays)
+                        .ThenInclude(x => x.ProgramDayAppreciations)
+                        .ThenInclude(x => x.Appreciation)
+
                         .ToListAsync();
                     SetEntities(programs);
                 }
@@ -73,21 +77,26 @@ namespace Halaqat.Features.Programs
                 return await dbContext
                     .Programs
 
-                        .Include(x => x.ProgramDays)
-                        .ThenInclude(x => x.ProgramDayItems)
-                        .ThenInclude(x => x.Sorah)
+                    .Include(x => x.ProgramDays)
+                    .ThenInclude(x => x.ProgramDayItems)
+                    .ThenInclude(x => x.Sorah)
 
-                        .Include(x => x.ProgramDays)
-                        .ThenInclude(x => x.ProgramDayItems)
-                        .ThenInclude(x => x.ProgramDayItemType)
+                    .Include(x => x.ProgramDays)
+                    .ThenInclude(x => x.ProgramDayItems)
+                    .ThenInclude(x => x.ProgramDayItemType)
 
-                        .Include(x => x.ProgramDays)
-                        .ThenInclude(x => x.ProgramDayItems)
-                        .ThenInclude(x => x.VerseFrom)
+                    .Include(x => x.ProgramDays)
+                    .ThenInclude(x => x.ProgramDayItems)
+                    .ThenInclude(x => x.VerseFrom)
 
-                        .Include(x => x.ProgramDays)
-                        .ThenInclude(x => x.ProgramDayItems)
-                        .ThenInclude(x => x.VerseTo)
+                    .Include(x => x.ProgramDays)
+                    .ThenInclude(x => x.ProgramDayItems)
+                    .ThenInclude(x => x.VerseTo)
+
+                    .Include(x => x.ProgramDays)
+                    .ThenInclude(x => x.ProgramDayAppreciations)
+                    .ThenInclude(x => x.Appreciation)
+
                     .Where(x => x.Id == id)
                     .FirstOrDefaultAsync();
             }
