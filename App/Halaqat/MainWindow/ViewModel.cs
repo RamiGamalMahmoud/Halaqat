@@ -19,7 +19,7 @@ namespace Halaqat.MainWindow
             UserName = user.UserName;
             IEnumerable<ViewItem> viewItems = new ObservableCollection<ViewItem>()
             {
-                new ViewItem("العاملين", typeof(Shared.Abstraction.Features.Employees.IHomeView), user.EmployeesManagementPrivileges.CanRead),
+                new ViewItem("إدارة", typeof(Shared.Abstraction.Features.Employees.IHomeView), user.EmployeesManagementPrivileges.CanRead),
                 new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView), user.StudentsManagementPrivileges.CanRead),
                 new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView), user.CirclesManagementPrivileges.CanRead),
                 new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView), user.ProgramsManagementPrivileges.CanRead),
