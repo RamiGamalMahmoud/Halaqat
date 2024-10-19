@@ -9,6 +9,8 @@ namespace Halaqat.Features.MemorizingAndReview
         {
             services.AddMediatR((cfg) => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+            services.AddSingleton<Repository>();
+
             services.AddTransient<View>();
             services.AddTransient<ViewModel>();
 

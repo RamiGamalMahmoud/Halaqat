@@ -18,5 +18,6 @@ namespace Halaqat.Shared.Models
 
         public IEnumerable<ProgramDayItem> MemorizingItems => ProgramDayItems.Where(x => x.ProgramDayItemType.Name == "حفظ");
         public IEnumerable<ProgramDayItem> ReviewItems => ProgramDayItems.Where(x => x.ProgramDayItemType.Name == "مراجعة");
+        public Collection<ProgramDayAppreciation> ProgramDayAppreciations { get; } = [];
     }
 }
