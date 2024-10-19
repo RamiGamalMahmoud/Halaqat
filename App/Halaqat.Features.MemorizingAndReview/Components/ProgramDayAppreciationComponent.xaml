@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="Halaqat.Features.MemorizingAndReview.Components.ProgramDayAppreciationComponent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Halaqat.Features.MemorizingAndReview.Components"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="root"
+    mc:Ignorable="d">
+
+    <Grid IsEnabled="{Binding ElementName=root, Path=CanSetAppreciation}" Visibility="{Binding ElementName=root, Path=HasItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <ComboBox
+            Grid.Column="0"
+            Width="100"
+            VerticalAlignment="Stretch"
+            Cursor="Hand"
+            DisplayMemberPath="Name"
+            FontSize="14"
+            ItemsSource="{Binding ElementName=root, Path=Appreciations}"
+            SelectedItem="{Binding ElementName=root, Path=Appreciation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+        <Button
+            Grid.Column="1"
+            Margin="5,0"
+            Padding="5"
+            VerticalAlignment="Center"
+            Command="{Binding ElementName=root, Path=Command}"
+            CommandParameter="{Binding ElementName=root, Path=CommandParameter}"
+            Foreground="{StaticResource SuccessBrush}"
+            Style="{StaticResource MaterialDesignFlatButton}"
+            Visibility="{Binding ElementName=root, Path=CanSetAppreciation, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="CheckboxMarked" />
+            </StackPanel>
+        </Button>
+
+    </Grid>
+
+</UserControl>
