@@ -21,6 +21,8 @@ namespace Halaqat.Data
         public DbSet<Sorah> Sorahs { get; set; }
         public DbSet<Verse> Verses { get; set; }
         public DbSet<ProgramDayItem> ProgramDayItems { get; set; }
+        public DbSet<EducationalStage> EducationalStages { get; set; }
+        public DbSet<Class> Classes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
