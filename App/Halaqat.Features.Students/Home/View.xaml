@@ -92,6 +92,8 @@
                 <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
                 <DataGridTextColumn Binding="{Binding Circle.Name}" Header="الحلقة" />
                 <DataGridTextColumn Binding="{Binding Circle.Teacher.Name}" Header="المعلم" />
+                <DataGridTextColumn Header="المرحلة الدراسية" Binding="{Binding EducationalStage.Name}"/>
+                <DataGridTextColumn Header="الصف الدراسي" Binding="{Binding Class.Name}"/>
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
                 <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ الميلاد" />
 

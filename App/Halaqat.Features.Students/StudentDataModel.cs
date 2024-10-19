@@ -29,6 +29,8 @@ namespace Halaqat.Features.Students
                 Phones = new ObservableCollection<Phone>(model.Phones);
                 Gender = model.Gender;
                 Program = model.Program;
+                EducationalStage = model.EducationalStage;
+                Class = model.Class;
             }
 
             Phones.CollectionChanged += Phones_CollectionChanged;
@@ -51,6 +53,8 @@ namespace Halaqat.Features.Students
             model.Phones.Clear();
             model.DateOfBirth =(DateTime) DateOfBirth;
             model.Program = Program;
+            model.EducationalStage = EducationalStage;
+            model.Class = Class;
 
             foreach (Phone phone in Phones)
             {
@@ -115,6 +119,12 @@ namespace Halaqat.Features.Students
 
         [ObservableProperty]
         private Program _program;
+
+        [ObservableProperty]
+        private EducationalStage _educationalStage;
+
+        [ObservableProperty]
+        private Class _class;
         public ObservableCollection<Phone> Phones { get; } = [];
     }
 }

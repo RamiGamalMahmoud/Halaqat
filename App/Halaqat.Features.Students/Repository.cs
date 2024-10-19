@@ -12,6 +12,28 @@ namespace Halaqat.Features.Students
 {
     internal class Repository(IAppDbContextFactory dbContextFactory) : RepositoryBase<Student, StudentDataModel>(dbContextFactory)
     {
+        public async Task<IEnumerable<EducationalStage>> GetEducationalStagesAsync()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .EducationalStages
+                    .Include(x => x.Classes)
+                    .ToListAsync();
+            }
+        }
+
+        public async Task<IEnumerable<Class>> GetClassAsync()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Classes
+                    .Include(x => x.EducationalStage)
+                    .ToListAsync();
+            }
+        }
+
         public override async Task<IEnumerable<Student>> GetAll(bool reload)
         {
             if (!_isLoaded || reload)
@@ -26,6 +48,8 @@ namespace Halaqat.Features.Students
                         .Include(x => x.Circle)
                         .ThenInclude(x => x.Teacher)
                         .Include(x => x.Program)
+                        .Include(x => x.EducationalStage)
+                        .Include(x => x.Class)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
 
@@ -90,6 +114,8 @@ namespace Halaqat.Features.Students
                 student.Address = studentAddress;
                 student.CircleId = dataModel.Circle.Id;
                 student.ProgramId = dataModel.Program?.Id;
+                dbContext.Entry(student).Property<int?>("EducationalStageId").CurrentValue = dataModel.EducationalStage?.Id;
+                dbContext.Entry(student).Property<int?>("ClassId").CurrentValue = dataModel.Class?.Id;
 
                 foreach (Phone phone in dataModel.Phones)
                 {
@@ -134,6 +160,8 @@ namespace Halaqat.Features.Students
                 stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
                 stored.CircleId = dataModel.Circle.Id;
                 stored.ProgramId = dataModel.Program?.Id;
+                dbContext.Entry(stored).Property<int?>("EducationalStageId").CurrentValue = dataModel.EducationalStage?.Id;
+                dbContext.Entry(stored).Property<int?>("ClassId").CurrentValue = dataModel.Class?.Id;
 
                 dbContext.Students.Update(stored);
                 await dbContext.SaveChangesAsync();

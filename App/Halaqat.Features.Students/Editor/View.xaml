@@ -63,6 +63,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" />
                                 <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
 
                             <StackPanel
@@ -138,11 +139,11 @@
                             </StackPanel>
 
                             <StackPanel
-                                IsEnabled="{Binding CanChangeProgram}"
                                 Grid.Row="1"
                                 Grid.Column="2"
                                 MinWidth="200"
                                 Margin="5"
+                                IsEnabled="{Binding CanChangeProgram}"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="برنامج الحفظ" />
                                 <ComboBox
@@ -151,6 +152,38 @@
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding Programs}"
                                     SelectedItem="{Binding DataModel.Program}"
+                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                MinWidth="200"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المرحلة الدراسية" />
+                                <ComboBox
+                                    Padding="5"
+                                    Cursor="Hand"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding EducationalStages}"
+                                    SelectedItem="{Binding DataModel.EducationalStage}"
+                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                MinWidth="200"
+                                Margin="5"
+                                Orientation="Vertical">
+                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الصف الدراسي" />
+                                <ComboBox
+                                    Padding="5"
+                                    Cursor="Hand"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding Classes}"
+                                    SelectedItem="{Binding DataModel.Class}"
                                     Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                             </StackPanel>
 

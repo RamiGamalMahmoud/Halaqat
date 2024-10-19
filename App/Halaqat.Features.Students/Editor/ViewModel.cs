@@ -5,6 +5,7 @@ using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
 using MediatR;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace Halaqat.Features.Students.Editor
@@ -24,6 +25,16 @@ namespace Halaqat.Features.Students.Editor
             Genders = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Gender>(false));
             Circles = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(false));
             Programs = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Program>(false));
+            EducationalStages = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<EducationalStage>(false));
+        }
+
+        protected override async void DataModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(DataModel.EducationalStage) && DataModel.EducationalStage is not null)
+            {
+                Classes = await _mediator.Send(new CommandHandlers.GetEducationalStageClasses.Command(DataModel.EducationalStage.Id));
+            }
+            base.DataModel_PropertyChanged(sender, e);
         }
 
         public bool CanChangeProgram => DataModel.Program is null;
@@ -51,6 +62,12 @@ namespace Halaqat.Features.Students.Editor
 
         [ObservableProperty]
         private IEnumerable<Circle> _circles;
+
+        [ObservableProperty]
+        private IEnumerable<EducationalStage> _educationalStages;
+
+        [ObservableProperty]
+        private IEnumerable<Class> _classes;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(CanChangeProgram))]
