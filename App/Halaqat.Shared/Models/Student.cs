@@ -50,6 +50,12 @@ namespace Halaqat.Shared.Models
         public Program Program { get => _program; set => SetProperty(ref _program, value); }
         private Program _program;
 
+        public EducationalStage EducationalStage { get => _educationalStage; set => SetProperty(ref _educationalStage, value); }
+        private EducationalStage _educationalStage;
+
+        public Class Class { get => _class; set => SetProperty(ref _class, value); }
+        private Class _class;
+
         public ICollection<Phone> Phones { get; private set; } = [];
     }
 }

@@ -37,6 +37,18 @@ namespace Halaqat.Data.Configurations
                 .WithMany()
                 .HasForeignKey(x => x.ProgramId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.EducationalStage)
+                .WithMany()
+                .HasForeignKey("EducationalStageId")
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Class)
+                .WithMany()
+                .HasForeignKey("ClassId")
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
