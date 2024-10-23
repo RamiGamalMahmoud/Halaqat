@@ -112,7 +112,7 @@ namespace Halaqat.Features.Students
                 student.DateCreated = dataModel.DateCreated;
                 student.GenderId = dataModel.Gender.Id;
                 student.Address = studentAddress;
-                student.CircleId = dataModel.Circle.Id;
+                student.CircleId = dataModel.Circle?.Id;
                 student.ProgramId = dataModel.Program?.Id;
                 dbContext.Entry(student).Property<int?>("EducationalStageId").CurrentValue = dataModel.EducationalStage?.Id;
                 dbContext.Entry(student).Property<int?>("ClassId").CurrentValue = dataModel.Class?.Id;

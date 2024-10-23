@@ -112,8 +112,6 @@ namespace Halaqat.Features.Students
         private Gender _gender;
 
         [ObservableProperty]
-        [Required(ErrorMessage = "حقل مطلوب")]
-        [NotifyDataErrorInfo]
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private Circle _circle;
 
