@@ -26,6 +26,7 @@ namespace Halaqat.MainWindow
                 new ViewItem("التقارير", typeof(object), user.ReportsManagementPrivileges.CanRead),
                 new ViewItem("الماليات", typeof(object), user.UsersManagementPrivileges.CanRead),
                 new ViewItem("المستخدمين", typeof(Shared.Abstraction.Features.Users.IHomeView), user.UsersManagementPrivileges.CanRead),
+                new ViewItem("الإعدادات", typeof(Shared.Abstraction.Features.Settings.ISettingsView), true)
             };
 
             ViewItems = viewItems.Where(x => x.IsEnabled);
@@ -44,12 +45,12 @@ namespace Halaqat.MainWindow
 
         partial void OnViewItemChanged(ViewItem oldValue, ViewItem newValue)
         {
-            if (newValue.View.GetInterface(nameof(IView)) is null)
+            if (newValue.View.GetInterface(nameof(IView)) is not null)
             {
-                CurrentView = new EmptyView() { Text = newValue.Title };
+                CurrentView = _serviceProvider.GetRequiredService(newValue.View);
                 return;
             }
-            CurrentView = _serviceProvider.GetRequiredService(newValue.View);
+            CurrentView = new EmptyView() { Text = newValue.Title };
         }
 
         [ObservableProperty]

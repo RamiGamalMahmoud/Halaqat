@@ -6,6 +6,8 @@ using Halaqat.Features.Employees;
 using Halaqat.Features.MemorizingAndReview;
 using Halaqat.Features.Programs;
 using Halaqat.Features.Students;
+using Halaqat.Features.Management;
+using Halaqat.Features.Settings;
 using Halaqat.Features.Users;
 using Halaqat.Helpers;
 using Halaqat.Shared;
@@ -86,6 +88,8 @@ namespace Halaqat
             services.ConfigureEmployeesFeature();
             services.ConfigureStudentsFeature();
             services.ConfigureMemorizingAndReviewFeature();
+            services.ConfigureSettingsFeature();
+            services.ConfigureManagementFeature();
         }
 
         private void ShowMaindWindow()
