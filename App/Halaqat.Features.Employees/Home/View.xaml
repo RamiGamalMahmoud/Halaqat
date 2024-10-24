@@ -52,6 +52,25 @@
                             Text="إعادة تحميل" />
                     </StackPanel>
                 </Button>
+
+                <TextBlock
+                    Margin="5,0"
+                    VerticalAlignment="Center"
+                    Text="عرض" />
+
+                <ComboBox
+                    Width="150"
+                    Margin="5,0"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    Cursor="Hand"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    <ComboBoxItem Content="معلمين" />
+                    <ComboBoxItem Content="إداريين" />
+                </ComboBox>
+
             </StackPanel>
 
             <StackPanel

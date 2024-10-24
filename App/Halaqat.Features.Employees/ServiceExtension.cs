@@ -15,8 +15,8 @@ namespace Halaqat.Features.Employees
             services.AddSingleton<Shared.Abstraction.Features.Employees.IHomeView, Home.View>();
             services.AddSingleton<Home.ViewModel>();
 
-            services.AddSingleton<Editor.CreateViewModel>();
-            services.AddSingleton<Editor.UpdateViewModel>();
+            services.AddTransient<Editor.CreateViewModel>();
+            services.AddTransient<Editor.UpdateViewModel>();
             return services;
         }
     }

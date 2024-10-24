@@ -14,8 +14,9 @@ namespace Halaqat.Features.Employees.CommandHandlers
     {
         public Task Handle(Common.ShowCreateModelViewCommand<Employee> request, CancellationToken cancellationToken)
         {
+            IMediator mediator = services.GetRequiredService<IMediator>();
             IMessenger messenger = services.GetRequiredService<IMessenger>();
-            EditorViewModelBase viewModel = services.GetRequiredService<CreateViewModel>();
+            EditorViewModelBase viewModel = new CreateViewModel(mediator, messenger);
             View view = new View(viewModel, messenger);
             view.ShowDialog();
             return Task.CompletedTask;
