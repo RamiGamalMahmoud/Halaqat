@@ -19,5 +19,6 @@ namespace Halaqat.Shared.Commands
         public record UpdateModelCommand<TDataModel>(TDataModel DataModel) : IRequest<Result>;
 
         public record RemoveModelCommand<TModel>(TModel Model) : IRequest<Result>;
+        public record ShowSettingsViewCommand() : IRequest;
     }
 }

@@ -15,6 +15,8 @@ namespace Halaqat.Shared.Models
         [ObservableProperty]
         private bool _isActive;
 
+        public bool IsSuperAdmin { get; private set; }
+
         public bool HasFullPrivileges
         {
             get => UsersManagementPrivileges.HasFullPrivileges &&
