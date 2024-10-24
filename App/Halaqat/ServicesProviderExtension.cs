@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Data;
 using Halaqat.Helpers;
+using Halaqat.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -36,12 +37,24 @@ namespace Halaqat
 
             services.AddSingleton<Halaqat.Data.IAppDbContextFactory>(s =>
             {
-                return new AppDbContextFactory(@"
-Server=.\SQLEXPRESS2019;
-Integrated Security=SSPI;
-Initial Catalog=halaqat;
-TrustServerCertificate=True;
-Trusted_Connection=True;");
+                ISettingsVewModel settings = s.GetRequiredService<ISettingsVewModel>();
+
+                if(settings.IsLocalDatabase)
+                {
+                    return new AppDbContextFactory(@"
+                        Server=.\SQLEXPRESS;
+                        Integrated Security=SSPI;
+                        Initial Catalog=halaqat;
+                        TrustServerCertificate=True;
+                        Trusted_Connection=True;");
+                }
+
+                return new AppDbContextFactory(@$"
+                    Data Source={settings.IP},{settings.Port};
+                    User Id={settings.UserId};
+                    Password={settings.Password};
+                    Initial Catalog=halaqat;
+                    TrustServerCertificate=True;");
             });
 
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
