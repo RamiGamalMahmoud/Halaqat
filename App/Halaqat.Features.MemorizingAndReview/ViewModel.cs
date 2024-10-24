@@ -26,16 +26,18 @@ namespace Halaqat.Features.MemorizingAndReview
             _messenger = messenger;
             OnPropertyChanged(nameof(Student));
             OnPropertyChanged(nameof(Teacher));
+
             _messenger.Register<DayItemAppreciatedMessage>(this, (r, m) =>
             {
                 HasChanges = true;
-                if(m.ProgramDayItemViewModel.CanSetMemorizingAppreciation || m.ProgramDayItemViewModel.CanSetReviewAppreciation)
+                _changedDays.Add(m.ProgramDayItemViewModel);
+                if (m.ProgramDayItemViewModel.CanSetMemorizingAppreciation || m.ProgramDayItemViewModel.CanSetReviewAppreciation)
                 {
                     return;
                 }
 
                 int currentIndex = ProgramDays.IndexOf(m.ProgramDayItemViewModel);
-                if(currentIndex >= (ProgramDays.Count - 1))
+                if (currentIndex >= (ProgramDays.Count - 1))
                 {
                     return;
                 }
@@ -67,9 +69,12 @@ namespace Halaqat.Features.MemorizingAndReview
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]
-        private Task Save()
+        private async Task Save()
         {
-            return Task.CompletedTask;
+            foreach (ProgramDayItemViewModel day in _changedDays)
+            {
+                await _mediator.Send(new CommandHandlers.UpdateProgramDay.Command(day));
+            }
         }
 
         private bool CanSave() => HasChanges;
@@ -91,6 +96,8 @@ namespace Halaqat.Features.MemorizingAndReview
 
         [ObservableProperty]
         private List<ProgramDayItemViewModel> _programDays;
+
+        private List<ProgramDayItemViewModel> _changedDays = [];
 
         [ObservableProperty]
         private IEnumerable<Appreciation> _appreciations;
