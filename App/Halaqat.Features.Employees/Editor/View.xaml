@@ -76,19 +76,30 @@
                                     Text="{Binding DataModel.Name, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
 
-                            <StackPanel
-                                Grid.Column="1"
-                                MinWidth="200"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المؤهل" />
-                                <ComboBox
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <StackPanel
+                                    Grid.Column="1"
+                                    MinWidth="200"
+                                    Margin="5"
+                                    Orientation="Vertical">
+                                    <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المؤهل" />
+                                    <ComboBox
+                                        Padding="5"
+                                        Cursor="Hand"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding AcademicQualifications}"
+                                        SelectedItem="{Binding DataModel.AcademicQualification}"
+                                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                                </StackPanel>
+                                <Button
                                     Padding="5"
-                                    Cursor="Hand"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding AcademicQualifications}"
-                                    SelectedItem="{Binding DataModel.AcademicQualification}"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding CreateAcademicQualificationCommand}"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AddCircle" />
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
 
                             <StackPanel
@@ -149,24 +160,35 @@
                                 Foreground="{StaticResource BlackBrush}"
                                 Text="العنوان" />
 
-                            <StackPanel
-                                Grid.Column="1"
-                                MinWidth="100"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المدينة" />
-                                <ComboBox
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <StackPanel
+                                    Grid.Column="1"
+                                    MinWidth="200"
+                                    Margin="5"
+                                    Orientation="Vertical">
+                                    <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المدينة" />
+                                    <ComboBox
+                                        Padding="5"
+                                        Cursor="Hand"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding Cities}"
+                                        SelectedItem="{Binding DataModel.City}"
+                                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                                </StackPanel>
+                                <Button
                                     Padding="5"
-                                    Cursor="Hand"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding Cities}"
-                                    SelectedItem="{Binding DataModel.City}"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding CreateCityCommand}"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AddCircle" />
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
 
                             <StackPanel
                                 Grid.Column="2"
-                                MinWidth="100"
+                                MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الحي" />
@@ -178,7 +200,7 @@
 
                             <StackPanel
                                 Grid.Column="3"
-                                MinWidth="100"
+                                MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الشارع" />
@@ -372,9 +394,9 @@
                                 Margin="0,5"
                                 HorizontalAlignment="Left"
                                 Content="مستخدم للنظام"
-                                IsChecked="{Binding DataModel.IsActive}"
                                 Cursor="Hand"
                                 FlowDirection="LeftToRight"
+                                IsChecked="{Binding DataModel.IsActive}"
                                 Style="{StaticResource MaterialDesignLightCheckBox}" />
 
                             <TextBlock

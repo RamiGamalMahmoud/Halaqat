@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
@@ -25,6 +26,18 @@ namespace Halaqat.Features.Employees.Editor
             JobTitles = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<JobTitle>(false));
             Cities = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<City>(false));
             Genders = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Gender>(false));
+        }
+
+        [RelayCommand]
+        private async Task CreateCity()
+        {
+            await _mediator.Send(new Shared.Commands.Common.ShowCreateModelViewCommand<City>());
+        }
+
+        [RelayCommand]
+        private async Task CreateAcademicQualification()
+        {
+            await _mediator.Send(new Shared.Commands.Common.ShowCreateModelViewCommand<AcademicQualification>());
         }
 
         public bool EnableJobTitles { get; protected set; } = false;
