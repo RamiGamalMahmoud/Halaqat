@@ -11,8 +11,8 @@ namespace Halaqat.Features.Programs.Editor
             InitializeComponent();
             DataContext = viewModel;
 
-            messenger.Register<Shared.Messages.Common.EntityCreatedMessage<Program>>(this, (r, m) => Close());
-            messenger.Register<Shared.Messages.Common.EntityUpdatedMessage<Program>>(this, (r, m) => Close());
+            //messenger.Register<Shared.Messages.Common.EntityCreatedMessage<Program>>(this, (r, m) => Close());
+            //messenger.Register<Shared.Messages.Common.EntityUpdatedMessage<Program>>(this, (r, m) => Close());
         }
     }
 }

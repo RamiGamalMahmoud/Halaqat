@@ -16,6 +16,7 @@ namespace Halaqat.Features.Programs.Editor
             {
                 _messenger.Send(new Shared.Messages.Common.EntityUpdatedMessage<Program>());
                 _messenger.Send(new Shared.Messages.Notifications.SuccessNotification());
+                HasChangesObject.SetNotHasChanges();
             }
             else
             {
