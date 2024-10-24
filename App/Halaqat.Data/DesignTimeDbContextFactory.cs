@@ -10,7 +10,7 @@ namespace Halaqat.Data
             DbContextOptionsBuilder<AppDbContext> builder = new DbContextOptionsBuilder<AppDbContext>();
             builder
                 .UseSqlServer(@"
-Server=.\SQLEXPRESS2019;
+Server=.\SQLEXPRESS;
 Integrated Security=SSPI;
 Initial Catalog=halaqat;
 TrustServerCertificate=True;

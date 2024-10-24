@@ -5,7 +5,7 @@
 namespace Halaqat.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedSorahs : Migration
+    public partial class SeedSorahas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -134,7 +134,7 @@ INSERT INTO Sorahs (Name) VALUES ( 'الناس');
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DELETE FROM Sorahs;");
+
         }
     }
 }

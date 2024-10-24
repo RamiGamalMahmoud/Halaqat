@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241019203052_AddEducationalStageAndClassStudentColumns")]
-    partial class AddEducationalStageAndClassStudentColumns
+    [Migration("20241023161337_SeedSorahas")]
+    partial class SeedSorahas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -169,7 +169,7 @@ namespace Halaqat.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.Property<int?>("TeacherId")
                         .HasColumnType("int");
@@ -704,7 +704,8 @@ namespace Halaqat.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR(20)");
 
                     b.HasKey("Id");
 
@@ -788,6 +789,9 @@ namespace Halaqat.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<bool>("IsSuperAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("NVARCHAR(20)");
@@ -809,6 +813,7 @@ namespace Halaqat.Data.Migrations
                             Id = 1,
                             DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsActive = true,
+                            IsSuperAdmin = true,
                             Password = "admin",
                             UserName = "admin"
                         });

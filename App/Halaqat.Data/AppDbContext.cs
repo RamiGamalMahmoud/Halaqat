@@ -23,6 +23,7 @@ namespace Halaqat.Data
         public DbSet<ProgramDayItem> ProgramDayItems { get; set; }
         public DbSet<EducationalStage> EducationalStages { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<Nationality> Nationalities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

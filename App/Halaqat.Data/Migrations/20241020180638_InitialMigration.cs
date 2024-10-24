@@ -27,6 +27,19 @@ namespace Halaqat.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Appreciations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "NVARCHAR(10)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appreciations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -37,6 +50,19 @@ namespace Halaqat.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EducationalStages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "NVARCHAR(20)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EducationalStages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,6 +90,19 @@ namespace Halaqat.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_JobTitles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Nationality",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "NVARCHAR(50)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Nationality", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,7 +152,7 @@ namespace Halaqat.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "NVARCHAR(20)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,9 +165,34 @@ namespace Halaqat.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "NVARCHAR(20)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Password = table.Column<string>(type: "NVARCHAR(20)", nullable: false)
+                    UsersManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    UsersManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    UsersManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    UsersManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    EmployeesManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    EmployeesManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    EmployeesManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    EmployeesManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    StudentsManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    StudentsManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    StudentsManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    StudentsManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    CirclesManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    CirclesManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    CirclesManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    CirclesManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ProgramsManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ProgramsManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ProgramsManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ProgramsManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ReportsManagementPrivileges_CanCreate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ReportsManagementPrivileges_CanRead = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ReportsManagementPrivileges_CanUpdate = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    ReportsManagementPrivileges_CanDelete = table.Column<bool>(type: "bit", nullable: true, defaultValue: false),
+                    UserName = table.Column<string>(type: "NVARCHAR(20)", nullable: false),
+                    Password = table.Column<string>(type: "NVARCHAR(20)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
                 {
@@ -152,6 +216,26 @@ namespace Halaqat.Data.Migrations
                         name: "FK_Addresses_Cities_CityId",
                         column: x => x.CityId,
                         principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Classes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "NVARCHAR(20)", nullable: false),
+                    EducationalStageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Classes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Classes_EducationalStages_EducationalStageId",
+                        column: x => x.EducationalStageId,
+                        principalTable: "EducationalStages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -211,6 +295,7 @@ namespace Halaqat.Data.Migrations
                     AcademicQualificationId = table.Column<int>(type: "int", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: false),
                     GenderId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "NVARCHAR(50)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -243,6 +328,46 @@ namespace Halaqat.Data.Migrations
                         principalTable: "JobTitles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Employees_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgramDayAppreciation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateAppreciated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProgramDayId = table.Column<int>(type: "int", nullable: false),
+                    AppreciationId = table.Column<int>(type: "int", nullable: false),
+                    ProgramDayItemTypeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramDayAppreciation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProgramDayAppreciation_Appreciations_AppreciationId",
+                        column: x => x.AppreciationId,
+                        principalTable: "Appreciations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProgramDayAppreciation_ProgramDays_ProgramDayId",
+                        column: x => x.ProgramDayId,
+                        principalTable: "ProgramDays",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProgramDayAppreciation_ProgramItemTypes_ProgramDayItemTypeId",
+                        column: x => x.ProgramDayItemTypeId,
+                        principalTable: "ProgramItemTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -341,7 +466,7 @@ namespace Halaqat.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TeacherId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Name = table.Column<string>(type: "NVARCHAR(50)", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -366,6 +491,8 @@ namespace Halaqat.Data.Migrations
                     GenderId = table.Column<int>(type: "int", nullable: false),
                     CircleId = table.Column<int>(type: "int", nullable: true),
                     ProgramId = table.Column<int>(type: "int", nullable: true),
+                    EducationalStageId = table.Column<int>(type: "int", nullable: true),
+                    ClassId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "NVARCHAR(50)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateCreated = table.Column<DateOnly>(type: "date", nullable: false),
@@ -385,6 +512,18 @@ namespace Halaqat.Data.Migrations
                         name: "FK_Students_Circles_CircleId",
                         column: x => x.CircleId,
                         principalTable: "Circles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Students_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Students_EducationalStages_EducationalStageId",
+                        column: x => x.EducationalStageId,
+                        principalTable: "EducationalStages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -437,6 +576,17 @@ namespace Halaqat.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Appreciations",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "إعادة" },
+                    { 2, "جيد" },
+                    { 3, "جيد جدا" },
+                    { 4, "ممتاز" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
@@ -444,6 +594,18 @@ namespace Halaqat.Data.Migrations
                     { 1, "مدينة 1" },
                     { 2, "مدينة 2" },
                     { 3, "مدينة 3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EducationalStages",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "ما قبل الدراسة" },
+                    { 2, "إبتدائي" },
+                    { 3, "متوسطة" },
+                    { 4, "ثانوي" },
+                    { 5, "جامعي" }
                 });
 
             migrationBuilder.InsertData(
@@ -480,8 +642,31 @@ namespace Halaqat.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "DateCreated", "Password", "UserName" },
-                values: new object[] { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin", "admin" });
+                columns: new[] { "Id", "DateCreated", "IsActive", "Password", "UserName" },
+                values: new object[] { 1, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "admin", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "Classes",
+                columns: new[] { "Id", "EducationalStageId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 2, "أول" },
+                    { 2, 2, "ثاني" },
+                    { 3, 2, "ثالث" },
+                    { 4, 2, "رابع" },
+                    { 5, 2, "خامس" },
+                    { 6, 2, "سادس" },
+                    { 7, 3, "أول" },
+                    { 8, 3, "ثاني" },
+                    { 9, 3, "ثالث" },
+                    { 10, 4, "أول" },
+                    { 11, 4, "ثاني" },
+                    { 12, 4, "ثالث" },
+                    { 13, 5, "أول" },
+                    { 14, 5, "ثاني" },
+                    { 15, 5, "ثالث" },
+                    { 16, 5, "رابع" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AcademicQualifications_Name",
@@ -493,6 +678,12 @@ namespace Halaqat.Data.Migrations
                 name: "IX_Addresses_CityId",
                 table: "Addresses",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appreciations_Name",
+                table: "Appreciations",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Circles_Name",
@@ -508,6 +699,17 @@ namespace Halaqat.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_Name",
                 table: "Cities",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Classes_EducationalStageId",
+                table: "Classes",
+                column: "EducationalStageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EducationalStages_Name",
+                table: "EducationalStages",
                 column: "Name",
                 unique: true);
 
@@ -537,6 +739,13 @@ namespace Halaqat.Data.Migrations
                 column: "JobTitleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Employees_UserId",
+                table: "Employees",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobTitles_Name",
                 table: "JobTitles",
                 column: "Name",
@@ -546,6 +755,21 @@ namespace Halaqat.Data.Migrations
                 name: "IX_PhoneStudent_StudentId",
                 table: "PhoneStudent",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramDayAppreciation_AppreciationId",
+                table: "ProgramDayAppreciation",
+                column: "AppreciationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramDayAppreciation_ProgramDayId",
+                table: "ProgramDayAppreciation",
+                column: "ProgramDayId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramDayAppreciation_ProgramDayItemTypeId",
+                table: "ProgramDayAppreciation",
+                column: "ProgramDayItemTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProgramDayItems_ProgramDayId",
@@ -588,6 +812,16 @@ namespace Halaqat.Data.Migrations
                 column: "CircleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Students_ClassId",
+                table: "Students",
+                column: "ClassId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_EducationalStageId",
+                table: "Students",
+                column: "EducationalStageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_GenderId",
                 table: "Students",
                 column: "GenderId");
@@ -616,19 +850,25 @@ namespace Halaqat.Data.Migrations
                 name: "EmployeePhone");
 
             migrationBuilder.DropTable(
+                name: "Nationality");
+
+            migrationBuilder.DropTable(
                 name: "PhoneStudent");
 
             migrationBuilder.DropTable(
-                name: "ProgramDayItems");
+                name: "ProgramDayAppreciation");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "ProgramDayItems");
 
             migrationBuilder.DropTable(
                 name: "Phones");
 
             migrationBuilder.DropTable(
                 name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "Appreciations");
 
             migrationBuilder.DropTable(
                 name: "ProgramDays");
@@ -643,6 +883,9 @@ namespace Halaqat.Data.Migrations
                 name: "Circles");
 
             migrationBuilder.DropTable(
+                name: "Classes");
+
+            migrationBuilder.DropTable(
                 name: "Programs");
 
             migrationBuilder.DropTable(
@@ -650,6 +893,9 @@ namespace Halaqat.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Teachers");
+
+            migrationBuilder.DropTable(
+                name: "EducationalStages");
 
             migrationBuilder.DropTable(
                 name: "Employees");
@@ -665,6 +911,9 @@ namespace Halaqat.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "JobTitles");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Cities");

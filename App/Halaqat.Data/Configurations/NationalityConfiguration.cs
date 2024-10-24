@@ -8,6 +8,7 @@ namespace Halaqat.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Nationality> builder)
         {
+            builder.ToTable("Nationalities");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).HasColumnType("NVARCHAR(50)");
 

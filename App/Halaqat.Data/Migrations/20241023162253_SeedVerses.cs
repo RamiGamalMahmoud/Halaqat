@@ -6363,13 +6363,14 @@ INSERT INTO Verses ( Sorahid, Number, Page, Quarter, Hezb, Joza, Text, SearchTex
 
 
 ";
+
             migrationBuilder.Sql(sql);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("DELETE FROM Verses;");
+
         }
     }
 }

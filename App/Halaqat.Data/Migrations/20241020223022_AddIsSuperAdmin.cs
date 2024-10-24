@@ -5,23 +5,23 @@
 namespace Halaqat.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIsActiveToUsers : Migration
+    public partial class AddIsSuperAdmin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsActive",
+                name: "IsSuperAdmin",
                 table: "Users",
                 type: "bit",
                 nullable: false,
-                defaultValue: true);
+                defaultValue: false);
 
             migrationBuilder.UpdateData(
                 table: "Users",
                 keyColumn: "Id",
                 keyValue: 1,
-                column: "IsActive",
+                column: "IsSuperAdmin",
                 value: true);
         }
 
@@ -29,7 +29,7 @@ namespace Halaqat.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsActive",
+                name: "IsSuperAdmin",
                 table: "Users");
         }
     }

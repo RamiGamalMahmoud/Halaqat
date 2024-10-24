@@ -87,7 +87,8 @@ namespace Halaqat.Data.Configurations
                 DateCreated = DateTime.Parse("2024-01-01"),
                 UserName = "admin",
                 Password = "admin",
-                IsActive = true
+                IsActive = true,
+                IsSuperAdmin = true
             });
         }
     }
