@@ -1,7 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Resources;
-using Halaqat.Shared.Abstraction;
+using Halaqat.Shared;
 using Halaqat.Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,14 +20,34 @@ namespace Halaqat.MainWindow
             UserName = user.UserName;
             IEnumerable<ViewItem> viewItems = new ObservableCollection<ViewItem>()
             {
-                new ViewItem("إدارة", typeof(Shared.Abstraction.Features.Employees.IHomeView), user.EmployeesManagementPrivileges.CanRead),
-                new ViewItem("الطلبة", typeof(Shared.Abstraction.Features.Students.IHomeView), user.StudentsManagementPrivileges.CanRead),
-                new ViewItem("الحلقات", typeof(Shared.Abstraction.Features.Circles.IHomeView), user.CirclesManagementPrivileges.CanRead),
-                new ViewItem("البرامج", typeof(Shared.Abstraction.Features.Programs.IHomeView), user.ProgramsManagementPrivileges.CanRead),
-                new ViewItem("التقارير", typeof(object), user.ReportsManagementPrivileges.CanRead),
-                new ViewItem("الماليات", typeof(object), user.UsersManagementPrivileges.CanRead),
-                new ViewItem("المستخدمين", typeof(Shared.Abstraction.Features.Users.IHomeView), user.UsersManagementPrivileges.CanRead),
-                new ViewItem("الإعدادات", typeof(Shared.Abstraction.Features.Settings.ISettingsView), true)
+                new ViewItem(
+                    "إدارة",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Employees.IHomeView)),
+                    user.EmployeesManagementPrivileges.CanRead),
+                new ViewItem(
+                    "الطلبة",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Students.IHomeView)),
+                    user.StudentsManagementPrivileges.CanRead),
+                new ViewItem(
+                    "الحلقات",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Circles.IHomeView)),
+                    user.CirclesManagementPrivileges.CanRead),
+                new ViewItem(
+                    "البرامج",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Programs.IHomeView)),
+                    user.ProgramsManagementPrivileges.CanRead),
+                new ViewItem("التقارير"),
+                new ViewItem("الماليات"),
+                new ViewItem(
+                    "المستخدمين",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Users.IHomeView)),
+                    user.UsersManagementPrivileges.CanRead),
+                new ViewItem(
+                    "الإعدادات",
+                    () => SetCurrentView(typeof(Shared.Abstraction.Features.Settings.ISettingsView)),
+                    true),
+                new ViewItem("خروج",
+                () => messenger.Send<Messages.Users.LogoutMessage>())
             };
 
             ViewItems = viewItems.Where(x => x.IsEnabled);
@@ -45,12 +66,21 @@ namespace Halaqat.MainWindow
 
         partial void OnViewItemChanged(ViewItem oldValue, ViewItem newValue)
         {
-            if (newValue.View.GetInterface(nameof(IView)) is not null)
+            if (newValue is null || newValue.Action is null)
             {
-                CurrentView = _serviceProvider.GetRequiredService(newValue.View);
+                CurrentView = new EmptyView() { Text = newValue.Title };
                 return;
             }
-            CurrentView = new EmptyView() { Text = newValue.Title };
+            newValue.Action.Invoke();
+        }
+
+        private void SetCurrentView(Type type)
+        {
+            if(type is null)
+            {
+                CurrentView = new EmptyView();
+            }
+            CurrentView = _serviceProvider.GetRequiredService(type);
         }
 
         [ObservableProperty]
@@ -60,5 +90,5 @@ namespace Halaqat.MainWindow
         public string UserName { get; private set; }
     }
 
-    record ViewItem(string Title, Type View, bool IsEnabled);
+    record ViewItem(string Title, Action Action = null, bool IsEnabled = true);
 }
