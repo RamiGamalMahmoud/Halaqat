@@ -58,8 +58,8 @@ namespace Halaqat
             });
 
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
-            services.AddSingleton<Shared.Abstraction.MainWindow.IMainWindowView, Halaqat.MainWindow.View>();
-            services.AddSingleton<MainWindow.ViewModel>();
+            services.AddTransient<Shared.Abstraction.MainWindow.IMainWindowView, Halaqat.MainWindow.View>();
+            services.AddTransient<MainWindow.ViewModel>();
             services.AddSingleton<AppHelper>();
             return services;
         }
