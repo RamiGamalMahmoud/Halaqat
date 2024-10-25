@@ -52,6 +52,14 @@ namespace Halaqat
                 MessageBox.Show("اسم المستخدم غير موجود أو كلمة مرور خاطئة");
             });
 
+            _messenger.Register<Messages.Users.LogoutMessage>(this, (r, m) =>
+            {
+                Window window = MainWindow;
+                MainWindow = _host.Services.GetRequiredService<Shared.Abstraction.Features.Auth.ILoginView>() as Window;
+                window.Close();
+                MainWindow.Show();
+            });
+
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
