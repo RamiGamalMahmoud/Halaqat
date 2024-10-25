@@ -23,6 +23,7 @@ namespace Halaqat.Shared
         {
             public record LoginSucceded(User User);
             public record LoginFailed();
+            public record LogoutMessage();
             public class LoggedInUserRequestMessage() : RequestMessage<User>;
         }
 
