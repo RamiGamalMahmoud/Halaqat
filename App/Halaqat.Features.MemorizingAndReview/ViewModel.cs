@@ -30,18 +30,17 @@ namespace Halaqat.Features.MemorizingAndReview
             _messenger.Register<DayItemAppreciatedMessage>(this, (r, m) =>
             {
                 HasChanges = true;
-                _changedDays.Add(m.ProgramDayItemViewModel);
-                if (m.ProgramDayItemViewModel.CanSetMemorizingAppreciation || m.ProgramDayItemViewModel.CanSetReviewAppreciation)
+                ChangedDays.Add(m.ProgramDayItemViewModel);
+
+                if (m.ProgramDayItemViewModel.ProgramDayMemorizingItemViewModel.CanInsertAppreciation ||
+                    m.ProgramDayItemViewModel.ProgramDayReviewItemViewModel.CanInsertAppreciation)
                 {
                     return;
                 }
 
                 int currentIndex = ProgramDays.IndexOf(m.ProgramDayItemViewModel);
-                if (currentIndex >= (ProgramDays.Count - 1))
-                {
-                    return;
-                }
-                ProgramDayItemViewModel next = ProgramDays.ElementAt(currentIndex + 1);
+
+                ProgramDayViewModel next = ProgramDays.ElementAt(currentIndex + 1);
                 next.IsEnabled = true;
             });
         }
@@ -50,28 +49,29 @@ namespace Halaqat.Features.MemorizingAndReview
         {
             using (BusyWorkRunner.CreateBusyWork(DoBusyWork))
             {
-                Program program = await _mediator.Send(new Shared.Commands.Programs.GetProgram(Student.Program.Id));
                 Appreciations = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Appreciation>(isReload));
                 _programDayItemTypes = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<ProgramDayItemType>(false));
-                ProgramDays = program.ProgramDays.Select(x => new ProgramDayItemViewModel(x, _programDayItemTypes, _messenger)).ToList();
+
+                ProgramDays = (await _mediator.Send(new CommandHandlers.GetStudentAppreciatinos.Command(Student.Id)))
+                    .Select(x => new ProgramDayViewModel(x, Student, Teacher, _programDayItemTypes, _messenger)).ToList();
                 EnableFirstProgramDayItemViewModel();
             }
         }
 
         private void EnableFirstProgramDayItemViewModel()
         {
-            ProgramDayItemViewModel firstEnabled = ProgramDays.Where(x => x.IsEnabled).FirstOrDefault();
-            foreach (ProgramDayItemViewModel item in ProgramDays)
+            ProgramDayViewModel firstEnabled = ProgramDays.Where(x => x.IsEnabled).FirstOrDefault();
+            foreach (ProgramDayViewModel item in ProgramDays)
             {
                 item.IsEnabled = false;
             }
-            firstEnabled.IsEnabled = true;
+            if (firstEnabled is not null) firstEnabled.IsEnabled = true;
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]
         private async Task Save()
         {
-            foreach (ProgramDayItemViewModel day in _changedDays)
+            foreach (ProgramDayViewModel day in ChangedDays)
             {
                 await _mediator.Send(new CommandHandlers.UpdateProgramDay.Command(day));
             }
@@ -95,9 +95,9 @@ namespace Halaqat.Features.MemorizingAndReview
         public Teacher Teacher { get; }
 
         [ObservableProperty]
-        private List<ProgramDayItemViewModel> _programDays;
+        private List<ProgramDayViewModel> _programDays;
 
-        private List<ProgramDayItemViewModel> _changedDays = [];
+        public List<ProgramDayViewModel> ChangedDays { get; } = [];
 
         [ObservableProperty]
         private IEnumerable<Appreciation> _appreciations;

@@ -31,7 +31,7 @@
             Padding="5"
             VerticalAlignment="Center"
             Command="{Binding ElementName=root, Path=Command}"
-            CommandParameter="{Binding ElementName=root, Path=CommandParameter}"
+            CommandParameter="{Binding ElementName=root, Path=Appreciation}"
             Foreground="{StaticResource SuccessBrush}"
             Style="{StaticResource MaterialDesignFlatButton}"
             Visibility="{Binding ElementName=root, Path=CanSetAppreciation, Converter={StaticResource BooleanToVisibilityConverter}}">

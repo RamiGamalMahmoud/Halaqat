@@ -6,7 +6,7 @@ namespace Halaqat.Features.MemorizingAndReview.CommandHandlers
 {
     internal static class UpdateProgramDay
     {
-        public record Command(ProgramDayItemViewModel ProgramDayItemViewModel) : IRequest;
+        public record Command(ProgramDayViewModel ProgramDayItemViewModel) : IRequest;
         internal class Handler(Repository repository) : IRequestHandler<Command>
         {
             public async Task Handle(Command request, CancellationToken cancellationToken)

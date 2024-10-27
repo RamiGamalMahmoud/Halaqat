@@ -155,12 +155,12 @@
                                 <DataTemplate>
 
                                     <components:ProgramDayAppreciationComponent
-                                        Appreciation="{Binding MemorizingAppreciation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        Appreciation="{Binding ProgramDayMemorizingItemViewModel.Appreciation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Appreciations="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.Appreciations}"
-                                        CanSetAppreciation="{Binding CanSetMemorizingAppreciation}"
-                                        Command="{Binding SetMemorizingAppreciationCommand}"
+                                        CanSetAppreciation="{Binding ProgramDayMemorizingItemViewModel.CanInsertAppreciation}"
+                                        Command="{Binding ProgramDayMemorizingItemViewModel.InsertApprecationCommand}"
                                         CommandParameter="{Binding}"
-                                        HasItems="{Binding HasMemorizingItems}"
+                                        HasItems="{Binding ProgramDayMemorizingItemViewModel.HasItems}"
                                         IsEnabled="{Binding IsEnabled}" />
 
                                 </DataTemplate>
@@ -191,12 +191,12 @@
                                 <DataTemplate>
 
                                     <components:ProgramDayAppreciationComponent
-                                        Appreciation="{Binding ReviewAppreciation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        Appreciation="{Binding ProgramDayReviewItemViewModel.Appreciation, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         Appreciations="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.Appreciations}"
-                                        CanSetAppreciation="{Binding CanSetReviewAppreciation}"
-                                        Command="{Binding SetReviewAppreciationCommand}"
+                                        CanSetAppreciation="{Binding ProgramDayReviewItemViewModel.CanInsertAppreciation}"
+                                        Command="{Binding ProgramDayReviewItemViewModel.InsertApprecationCommand}"
                                         CommandParameter="{Binding}"
-                                        HasItems="{Binding HasReviewItems}"
+                                        HasItems="{Binding ProgramDayReviewItemViewModel.HasItems}"
                                         IsEnabled="{Binding IsEnabled}" />
 
                                 </DataTemplate>
@@ -233,11 +233,11 @@
                                         BorderThickness="1"
                                         GridLinesVisibility="All"
                                         IsReadOnly="True"
-                                        ItemsSource="{Binding MemorizingAppreciations}">
+                                        ItemsSource="{Binding ProgramDayMemorizingItemViewModel.ProgramDayAppreciations}">
 
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Binding="{Binding Appreciation.Name}" Header="التقييم" />
-                                            <DataGridTextColumn Binding="{Binding DateAppreciated}" Header="التاريخ" />
+                                            <DataGridTextColumn Binding="{Binding DateAppreciated, StringFormat={}{0:yyyy/MM/dd}}" Header="التاريخ" />
                                         </DataGrid.Columns>
 
                                     </DataGrid>
@@ -250,11 +250,11 @@
                                         BorderThickness="1"
                                         GridLinesVisibility="All"
                                         IsReadOnly="True"
-                                        ItemsSource="{Binding ReviewAppreciations}">
+                                        ItemsSource="{Binding ProgramDayReviewItemViewModel.ProgramDayAppreciations}">
 
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Binding="{Binding Appreciation.Name}" Header="التقييم" />
-                                            <DataGridTextColumn Binding="{Binding DateAppreciated}" Header="التاريخ" />
+                                            <DataGridTextColumn Binding="{Binding DateAppreciated, StringFormat={}{0:yyyy/MM/dd}}" Header="التاريخ" />
                                         </DataGrid.Columns>
 
                                     </DataGrid>
