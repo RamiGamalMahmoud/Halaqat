@@ -33,6 +33,10 @@ namespace Halaqat.Data.Configurations
             builder.HasMany(x => x.Phones)
                 .WithMany();
 
+            builder.HasMany(x => x.ProgramDayAppreciations)
+                .WithOne(x => x.Student)
+                .HasForeignKey("StudentId");
+
             builder.HasOne(x => x.Program)
                 .WithMany()
                 .HasForeignKey(x => x.ProgramId)
