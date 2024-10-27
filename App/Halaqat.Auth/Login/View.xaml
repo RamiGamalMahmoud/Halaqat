@@ -69,16 +69,14 @@
 
             <Button
                 Grid.Row="4"
-                Grid.Column="0"
-                Grid.ColumnSpan="3"
+                Grid.Column="2"
                 Height="40"
-                Margin="0,20,0,0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                BorderThickness="0"
                 Command="{Binding LoginCommand}"
                 Content="دخول"
                 Cursor="Hand"
+                FontFamily="Arial"
+                FontSize="18"
+                FontWeight="Bold"
                 IsDefault="True" />
 
             <ProgressBar
