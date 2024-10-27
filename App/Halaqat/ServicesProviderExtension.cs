@@ -2,10 +2,13 @@
 using Halaqat.Data;
 using Halaqat.Helpers;
 using Halaqat.Shared;
+using Halaqat.Shared.Common;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
+using System.Data.Common;
 using System.IO;
 
 namespace Halaqat
@@ -35,31 +38,19 @@ namespace Halaqat
                 return logger.CreateLogger("logging");
             });
 
-            services.AddSingleton<Halaqat.Data.IAppDbContextFactory>(s =>
-            {
-                ISettingsVewModel settings = s.GetRequiredService<ISettingsVewModel>();
+            services.AddTransient<ConnectionStringFactory>();
+            services.AddSingleton<SqlConnectionFactory>();
+            services.AddSingleton<Halaqat.Data.IAppDbContextFactory, AppDbContextFactory>();
 
-                if(settings.IsLocalDatabase)
-                {
-                    return new AppDbContextFactory(@"
-                        Server=.\SQLEXPRESS;
-                        Integrated Security=SSPI;
-                        Initial Catalog=halaqat;
-                        TrustServerCertificate=True;
-                        Trusted_Connection=True;");
-                }
+            services.AddSingleton<MainWindow.AdministrativeOfficers.ViewModel>();
+            services.AddSingleton<MainWindow.AdministrativeOfficers.View>();
 
-                return new AppDbContextFactory(@$"
-                    Data Source={settings.IP},{settings.Port};
-                    User Id={settings.UserId};
-                    Password={settings.Password};
-                    Initial Catalog=halaqat;
-                    TrustServerCertificate=True;");
-            });
+            services.AddSingleton<MainWindow.Teachers.ViewModel>();
+            services.AddSingleton<MainWindow.Teachers.View>();
 
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
-            services.AddTransient<Shared.Abstraction.MainWindow.IMainWindowView, Halaqat.MainWindow.View>();
-            services.AddTransient<MainWindow.ViewModel>();
+            services.AddSingleton<Shared.Abstraction.MainWindow.IMainWindowView, Halaqat.MainWindow.View>();
+            services.AddSingleton<MainWindow.ViewModel>();
             services.AddSingleton<AppHelper>();
             return services;
         }

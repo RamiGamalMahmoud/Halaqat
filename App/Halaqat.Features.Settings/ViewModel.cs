@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Halaqat.Shared;
-using System.ComponentModel;
 
 namespace Halaqat.Features.Settings
 {
@@ -11,66 +11,46 @@ namespace Halaqat.Features.Settings
             _settings = settings;
         }
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            _settings.Save();
-            base.OnPropertyChanged(e);
-        }
-
         public bool IsLocalDatabase
         {
             get => _settings.IsLocalDatabase;
-            set
-            {
-                _settings.IsLocalDatabase = value;
-            }
+            set => SetProperty(_settings.IsLocalDatabase, value, _settings, (o, v) => o.IsLocalDatabase = v);
         }
 
         public string Server
         {
             get => _settings.Server;
-            set
-            {
-                _settings.Server = value;
-                OnPropertyChanged(nameof(Server));
-            }
+            set => SetProperty(_settings.Server, value, _settings, (o, v) => o.Server = v);
         }
 
         public string IP
         {
             get => _settings.IP;
-            set
-            {
-                _settings.IP = value;
-                OnPropertyChanged(nameof(IP));
-            }
+            set => SetProperty(_settings.IP, value, _settings, (o, v) => o.IP = v);
         }
 
         public int Port
         {
             get => _settings.Port;
-            set
-            {
-                _settings.Port = value;
-            }
+            set => SetProperty(_settings.Port, value, _settings, (o, v) => o.Port = v);
         }
 
         public string Password
         {
             get => _settings.Password;
-            set
-            {
-                _settings.Password = value;
-            }
+            set => SetProperty(_settings.Password, value, _settings, (o, v) => o.Password = v);
         }
 
         public string UserId
         {
             get => _settings.UserId;
-            set
-            {
-                _settings.UserId = value;
-            }
+            set => SetProperty(_settings.UserId, value, _settings, (o, v) => o.UserId = v);
+        }
+
+        [RelayCommand]
+        private void Save()
+        {
+            _settings.Save();
         }
 
         private readonly Properties.Settings _settings;
