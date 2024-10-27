@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Halaqat.Shared.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Halaqat.Data
 {
-    public class AppDbContextFactory(string connectionString) : IAppDbContextFactory
+    public class AppDbContextFactory(ConnectionStringFactory connectionStringFactory) : IAppDbContextFactory
     {
         public AppDbContext CreateAppDbContext()
         {
             return new AppDbContext(
                 new DbContextOptionsBuilder()
-                .UseSqlServer(connectionString)
+                .UseSqlServer(connectionStringFactory.GetConnectionString())
                 .Options
                 );
         }
