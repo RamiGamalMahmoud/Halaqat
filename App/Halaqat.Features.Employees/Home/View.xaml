@@ -66,10 +66,20 @@
                     VerticalContentAlignment="Center"
                     materialDesign:TextFieldAssist.HasClearButton="True"
                     Cursor="Hand"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBoxItem Content="معلمين" />
-                    <ComboBoxItem Content="إداريين" />
-                </ComboBox>
+                    DisplayMemberPath="Name"
+                    ItemsSource="{Binding JobTitles}"
+                    SelectedItem="{Binding JobTitle}"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+
+                <Button
+                    Margin="5,0"
+                    FontFamily="Arial"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Command="{Binding ShowAllCommand}"
+                    CommandParameter="{StaticResource True}"
+                    Content="عرض الكل"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" />
 
             </StackPanel>
 

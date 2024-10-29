@@ -71,7 +71,7 @@ namespace Halaqat.Features.Employees.Teachers
                         .Include(x => x.Address)
                         .ThenInclude(x => x.City)
                         .Include(x => x.Phones)
-                        .Include(x => x.Circles)
+                        .Include(x => x.Circles).ThenInclude(c => c.Students)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
                     SetEntities(teachers);
@@ -86,7 +86,7 @@ namespace Halaqat.Features.Employees.Teachers
             {
                 Teacher teacher = await dbContext
                     .Teachers
-                    .Include(x => x.Circles)
+                    .Include(x => x.Circles).ThenInclude(c => c.Students).ThenInclude(s => s.Program)
                     .Where(x => x.User.Id == userId)
                     .FirstOrDefaultAsync();
 

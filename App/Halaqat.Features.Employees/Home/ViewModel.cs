@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Models;
 using MediatR;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Halaqat.Features.Employees.Home
@@ -13,7 +14,9 @@ namespace Halaqat.Features.Employees.Home
         [RelayCommand]
         public async Task LoadDataAsync(bool reload )
         {
-            Employees = await mediator.Send(new Shared.Commands.Common.GetAllCommand<Employee>(reload));
+            _allEmployees = await mediator.Send(new Shared.Commands.Common.GetAllCommand<Employee>(reload));
+            Employees = _allEmployees;
+            JobTitles = await mediator.Send(new Shared.Commands.Common.GetAllCommand<JobTitle>(reload));
         }
 
         [RelayCommand]
@@ -35,21 +38,41 @@ namespace Halaqat.Features.Employees.Home
             messenger.Send(new Shared.Messages.Notifications.SuccessNotification());
         }
 
-        async partial void OnSearchTermChanged(string oldValue, string newValue)
+        [RelayCommand]
+        private void ShowAll()
+        {
+            JobTitle = null;
+            SearchTerm = null;
+        }
+
+        partial void OnJobTitleChanged(JobTitle oldValue, JobTitle newValue)
+        {
+            Employees = _allEmployees.Where(x => newValue is null || x.JobTitle == newValue);
+        }
+
+        partial void OnSearchTermChanged(string oldValue, string newValue)
         {
             if(newValue is null || string.IsNullOrEmpty(newValue))
             {
-                Employees = await mediator.Send(new Shared.Commands.Common.GetAllCommand<Employee>(false));
+                Employees = _allEmployees;
                 return;
             }
-            Employees = await mediator.Send(new Shared.Commands.Employees.GetByName(newValue));
+            Employees = _allEmployees.Where(x => x.Name.Contains(newValue));
         }
 
         private bool CanPerformEmployeeAction(Employee employee) => employee is not null;
 
 
+        private IEnumerable<Employee> _allEmployees;
+
         [ObservableProperty]
         private IEnumerable<Employee> _employees;
+
+        [ObservableProperty]
+        private IEnumerable<JobTitle> _jobTitles;
+
+        [ObservableProperty]
+        private JobTitle _jobTitle;
 
         [ObservableProperty]
         private string _searchTerm;
