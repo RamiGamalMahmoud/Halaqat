@@ -1,6 +1,6 @@
 dotnet publish -c Release  ..\App\Halaqat\ -r win-x64 -o .\publish
 
-$version = "0.0.2"
+$version = "0.0.23"
 $pack_id = "Halaqat"
 $main_exe = "Halaqat.exe"
 $icon_path = ".\quran.ico"
