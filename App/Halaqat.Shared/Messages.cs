@@ -25,11 +25,21 @@ namespace Halaqat.Shared
             public record LoginFailed();
             public record LogoutMessage();
             public class LoggedInUserRequestMessage() : RequestMessage<User>;
+            public class GetEmployeesPrivilegesRequestMessage() : RequestMessage<Privileges>;
+            public class GetStudentsPrivilegesRequestMessage() : RequestMessage<Privileges>;
+            public class GetCirclesPrivilegesRequestMessage() : RequestMessage<Privileges>;
+            public class GetProgramsPrivilegesRequestMessage() : RequestMessage<Privileges>;
+            public class GetUsersPrivilegesRequestMessage() : RequestMessage<Privileges>;
         }
 
         public static class Logging
         {
             public record LogErrorMessage(string Message);
+        }
+
+        public static class App
+        {
+            public class TestConnectionRequestMessage : AsyncRequestMessage<bool>;
         }
     }
 }

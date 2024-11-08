@@ -6,5 +6,6 @@ namespace Halaqat.Shared.Commands
     public static class MemorizingAndReviewCommands
     {
         public record ShowMemorizingAndReviewViewCommand(Student Student, Teacher Teacher) : IRequest;
+        public record ShowMemorizationBookletReportCommand(Student Student) : IRequest;
     }
 }

@@ -34,7 +34,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("PhonesId");
 
-                    b.ToTable("EmployeePhone", (string)null);
+                    b.ToTable("EmployeePhone");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.AcademicQualification", b =>
@@ -54,7 +54,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("AcademicQualifications", (string)null);
+                    b.ToTable("AcademicQualifications");
 
                     b.HasData(
                         new
@@ -102,7 +102,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Appreciation", b =>
@@ -178,7 +178,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("Circles", (string)null);
+                    b.ToTable("Circles");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.City", b =>
@@ -198,7 +198,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Cities", (string)null);
+                    b.ToTable("Cities");
 
                     b.HasData(
                         new
@@ -237,7 +237,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("EducationalStageId");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
 
                     b.HasData(
                         new
@@ -355,7 +355,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("EducationalStages", (string)null);
+                    b.ToTable("EducationalStages");
 
                     b.HasData(
                         new
@@ -437,7 +437,7 @@ namespace Halaqat.Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
 
                     b.UseTptMappingStrategy();
                 });
@@ -456,7 +456,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Gender", (string)null);
+                    b.ToTable("Gender");
 
                     b.HasData(
                         new
@@ -491,7 +491,7 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("JobTitles", (string)null);
+                    b.ToTable("JobTitles");
 
                     b.HasData(
                         new
@@ -539,7 +539,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Phones", (string)null);
+                    b.ToTable("Phones");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Program", b =>
@@ -562,7 +562,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Programs", (string)null);
+                    b.ToTable("Programs");
 
                     b.HasData(
                         new
@@ -591,7 +591,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramDays", (string)null);
+                    b.ToTable("ProgramDays");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayAppreciation", b =>
@@ -614,7 +614,10 @@ namespace Halaqat.Data.Migrations
                     b.Property<int>("ProgramDayItemTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -627,7 +630,9 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("ProgramDayAppreciation", (string)null);
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("ProgramDayAppreciation");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayItem", b =>
@@ -638,13 +643,16 @@ namespace Halaqat.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("VARCHAR(20)");
+
                     b.Property<int>("ProgramDayId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProgramDayItemTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SorahId")
+                    b.Property<int?>("SorahId")
                         .HasColumnType("int");
 
                     b.Property<int?>("VerseFromId")
@@ -665,7 +673,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("VerseToId");
 
-                    b.ToTable("ProgramDayItems", (string)null);
+                    b.ToTable("ProgramDayItems");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayItemType", b =>
@@ -711,7 +719,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sorahs", (string)null);
+                    b.ToTable("Sorahs");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Student", b =>
@@ -772,7 +780,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.User", b =>
@@ -785,6 +793,21 @@ namespace Halaqat.Data.Migrations
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("HasFinancePrivileges")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("HasReportsPrivileges")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("HasSettingsPrivileges")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
@@ -807,13 +830,16 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HasFinancePrivileges = true,
+                            HasReportsPrivileges = true,
+                            HasSettingsPrivileges = true,
                             IsActive = true,
                             IsSuperAdmin = true,
                             Password = "admin",
@@ -857,7 +883,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("SorahId");
 
-                    b.ToTable("Verses", (string)null);
+                    b.ToTable("Verses");
                 });
 
             modelBuilder.Entity("PhoneStudent", b =>
@@ -872,7 +898,7 @@ namespace Halaqat.Data.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("PhoneStudent", (string)null);
+                    b.ToTable("PhoneStudent");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.Teacher", b =>
@@ -1001,15 +1027,25 @@ namespace Halaqat.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Halaqat.Shared.Models.Student", null)
+                    b.HasOne("Halaqat.Shared.Models.Student", "Student")
                         .WithMany("ProgramDayAppreciations")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Halaqat.Shared.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Appreciation");
 
                     b.Navigation("ProgramDay");
 
                     b.Navigation("ProgramDayItemType");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Halaqat.Shared.Models.ProgramDayItem", b =>
@@ -1029,8 +1065,7 @@ namespace Halaqat.Data.Migrations
                     b.HasOne("Halaqat.Shared.Models.Sorah", "Sorah")
                         .WithMany()
                         .HasForeignKey("SorahId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Halaqat.Shared.Models.Verse", "VerseFrom")
                         .WithMany()
@@ -1102,7 +1137,7 @@ namespace Halaqat.Data.Migrations
 
             modelBuilder.Entity("Halaqat.Shared.Models.User", b =>
                 {
-                    b.OwnsOne("Halaqat.Shared.Models.User.CirclesManagementPrivileges#Halaqat.Shared.Models.Privileges", "CirclesManagementPrivileges", b1 =>
+                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "CirclesManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -1129,13 +1164,13 @@ namespace Halaqat.Data.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", (string)null);
+                            b1.ToTable("Users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("Halaqat.Shared.Models.User.EmployeesManagementPrivileges#Halaqat.Shared.Models.Privileges", "EmployeesManagementPrivileges", b1 =>
+                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "EmployeesManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -1162,13 +1197,13 @@ namespace Halaqat.Data.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", (string)null);
+                            b1.ToTable("Users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("Halaqat.Shared.Models.User.ProgramsManagementPrivileges#Halaqat.Shared.Models.Privileges", "ProgramsManagementPrivileges", b1 =>
+                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "ProgramsManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -1195,13 +1230,13 @@ namespace Halaqat.Data.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", (string)null);
+                            b1.ToTable("Users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("Halaqat.Shared.Models.User.ReportsManagementPrivileges#Halaqat.Shared.Models.Privileges", "ReportsManagementPrivileges", b1 =>
+                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "StudentsManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -1228,13 +1263,13 @@ namespace Halaqat.Data.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", (string)null);
+                            b1.ToTable("Users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
                         });
 
-                    b.OwnsOne("Halaqat.Shared.Models.User.StudentsManagementPrivileges#Halaqat.Shared.Models.Privileges", "StudentsManagementPrivileges", b1 =>
+                    b.OwnsOne("Halaqat.Shared.Models.Privileges", "UsersManagementPrivileges", b1 =>
                         {
                             b1.Property<int>("UserId")
                                 .HasColumnType("int");
@@ -1261,40 +1296,7 @@ namespace Halaqat.Data.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("Users", (string)null);
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.OwnsOne("Halaqat.Shared.Models.User.UsersManagementPrivileges#Halaqat.Shared.Models.Privileges", "UsersManagementPrivileges", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<bool>("CanCreate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanDelete")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRead")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanUpdate")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bit")
-                                .HasDefaultValue(false);
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users", (string)null);
+                            b1.ToTable("Users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
@@ -1305,8 +1307,6 @@ namespace Halaqat.Data.Migrations
                     b.Navigation("EmployeesManagementPrivileges");
 
                     b.Navigation("ProgramsManagementPrivileges");
-
-                    b.Navigation("ReportsManagementPrivileges");
 
                     b.Navigation("StudentsManagementPrivileges");
 

@@ -65,7 +65,8 @@ namespace Halaqat.Features.Programs.Editor
                         Sorah = item.Sorah,
                         VerseFrom = item.VerseFrom,
                         VerseTo = item.VerseTo,
-                        ProgramDayItemType = addMemoOrReview.ProgramDayItemTypes.Where(x => x.Name == "حفظ").FirstOrDefault()
+                        ProgramDayItemType = addMemoOrReview.ProgramDayItemTypes.Where(x => x.Name == "حفظ").FirstOrDefault(),
+                        Notes = item.Notes
                     };
                     MemorizingProgramDayItems.Add(programDayItem);
                 }
@@ -85,7 +86,8 @@ namespace Halaqat.Features.Programs.Editor
                         Sorah = item.Sorah,
                         VerseFrom = item.VerseFrom,
                         VerseTo = item.VerseTo,
-                        ProgramDayItemType = addMemoOrReview.ProgramDayItemTypes.Where(x => x.Name == "مراجعة").FirstOrDefault()
+                        ProgramDayItemType = addMemoOrReview.ProgramDayItemTypes.Where(x => x.Name == "مراجعة").FirstOrDefault(),
+                        Notes = item.Notes
                     };
                     ReviewProgramDayItems.Add(programDayItem);
                 }

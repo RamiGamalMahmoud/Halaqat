@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Halaqat.Shared.Models
 {
@@ -57,5 +58,6 @@ namespace Halaqat.Shared.Models
         private Class _class;
 
         public ICollection<Phone> Phones { get; private set; } = [];
+        public Collection<ProgramDayAppreciation> ProgramDayAppreciations { get; } = [];
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl
+<UserControl
     x:Class="Halaqat.Features.Students.Home.View"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -29,8 +29,8 @@
                 <Button
                     Background="#4caf50"
                     BorderThickness="0"
-                    Visibility="{Binding User.StudentsManagementPrivileges.CanCreate, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Command="{Binding ShowCreateCommand}">
+                    Command="{Binding ShowCreateCommand}"
+                    Visibility="{Binding Privileges.CanCreate, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="AccountPlus" />
 
@@ -93,10 +93,10 @@
                 <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
                 <DataGridTextColumn Binding="{Binding Circle.Name}" Header="الحلقة" />
                 <DataGridTextColumn Binding="{Binding Circle.Teacher.Name}" Header="المعلم" />
-                <DataGridTextColumn Header="المرحلة الدراسية" Binding="{Binding EducationalStage.Name}"/>
-                <DataGridTextColumn Header="الصف الدراسي" Binding="{Binding Class.Name}"/>
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
-                <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ الميلاد" />
+                <DataGridTextColumn Binding="{Binding EducationalStage.Name}" Header="المرحلة الدراسية" />
+                <DataGridTextColumn Binding="{Binding Class.Name}" Header="الصف الدراسي" />
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
+                <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ الميلاد" />
 
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
@@ -119,13 +119,12 @@
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowStudentMemorizingAndReviewTableCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowMemorizingReportCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource BlackBrush}"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    Style="{StaticResource MaterialDesignFlatButton}">
                                     <StackPanel Orientation="Horizontal">
-                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Brain" />
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="BookOpenVariantOutline" />
                                         <TextBlock
                                             VerticalAlignment="Center"
                                             FontWeight="Bold"
@@ -138,7 +137,8 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="Pencil" />
                                         <TextBlock
@@ -154,7 +154,8 @@
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.RemoveCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource DangerBrush}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanDelete, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="Delete" />
                                         <TextBlock

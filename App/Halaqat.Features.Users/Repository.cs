@@ -23,7 +23,6 @@ namespace Halaqat.Features.Users
                 {
                     IEnumerable<User> users = await dbContext
                         .Users
-                        .Where(x => x.IsActive)
                         .ToListAsync();
                     SetEntities(users);
                 }
@@ -38,7 +37,7 @@ namespace Halaqat.Features.Users
             {
                 User user = await dbContext
                     .Users
-                    .Where(x => x.UserName == userName && x.Password == password)
+                    .Where(x => x.UserName == userName && x.Password == password && x.IsActive)
                     .FirstOrDefaultAsync();
 
                 return new Result<User>(user, user is not null, "");
@@ -74,6 +73,14 @@ namespace Halaqat.Features.Users
             }
         }
 
+        public async Task<IEnumerable<User>> GetInActiveUsers()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext.Users.Where(x => !x.IsActive).ToListAsync();
+            }
+        }
+
         public override async Task<Result> Update(UserDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
@@ -91,13 +98,15 @@ namespace Halaqat.Features.Users
                 stored.UserName = dataModel.UserName;
                 stored.Password = dataModel.Password;
                 stored.IsActive = dataModel.IsActive;
+                stored.HasFinancePrivileges = dataModel.HasFinancePrivileges;
+                stored.HasReportsPrivileges = dataModel.HasReportsPrivileges;
+                stored.HasSettingsPrivileges = dataModel.HasSettingsPrivileges;
 
                 stored.UsersManagementPrivileges.UpdateFrom(dataModel.UsersManagementPrivileges);
                 stored.EmployeesManagementPrivileges.UpdateFrom(dataModel.EmployeesManagementPrivileges);
                 stored.StudentsManagementPrivileges.UpdateFrom(dataModel.StudentsManagementPrivileges);
                 stored.CirclesManagementPrivileges.UpdateFrom(dataModel.CirclesManagementPrivileges);
                 stored.ProgramsManagementPrivileges.UpdateFrom(dataModel.ProgramsManagementPrivileges);
-                stored.ReportsManagementPrivileges.UpdateFrom(dataModel.ReportsManagementPrivileges);
 
                 dbContext.Users.Update(stored);
 

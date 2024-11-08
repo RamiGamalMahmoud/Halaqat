@@ -22,6 +22,15 @@ namespace Halaqat.Data.Configurations
             builder.Property(x => x.IsActive)
                 .HasDefaultValue(true);
 
+            builder.Property(x => x.HasReportsPrivileges)
+                .HasDefaultValue(true);
+
+            builder.Property(x => x.HasSettingsPrivileges)
+                .HasDefaultValue(true);
+
+            builder.Property(x => x.HasFinancePrivileges)
+                .HasDefaultValue(true);
+
             builder.HasIndex(x => x.UserName)
                 .IsUnique();
 
@@ -72,14 +81,14 @@ namespace Halaqat.Data.Configurations
                 p.Ignore(x => x.HasFullPrivileges);
             });
 
-            builder.OwnsOne(x => x.ReportsManagementPrivileges, p =>
-            {
-                p.Property(x => x.CanCreate).HasDefaultValue(false);
-                p.Property(x => x.CanRead).HasDefaultValue(false);
-                p.Property(x => x.CanDelete).HasDefaultValue(false);
-                p.Property(x => x.CanUpdate).HasDefaultValue(false);
-                p.Ignore(x => x.HasFullPrivileges);
-            });
+            //builder.OwnsOne(x => x.ReportsManagementPrivileges, p =>
+            //{
+            //    p.Property(x => x.CanCreate).HasDefaultValue(false);
+            //    p.Property(x => x.CanRead).HasDefaultValue(false);
+            //    p.Property(x => x.CanDelete).HasDefaultValue(false);
+            //    p.Property(x => x.CanUpdate).HasDefaultValue(false);
+            //    p.Ignore(x => x.HasFullPrivileges);
+            //});
 
             builder.HasData(new
             {
@@ -88,7 +97,10 @@ namespace Halaqat.Data.Configurations
                 UserName = "admin",
                 Password = "admin",
                 IsActive = true,
-                IsSuperAdmin = true
+                IsSuperAdmin = true,
+                HasReportsPrivileges = true,
+                HasSettingsPrivileges = true,
+                HasFinancePrivileges = true
             });
         }
     }

@@ -10,13 +10,25 @@ namespace Halaqat.Data.Configurations
         {
             builder.HasKey(x => x.Id);
 
+            builder.HasOne(x => x.Teacher)
+                .WithMany()
+                .HasForeignKey(x => x.TeacherId);
+
+            builder.HasOne(x => x.Student)
+                .WithMany()
+                .HasForeignKey(x => x.StudentId);
+
+            builder.HasOne(x => x.ProgramDayItemType)
+                .WithMany()
+                .HasForeignKey(x => x.ProgramDayItemTypeId);
+
             builder.HasOne(x => x.ProgramDay)
                 .WithMany(x => x.ProgramDayAppreciations)
-                .HasForeignKey($"{nameof(ProgramDay)}Id");
+                .HasForeignKey(x => x.ProgramDayId);
 
             builder.HasOne(x => x.Appreciation)
                 .WithMany()
-                .HasForeignKey($"{nameof(Appreciation)}Id");
+                .HasForeignKey(x => x.AppreciationId);
         }
     }
 }

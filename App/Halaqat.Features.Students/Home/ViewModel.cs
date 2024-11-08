@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
 using MediatR;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Halaqat.Features.Students.Home
@@ -13,6 +14,7 @@ namespace Halaqat.Features.Students.Home
         public ViewModel(IMediator mediator, IMessenger messenger) : base(mediator, messenger)
         {
             User = _messenger.Send(new Shared.Messages.Users.LoggedInUserRequestMessage());
+            Privileges = _messenger.Send(new Shared.Messages.Users.GetStudentsPrivilegesRequestMessage());
         }
 
         public override async Task LoadDataAsync(bool isReload)
@@ -20,38 +22,21 @@ namespace Halaqat.Features.Students.Home
             using (BusyWorkRunner.CreateBusyWork(DoBusyWork))
             {
                 Teacher = (await _mediator.Send(new Shared.Commands.Teachers.GetLoggedInTeacherCommand(User.Id))).Value;
-                Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Student>(isReload));
-                ShowStudentMemorizingAndReviewTableCommand.NotifyCanExecuteChanged();
+                _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Student>(isReload));
+                Models = _all;
             }
         }
 
-        private bool CanShowMemorizingTable(Student student)
+        protected override void OnSearch()
         {
-            IsEnabled = Teacher is not null && student is not null && Teacher.Circles.Contains(student.Circle);
-            return Teacher is not null && student is not null && Teacher.Circles.Contains(student.Circle);
+            Models = string.IsNullOrEmpty(SearchTerm) ? _all : _all.Where(x => x.Name.Contains(SearchTerm));
         }
 
-        [ObservableProperty]
-        private bool _isEnabled;
-
-        [RelayCommand(CanExecute = nameof(CanShowMemorizingTable))]
-        private async Task ShowStudentMemorizingAndReviewTable(Student student)
+        [RelayCommand]
+        private async Task ShowMemorizingReport(Student student)
         {
-            await _mediator.Send(new Shared.Commands.MemorizingAndReviewCommands.ShowMemorizingAndReviewViewCommand(student, Teacher));
+            await _mediator.Send(new Shared.Commands.MemorizingAndReviewCommands.ShowMemorizationBookletReportCommand(student));
         }
-
-        async partial void OnSearchTermChanged(string oldValue, string newValue)
-        {
-            if (newValue is null || string.IsNullOrEmpty(newValue))
-            {
-                await LoadDataCommand.ExecuteAsync(false);
-                return;
-            }
-            Models = await _mediator.Send(new Shared.Commands.Students.Search(newValue));
-        }
-
-        [ObservableProperty]
-        private string _searchTerm;
 
         public User User { get => _user; private set => SetProperty(ref _user, value); }
         private User _user;

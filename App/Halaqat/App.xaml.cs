@@ -3,11 +3,12 @@ using Halaqat.Auth;
 using Halaqat.Data;
 using Halaqat.Features.Circles;
 using Halaqat.Features.Employees;
-using Halaqat.Features.MemorizingAndReview;
-using Halaqat.Features.Programs;
-using Halaqat.Features.Students;
 using Halaqat.Features.Management;
+using Halaqat.Features.MemorizingAndReview;
+using Halaqat.Features.Print;
+using Halaqat.Features.Programs;
 using Halaqat.Features.Settings;
+using Halaqat.Features.Students;
 using Halaqat.Features.Users;
 using Halaqat.Helpers;
 using Halaqat.Shared;
@@ -16,6 +17,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Velopack;
@@ -26,18 +30,49 @@ namespace Halaqat
     {
         public App()
         {
-            VelopackApp.Build().Run(); 
+            VelopackApp.Build().Run();
+
+            CultureInfo cultureInfo = new CultureInfo("ar");
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
             _host = CreateHost();
+            _messenger = _host.Services.GetRequiredService<IMessenger>();
+            _appHelper = _host.Services.GetRequiredService<AppHelper>();
+
             ShutdownMode = ShutdownMode.OnMainWindowClose;
             DispatcherUnhandledException += App_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            _appHelper = _host.Services.GetRequiredService<AppHelper>();
-            _messenger = _host.Services.GetRequiredService<IMessenger>();
 
             _messenger.Register<Messages.Users.LoggedInUserRequestMessage>(this, (r, m) =>
             {
                 m.Reply(_user);
+            });
+
+            _messenger.Register<Messages.Users.GetEmployeesPrivilegesRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user.EmployeesManagementPrivileges);
+            });
+
+            _messenger.Register<Messages.Users.GetStudentsPrivilegesRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user.StudentsManagementPrivileges);
+            });
+
+            _messenger.Register<Messages.Users.GetCirclesPrivilegesRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user.CirclesManagementPrivileges);
+            });
+
+            _messenger.Register<Messages.Users.GetProgramsPrivilegesRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user.ProgramsManagementPrivileges);
+            });
+
+            _messenger.Register<Messages.Users.GetUsersPrivilegesRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(_user.UsersManagementPrivileges);
             });
 
             _messenger.Register<Messages.Users.LoginSucceded>(this, (r, m) =>
@@ -48,16 +83,13 @@ namespace Halaqat
 
             _messenger.Register<Messages.Users.LoginFailed>(this, (r, m) =>
             {
-            _messenger.Send(new Messages.Logging.LogErrorMessage("Login Failed"));
+                _messenger.Send(new Messages.Logging.LogErrorMessage("Login Failed"));
                 MessageBox.Show("اسم المستخدم غير موجود أو كلمة مرور خاطئة");
             });
 
             _messenger.Register<Messages.Users.LogoutMessage>(this, (r, m) =>
             {
-                Window window = MainWindow;
-                MainWindow = _host.Services.GetRequiredService<Shared.Abstraction.Features.Auth.ILoginView>() as Window;
-                window.Close();
-                MainWindow.Show();
+                Restart();
             });
 
         }
@@ -87,12 +119,13 @@ namespace Halaqat
 
         private void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureAppService();
             services.ConfigureProgramsFeature();
             services.ConfigureCirclesFeature();
             services.ConfigureData();
             services.ConfigureUsersFeature();
-            services.ConfigureAppService();
             services.ConfigureAuthFeature();
+            services.ConfigurePrintFeature();
             services.ConfigureEmployeesFeature();
             services.ConfigureStudentsFeature();
             services.ConfigureMemorizingAndReviewFeature();
@@ -110,11 +143,34 @@ namespace Halaqat
 
         protected override async void OnStartup(StartupEventArgs e)
         {
+            if (!(await _appHelper.CanConnect()))
+            {
+                _messenger.Send(new Messages.Notifications.FailureNotification("لا يمكن الاتصال بقاعدة البيانات"));
+                await Task.Delay(3000);
+                RunConfiguration();
+            }
+
+            else
+            {
+                _messenger.Send(new Messages.Notifications.SuccessNotification("تم الاتصال بقاعدة البيانات"));
+                await Start();
+            }
+
+            base.OnStartup(e);
+            await _host.RunAsync();
+        }
+
+        private void RunConfiguration()
+        {
+            MainWindow = _host.Services.GetRequiredService<Shared.Abstraction.Features.Settings.IDatabaseConfigurationView>() as Window;
+            MainWindow.Show();
+        }
+
+        private async Task Start()
+        {
             await _appHelper.ApplyMigrations();
             MainWindow = _host.Services.GetRequiredService<Shared.Abstraction.Features.Auth.ILoginView>() as Window;
             MainWindow.Show();
-            base.OnStartup(e);
-            await _host.RunAsync();
         }
 
         protected override void OnExit(ExitEventArgs e)

@@ -15,6 +15,15 @@ namespace Halaqat.Shared.Models
         [ObservableProperty]
         private bool _isActive;
 
+        [ObservableProperty]
+        private bool _hasReportsPrivileges;
+
+        [ObservableProperty]
+        private bool _hasSettingsPrivileges;
+
+        [ObservableProperty]
+        private bool _hasFinancePrivileges;
+
         public bool IsSuperAdmin { get; private set; }
 
         public bool HasFullPrivileges
@@ -23,8 +32,7 @@ namespace Halaqat.Shared.Models
                 EmployeesManagementPrivileges.HasFullPrivileges &&
                 StudentsManagementPrivileges.HasFullPrivileges &&
                 CirclesManagementPrivileges.HasFullPrivileges &&
-                ProgramsManagementPrivileges.HasFullPrivileges &&
-                ReportsManagementPrivileges.HasFullPrivileges;
+                ProgramsManagementPrivileges.HasFullPrivileges;
             set
             {
                 UsersManagementPrivileges.HasFullPrivileges = value;
@@ -32,7 +40,6 @@ namespace Halaqat.Shared.Models
                 StudentsManagementPrivileges.HasFullPrivileges = value;
                 CirclesManagementPrivileges.HasFullPrivileges = value;
                 ProgramsManagementPrivileges.HasFullPrivileges = value;
-                ReportsManagementPrivileges.HasFullPrivileges = value;
             }
         }
 
@@ -41,6 +48,5 @@ namespace Halaqat.Shared.Models
         public Privileges StudentsManagementPrivileges { get; set; } = new Privileges();
         public Privileges CirclesManagementPrivileges { get; set; } = new Privileges();
         public Privileges ProgramsManagementPrivileges { get; set; } = new Privileges();
-        public Privileges ReportsManagementPrivileges { get; set; } = new Privileges();
     }
 }

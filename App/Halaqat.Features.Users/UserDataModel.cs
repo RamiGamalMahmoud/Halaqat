@@ -23,7 +23,9 @@ namespace Halaqat.Features.Users
                 StudentsManagementPrivileges = model.StudentsManagementPrivileges;
                 CirclesManagementPrivileges = model.CirclesManagementPrivileges;
                 ProgramsManagementPrivileges = model.ProgramsManagementPrivileges;
-                ReportsManagementPrivileges = model.ReportsManagementPrivileges;
+                HasFinancePrivileges  = model.HasFinancePrivileges;
+                HasReportsPrivileges  = model.HasReportsPrivileges;
+                HasSettingsPrivileges = model.HasSettingsPrivileges;
             }
 
             UsersManagementPrivileges.PropertyChanged += Privileges_PropertyChanged;
@@ -31,7 +33,6 @@ namespace Halaqat.Features.Users
             StudentsManagementPrivileges.PropertyChanged += Privileges_PropertyChanged;
             CirclesManagementPrivileges.PropertyChanged += Privileges_PropertyChanged;
             ProgramsManagementPrivileges.PropertyChanged += Privileges_PropertyChanged;
-            ReportsManagementPrivileges.PropertyChanged += Privileges_PropertyChanged;
             ValidateAllProperties();
         }
 
@@ -46,13 +47,15 @@ namespace Halaqat.Features.Users
 
             userModelToUpdate.UserName = UserName;
             userModelToUpdate.Password = Password;
+            userModelToUpdate.IsActive = IsActive;
             userModelToUpdate.UsersManagementPrivileges = UsersManagementPrivileges;
             userModelToUpdate.EmployeesManagementPrivileges = EmployeesManagementPrivileges;
             userModelToUpdate.StudentsManagementPrivileges = StudentsManagementPrivileges;
             userModelToUpdate.CirclesManagementPrivileges = CirclesManagementPrivileges;
             userModelToUpdate.ProgramsManagementPrivileges = ProgramsManagementPrivileges;
-            userModelToUpdate.ReportsManagementPrivileges = ReportsManagementPrivileges;
-
+            userModelToUpdate.HasFinancePrivileges = HasFinancePrivileges;
+            userModelToUpdate.HasReportsPrivileges = HasReportsPrivileges;
+            userModelToUpdate.HasSettingsPrivileges = HasSettingsPrivileges;
         }
 
         [ObservableProperty]
@@ -73,11 +76,19 @@ namespace Halaqat.Features.Users
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private bool _isActive;
 
+        [ObservableProperty]
+        private bool _hasReportsPrivileges;
+
+        [ObservableProperty]
+        private bool _hasSettingsPrivileges;
+
+        [ObservableProperty]
+        private bool _hasFinancePrivileges;
+
         public Privileges UsersManagementPrivileges { get; private set; } = new Privileges();
         public Privileges EmployeesManagementPrivileges { get; private set; } = new Privileges();
         public Privileges StudentsManagementPrivileges { get; private set; } = new Privileges();
         public Privileges CirclesManagementPrivileges { get; private set; } = new Privileges();
         public Privileges ProgramsManagementPrivileges { get; private set; } = new Privileges();
-        public Privileges ReportsManagementPrivileges { get; private set; } = new Privileges();
     }
 }

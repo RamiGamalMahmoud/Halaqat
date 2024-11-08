@@ -28,7 +28,8 @@
                 <Button
                     Background="#4caf50"
                     BorderThickness="0"
-                    Command="{Binding ShowCreateCommand}">
+                    Command="{Binding ShowCreateCommand}"
+                    Visibility="{Binding Privileges.CanCreate, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="AccountPlus" />
 
@@ -73,12 +74,12 @@
 
                 <Button
                     Margin="5,0"
-                    FontFamily="Arial"
-                    FontSize="14"
-                    FontWeight="Bold"
                     Command="{Binding ShowAllCommand}"
                     CommandParameter="{StaticResource True}"
                     Content="عرض الكل"
+                    FontFamily="Arial"
+                    FontSize="14"
+                    FontWeight="Bold"
                     Style="{StaticResource MaterialDesignOutlinedButton}" />
 
             </StackPanel>
@@ -137,9 +138,10 @@
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.UpdateCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="Pencil" />
                                         <TextBlock
@@ -155,7 +157,8 @@
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.RemoveCommand}"
                                     CommandParameter="{Binding}"
                                     Foreground="{StaticResource DangerBrush}"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanDelete, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Margin="0,0,5,0" Kind="Delete" />
                                         <TextBlock

@@ -279,16 +279,7 @@
 
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Sorah.Name}" />
-                                                            <TextBlock Text=" " />
-                                                            <TextBlock Name="VerseFromNumber" Text="{Binding VerseFrom.Number}" />
-                                                            <TextBlock Text=" - " Visibility="{Binding ElementName=VerseToNumber, Path=Text, Converter={StaticResource StringIsEmptyVisibilityConverter}}" />
-                                                            <TextBlock Name="VerseToNumber" Text="{Binding VerseTo.Number}" />
-                                                            <TextBlock Text=" " />
-                                                        </StackPanel>
-
+                                                        <TextBlock Text="{Binding}" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
 
@@ -315,16 +306,7 @@
 
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <TextBlock Text="{Binding Sorah.Name}" />
-                                                            <TextBlock Text=" " />
-                                                            <TextBlock Name="VerseFromNumber" Text="{Binding VerseFrom.Number}" />
-                                                            <TextBlock Text=" - " Visibility="{Binding ElementName=VerseToNumber, Path=Text, Converter={StaticResource StringIsEmptyVisibilityConverter}}" />
-                                                            <TextBlock Name="VerseToNumber" Text="{Binding VerseTo.Number}" />
-                                                            <TextBlock Text=" " />
-                                                        </StackPanel>
-
+                                                        <TextBlock Text="{Binding}" />
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
 

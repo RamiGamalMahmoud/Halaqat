@@ -44,10 +44,21 @@
                     BorderThickness="1"
                     CornerRadius="5">
 
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Grid HorizontalAlignment="Center">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
 
                         <StackPanel
-                            Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.Column="0"
                             MinWidth="200"
                             Margin="5"
                             Orientation="Vertical">
@@ -59,6 +70,8 @@
                         </StackPanel>
 
                         <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
                             MinWidth="200"
                             Margin="5"
                             Orientation="Vertical">
@@ -69,9 +82,14 @@
                                 Text="{Binding DataModel.Password, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
 
-                        <CheckBox Content="نشط" IsChecked="{Binding DataModel.IsActive}" />
+                        <CheckBox
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Content="نشط"
+                            IsChecked="{Binding DataModel.IsActive}"
+                            IsEnabled="{Binding DataModel.Model.IsSuperAdmin, Converter={StaticResource InvertBooleanConverter}}" />
 
-                    </StackPanel>
+                    </Grid>
 
                 </Border>
 
@@ -101,7 +119,7 @@
                             TextAlignment="Center" />
 
 
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" IsEnabled="{Binding DataModel.Model.IsSuperAdmin, Converter={StaticResource InvertBooleanConverter}}">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
@@ -145,11 +163,45 @@
                                 Grid.Column="1"
                                 Privileges="{Binding DataModel.ProgramsManagementPrivileges}" />
 
-                            <local:PrivilegesComponent
-                                Title="إدارة التقارير"
+                            <Border
                                 Grid.Row="1"
                                 Grid.Column="2"
-                                Privileges="{Binding DataModel.ReportsManagementPrivileges}" />
+                                Margin="0,10"
+                                Padding="5"
+                                BorderBrush="LightGray"
+                                BorderThickness="1"
+                                CornerRadius="5">
+                                <StackPanel Orientation="Vertical">
+
+                                    <TextBlock
+                                        Padding="5"
+                                        VerticalAlignment="Center"
+                                        Background="{StaticResource WhiteBrush}"
+                                        FontSize="14"
+                                        Foreground="{StaticResource BlackBrush}"
+                                        Text="أخرى"
+                                        TextAlignment="Center" />
+
+                                    <CheckBox
+                                        Margin="0,5"
+                                        Content="التقارير"
+                                        Cursor="Hand"
+                                        IsChecked="{Binding DataModel.HasReportsPrivileges, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                                    <CheckBox
+                                        Margin="0,5"
+                                        Content="الماليات"
+                                        Cursor="Hand"
+                                        IsChecked="{Binding DataModel.HasFinancePrivileges, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                                    <CheckBox
+                                        Margin="0,5"
+                                        Content="الإعدادات"
+                                        Cursor="Hand"
+                                        IsChecked="{Binding DataModel.HasSettingsPrivileges, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+                                </StackPanel>
+                            </Border>
 
                         </Grid>
 

@@ -1,30 +1,28 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
 using MediatR;
+using System.Linq;
 using System.Threading.Tasks;
+using static Halaqat.Shared.Messages.Users;
 
 namespace Halaqat.Features.Circles.Home
 {
-    internal partial class ViewModel(IMediator mediator, IMessenger messenger) : HomeViewModelBase<Circle>(mediator, messenger)
+    internal partial class ViewModel : HomeViewModelBase<Circle>
     {
+        public ViewModel(IMediator mediator, IMessenger messenger) : base(mediator, messenger)
+        {
+            Privileges = _messenger.Send(new GetCirclesPrivilegesRequestMessage());
+        }
         public override async Task LoadDataAsync(bool isReload)
         {
-            Models = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
+            _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
+            Models = _all;
         }
 
-        async partial void OnSearchTermChanged(string oldValue, string newValue)
+        protected override void OnSearch()
         {
-            if (newValue is null)
-            {
-                await LoadDataCommand.ExecuteAsync(true);
-                return;
-            }
-            Models = await _mediator.Send(new Shared.Commands.Circles.SearchByName(newValue));
+            Models = string.IsNullOrEmpty(SearchTerm) ? _all : _all.Where(x => x.Name.Contains(SearchTerm));
         }
-
-        [ObservableProperty]
-        private string _searchTerm;
     }
 }

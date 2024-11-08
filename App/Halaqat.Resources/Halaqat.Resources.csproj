@@ -6,10 +6,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Images\quran-128.png" />
-	  <None Remove="Images\quran-256.png" />
-	  <None Remove="Images\quran-64.png" />
-	  <None Remove="Images\quran.png" />
+		<None Remove="Images\quran-128.png" />
+		<None Remove="Images\quran-256.png" />
+		<None Remove="Images\quran-64.png" />
+		<None Remove="Images\quran.png" />
+		<None Remove="Reports\MemorizationBookletReport.rdlc" />
+		<None Remove="Reports\MemorizationReport.rdlc" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Reports\MemorizationBookletReport.rdlc">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Reports\MemorizationReport.rdlc">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -21,18 +32,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Images\quran-128.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\quran-256.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\quran-64.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
-	  <Resource Include="Images\quran.png">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </Resource>
+		<Resource Include="Images\quran-128.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Images\quran-256.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Images\quran-64.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Images\quran.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 </Project>

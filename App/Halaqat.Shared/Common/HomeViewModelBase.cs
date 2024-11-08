@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Halaqat.Shared.Models;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,9 @@ namespace Halaqat.Shared.Common
 
         [RelayCommand]
         public abstract Task LoadDataAsync(bool isReload);
+
+        [ObservableProperty]
+        private string _searchTerm;
 
         [RelayCommand]
         protected async Task ShowCreate()
@@ -33,9 +37,21 @@ namespace Halaqat.Shared.Common
             await _mediator.Send(new Shared.Commands.Common.RemoveModelCommand<TModel>(model));
         }
 
+        partial void OnSearchTermChanged(string oldValue, string newValue)
+        {
+             OnSearch();
+        }
+
+        protected virtual void OnSearch()
+        {
+        }
+
+        public Privileges Privileges { get; protected set; }
+
         public DoBusyWork DoBusyWork { get; } = new DoBusyWork();
 
         protected bool CanDoModelAction(TModel model) => model is not null;
+        protected IEnumerable<TModel> _all;
         protected readonly IMediator _mediator = mediator;
         protected readonly IMessenger _messenger = messenger;
     }

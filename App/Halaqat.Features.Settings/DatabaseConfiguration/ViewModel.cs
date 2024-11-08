@@ -98,7 +98,7 @@ namespace Halaqat.Features.Settings.DatabaseConfiguration
                     return;
                 }
 
-                SqlCommand cmd = new SqlCommand("CREATE DATABASE halaqat3 COLLATE Arabic_100_CI_AI", connection);
+                SqlCommand cmd = new SqlCommand("CREATE DATABASE halaqat COLLATE Arabic_100_CI_AI", connection);
 
                 try
                 {

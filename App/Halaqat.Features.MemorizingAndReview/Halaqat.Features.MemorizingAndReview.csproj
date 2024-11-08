@@ -8,6 +8,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Halaqat.Data\Halaqat.Data.csproj" />
 	  <ProjectReference Include="..\Halaqat.Resources\Halaqat.Resources.csproj" />
+	  <ProjectReference Include="..\Halaqat.Services\Halaqat.Services.csproj" />
 	  <ProjectReference Include="..\Halaqat.Shared\Halaqat.Shared.csproj" />
 	</ItemGroup>
 

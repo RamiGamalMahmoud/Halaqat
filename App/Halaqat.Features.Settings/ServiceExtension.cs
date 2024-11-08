@@ -11,6 +11,8 @@ namespace Halaqat.Features.Settings
         {
             services.AddMediatR((cfg) => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+            services.AddSingleton<DatabaseOperations>();
+
             services.AddSingleton<Properties.Settings>(Properties.Settings.Default);
 
             services.AddTransient<Shared.Abstraction.Features.Settings.IDatabaseConfigurationView, DatabaseConfiguration.View>();

@@ -18,6 +18,10 @@ namespace Halaqat.Helpers
             messenger.Register<Messages.Notifications.SuccessNotification>(this, (r, m) => _notificationManager.Show("رسالة", m.Message, NotificationType.Success));
             messenger.Register<Messages.Notifications.FailureNotification>(this, (r, m) => _notificationManager.Show("رسالة", m.Message, NotificationType.Error));
             messenger.Register<Messages.Notifications.Notification>(this, (r, m) => _notificationManager.Show("رسالة", m.Message));
+            messenger.Register<Messages.App.TestConnectionRequestMessage>(this, (r, m) =>
+            {
+                m.Reply(CanConnect());
+            });
             _dbContextFactory = dbContextFactory;
         }
 
@@ -30,6 +34,14 @@ namespace Halaqat.Helpers
                 {
                     await dbContext.Database.MigrateAsync();
                 }
+            }
+        }
+
+        public async Task<bool> CanConnect()
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext.Database.CanConnectAsync();
             }
         }
 

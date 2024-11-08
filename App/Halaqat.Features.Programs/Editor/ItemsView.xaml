@@ -21,11 +21,27 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Sorah.Name}" />
-                        <TextBlock Text="  " />
-                        <TextBlock Text="{Binding VerseFrom.Number}" />
-                        <TextBlock Text=" - " />
-                        <TextBlock Text="{Binding VerseTo.Number}" />
+
+                        <TextBlock
+                            x:Name="txtNotes"
+                            VerticalAlignment="Center"
+                            Text="{Binding Notes}" />
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Sorah.Name}" />
+                            <TextBlock VerticalAlignment="Center" Text="  " />
+                            <TextBlock
+                                x:Name="txtVerseFrom"
+                                VerticalAlignment="Center"
+                                Text="{Binding VerseFrom.Number}" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Text=" - "
+                                Visibility="{Binding ElementName=txtVerseFrom, Path=Text, Converter={StaticResource StringIsEmptyVisibilityConverter}}" />
+                            <TextBlock VerticalAlignment="Center" Text="{Binding VerseTo.Number}" />
+
+                        </StackPanel>
 
                     </StackPanel>
                     <Button

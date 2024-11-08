@@ -23,7 +23,43 @@
         FlowDirection="RightToLeft">
 
         <StackPanel Orientation="Vertical">
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+
+                <StackPanel
+                    Width="200"
+                    Margin="10,0"
+                    Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="من سورة" />
+                    <ComboBox
+                        Padding="5"
+                        DisplayMemberPath="Name"
+                        IsEditable="True"
+                        ItemsSource="{Binding Sorahs}"
+                        SelectedItem="{Binding SorahFrom}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                </StackPanel>
+
+                <StackPanel
+                    Width="200"
+                    Margin="10,0"
+                    Orientation="Vertical">
+                    <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="إلى سورة" />
+                    <ComboBox
+                        Padding="5"
+                        DisplayMemberPath="Name"
+                        IsEditable="True"
+                        ItemsSource="{Binding Sorahs}"
+                        SelectedItem="{Binding SorahTo}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                </StackPanel>
+
+            </StackPanel>
+
+            <StackPanel
+                Margin="0,10,0,0"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal">
 
                 <StackPanel
                     Width="200"
@@ -31,10 +67,12 @@
                     Orientation="Vertical">
                     <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="السورة" />
                     <ComboBox
-                        Margin="0,20,0,0"
+                        Padding="5"
                         DisplayMemberPath="Name"
+                        IsEditable="True"
                         ItemsSource="{Binding Sorahs}"
-                        SelectedItem="{Binding Sorah}" />
+                        SelectedItem="{Binding Sorah}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
 
                 <StackPanel
@@ -43,10 +81,12 @@
                     Orientation="Vertical">
                     <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="من الآية" />
                     <ComboBox
-                        Margin="0,20,0,0"
+                        Padding="5"
+                        Cursor="Hand"
                         DisplayMemberPath="Number"
                         ItemsSource="{Binding Verses}"
-                        SelectedItem="{Binding VerseFrom}" />
+                        SelectedItem="{Binding VerseFrom}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
 
                 <StackPanel
@@ -55,12 +95,24 @@
                     Orientation="Vertical">
                     <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="إلى الآية" />
                     <ComboBox
-                        Margin="0,20,0,0"
+                        Padding="5"
+                        Cursor="Hand"
                         DisplayMemberPath="Number"
                         ItemsSource="{Binding Verses}"
-                        SelectedItem="{Binding VerseTo}" />
+                        SelectedItem="{Binding VerseTo}"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}" />
                 </StackPanel>
 
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="ملاحظات" />
+                <TextBox
+                    Width="200"
+                    Padding="5"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
 
             <local:ItemsView ItemsSource="{Binding Items}" RemoveItemCommand="{Binding RemoveItemCommand}" />

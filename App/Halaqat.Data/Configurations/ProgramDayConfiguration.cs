@@ -12,7 +12,7 @@ namespace Halaqat.Data.Configurations
 
             builder.HasOne(x => x.Program)
                 .WithMany(x => x.ProgramDays)
-                .HasForeignKey("ProgramId")
+                .HasForeignKey(x => x.ProgramId)
                 .IsRequired();
 
             builder.Ignore(x => x.MemorizingItems).Ignore(x => x.ReviewItems);

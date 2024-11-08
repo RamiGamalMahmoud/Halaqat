@@ -12,6 +12,7 @@
         public string Password { get; }
         public string IP { get; }
         public int Port { get; }
+        public bool AutoSave { get; }
     }
 
     public interface IGeneralSettings

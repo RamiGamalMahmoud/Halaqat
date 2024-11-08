@@ -21,12 +21,31 @@ namespace Halaqat.Features.Programs
                     Notes = dataModel.Notes
                 };
 
-                foreach (ProgramDay item in dataModel.ProgramDays)
+                IEnumerable<ProgramDay> newDays = dataModel.ProgramDays.Where(x => x.Id == 0);
+
+                foreach (ProgramDay newDay in newDays)
                 {
-                    program.ProgramDays.Add(item);
+                    ProgramDay programDay = new ProgramDay
+                    {
+                        Day = newDay.Day
+                    };
+
+                    foreach (ProgramDayItem item in newDay.ProgramDayItems)
+                    {
+                        programDay.ProgramDayItems.Add(new ProgramDayItem()
+                        {
+                            SorahId = item.Sorah?.Id,
+                            Notes = item.Notes,
+                            VerseFromId = item.VerseFrom?.Id,
+                            VerseToId = item.VerseTo?.Id,
+                            ProgramDayItemTypeId = item.ProgramDayItemType.Id
+                        });
+                    }
+
+                    program.ProgramDays.Add(programDay);
                 }
 
-                dbContext.Programs.Update(program);
+                dbContext.Programs.Add(program);
 
                 await dbContext.SaveChangesAsync();
                 _entities?.Add(program);
@@ -42,7 +61,7 @@ namespace Halaqat.Features.Programs
                 {
                     IEnumerable<Program> programs = await dbContext
                         .Programs
-                        
+
                         .Include(x => x.ProgramDays)
                         .ThenInclude(x => x.ProgramDayItems)
                         .ThenInclude(x => x.Sorah)
@@ -148,7 +167,24 @@ namespace Halaqat.Features.Programs
 
                 foreach (ProgramDay newDay in newDays)
                 {
-                    stored.ProgramDays.Add(newDay);
+                    ProgramDay programDay = new ProgramDay
+                    {
+                        Day = newDay.Day
+                    };
+
+                    foreach (ProgramDayItem item in newDay.ProgramDayItems)
+                    {
+                        programDay.ProgramDayItems.Add(new ProgramDayItem()
+                        {
+                            SorahId = item.Sorah?.Id,
+                            Notes = item.Notes,
+                            VerseFromId = item.VerseFrom?.Id,
+                            VerseToId = item.VerseTo?.Id,
+                            ProgramDayItemTypeId = item.ProgramDayItemType.Id
+                        });
+                    }
+
+                    stored.ProgramDays.Add(programDay);
                 }
 
                 stored.Name = dataModel.Name;

@@ -38,6 +38,7 @@ namespace Halaqat
                 return logger.CreateLogger("logging");
             });
 
+            services.AddSingleton<AppHelper>();
             services.AddTransient<ConnectionStringFactory>();
             services.AddSingleton<SqlConnectionFactory>();
             services.AddSingleton<Halaqat.Data.IAppDbContextFactory, AppDbContextFactory>();
@@ -51,7 +52,6 @@ namespace Halaqat
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
             services.AddSingleton<Shared.Abstraction.MainWindow.IMainWindowView, Halaqat.MainWindow.View>();
             services.AddSingleton<MainWindow.ViewModel>();
-            services.AddSingleton<AppHelper>();
             return services;
         }
     }

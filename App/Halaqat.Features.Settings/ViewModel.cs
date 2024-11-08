@@ -1,58 +1,61 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Halaqat.Shared;
+using Halaqat.Shared.Common;
+using MediatR;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Halaqat.Features.Settings
 {
     internal partial class ViewModel : ObservableObject, ISettingsVewModel
     {
-        public ViewModel(Properties.Settings settings)
+        public ViewModel(Properties.Settings settings, IMediator mediator)
         {
             _settings = settings;
+            _mediator = mediator;
+            HasChangesObject = new HasChangesObject(() => SaveCommand.NotifyCanExecuteChanged());
         }
 
-        public bool IsLocalDatabase
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            get => _settings.IsLocalDatabase;
-            set => SetProperty(_settings.IsLocalDatabase, value, _settings, (o, v) => o.IsLocalDatabase = v);
+            if (e.PropertyName != nameof(CurrentView))
+                HasChangesObject.SetHaschanges();
+
+            if(_settings.AutoSave)
+            {
+                SaveCommand.Execute(null);
+            }
+
+            base.OnPropertyChanged(e);
         }
 
-        public string Server
-        {
-            get => _settings.Server;
-            set => SetProperty(_settings.Server, value, _settings, (o, v) => o.Server = v);
-        }
+        public HasChangesObject HasChangesObject { get; }
 
-        public string IP
-        {
-            get => _settings.IP;
-            set => SetProperty(_settings.IP, value, _settings, (o, v) => o.IP = v);
-        }
+        [ObservableProperty]
+        private object _currentView;
 
-        public int Port
+        [RelayCommand]
+        private async Task BackupDatabase()
         {
-            get => _settings.Port;
-            set => SetProperty(_settings.Port, value, _settings, (o, v) => o.Port = v);
-        }
-
-        public string Password
-        {
-            get => _settings.Password;
-            set => SetProperty(_settings.Password, value, _settings, (o, v) => o.Password = v);
-        }
-
-        public string UserId
-        {
-            get => _settings.UserId;
-            set => SetProperty(_settings.UserId, value, _settings, (o, v) => o.UserId = v);
+            await _mediator.Send(new Shared.Commands.Database.BackupCommand());
         }
 
         [RelayCommand]
+        private async Task RestoreDatabase()
+        {
+            Result result = await _mediator.Send(new Shared.Commands.Database.RestoreCommand());
+        }
+
+        [RelayCommand(CanExecute = nameof(CanSave))]
         private void Save()
         {
             _settings.Save();
+            HasChangesObject.SetNotHasChanges();
         }
+        private bool CanSave() => HasChangesObject.HasChanges;
 
         private readonly Properties.Settings _settings;
+        private readonly IMediator _mediator;
     }
 }

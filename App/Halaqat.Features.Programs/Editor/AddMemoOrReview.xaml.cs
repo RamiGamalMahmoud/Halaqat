@@ -28,6 +28,14 @@ namespace Halaqat.Features.Programs.Editor
         }
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddCommand))]
+        private Sorah _sorahFrom;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddCommand))]
+        private Sorah _sorahTo;
+
+        [ObservableProperty]
         private IEnumerable<Sorah> _sorahs;
 
         public IEnumerable<Verse> Verses { get => _verses; private set => SetProperty(ref _verses, value); }
@@ -42,6 +50,10 @@ namespace Halaqat.Features.Programs.Editor
 
         [ObservableProperty]
         private Verse _verseTo;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddCommand))]
+        private string _notes;
 
         public ObservableCollection<Item> Items { get; set; } = [];
 
@@ -67,13 +79,41 @@ namespace Halaqat.Features.Programs.Editor
 
         public bool CanAddItem()
         {
-            return Sorah is not null;
+            return Sorah is not null || Notes is not null || (SorahFrom is not null && SorahTo is not null);
         }
 
         [RelayCommand(CanExecute = nameof(CanAddItem))]
         private void Add()
         {
-            Items.Add(new Item(Sorah, VerseFrom, VerseTo));
+            if (SorahFrom is not null && SorahTo is not null)
+            {
+                var selected = Sorahs.Where(x => x.Id >= SorahFrom.Id && x.Id <= SorahTo.Id);
+
+                if(!string.IsNullOrEmpty(Notes))
+                {
+                    Items.Add(new Item(null, null, null, Notes));
+                }
+
+                foreach(Sorah sorah in selected)
+                {
+                    Items.Add(new Item(sorah, null, null, null));
+                }
+
+            }
+
+            else if (Sorah is not null)
+            {
+                Items.Add(new Item(Sorah, VerseFrom, VerseTo, Notes));
+            }
+
+            else
+            {
+                Items.Add(new Item(null, null, null, Notes));
+            }
+
+            SorahFrom = null;
+            SorahTo = null;
+            Notes = null;
             Sorah = null;
             VerseFrom = null;
             VerseTo = null;
@@ -103,5 +143,5 @@ namespace Halaqat.Features.Programs.Editor
         }
     }
 
-    public record Item(Sorah Sorah, Verse VerseFrom, Verse VerseTo);
+    public record Item(Sorah Sorah, Verse VerseFrom, Verse VerseTo, string Notes);
 }

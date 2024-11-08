@@ -34,6 +34,7 @@
 		<ProjectReference Include="..\Halaqat.Features.Employees\Halaqat.Features.Employees.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Management\Halaqat.Features.Management.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.MemorizingAndReview\Halaqat.Features.MemorizingAndReview.csproj" />
+		<ProjectReference Include="..\Halaqat.Features.Print\Halaqat.Features.Print.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Programs\Halaqat.Features.Programs.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Settings\Halaqat.Features.Settings.csproj" />
 		<ProjectReference Include="..\Halaqat.Features.Students\Halaqat.Features.Students.csproj" />
