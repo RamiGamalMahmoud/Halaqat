@@ -45,14 +45,17 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <CheckBox Cursor="Hand" Content="الاتصال بقاعدة بيانات محلية" IsChecked="{Binding IsLocalDatabase, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <CheckBox
+                    Content="الاتصال بقاعدة بيانات محلية"
+                    Cursor="Hand"
+                    IsChecked="{Binding IsLocalDatabase, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
                 <StackPanel
-                    Grid.Row="1"
-                    Grid.Column="0"
+                    Grid.Row="0"
+                    Grid.Column="1"
                     MinWidth="200"
                     Margin="5"
-                    IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
+                    IsEnabled="{Binding IsLocalDatabase}"
                     Orientation="Vertical">
                     <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="السيرفر" />
                     <TextBox
@@ -63,7 +66,7 @@
 
                 <StackPanel
                     Grid.Row="1"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     MinWidth="200"
                     Margin="5"
                     IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -76,8 +79,8 @@
                 </StackPanel>
 
                 <StackPanel
-                    Grid.Row="2"
-                    Grid.Column="0"
+                    Grid.Row="1"
+                    Grid.Column="1"
                     MinWidth="200"
                     Margin="5"
                     IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -91,7 +94,7 @@
 
                 <StackPanel
                     Grid.Row="2"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     MinWidth="200"
                     Margin="5"
                     IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -104,8 +107,8 @@
                 </StackPanel>
 
                 <StackPanel
-                    Grid.Row="3"
-                    Grid.Column="0"
+                    Grid.Row="2"
+                    Grid.Column="1"
                     MinWidth="200"
                     Margin="5"
                     IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"

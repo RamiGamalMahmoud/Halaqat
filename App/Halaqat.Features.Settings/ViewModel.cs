@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared;
 using Halaqat.Shared.Common;
 using MediatR;
@@ -10,10 +11,11 @@ namespace Halaqat.Features.Settings
 {
     internal partial class ViewModel : ObservableObject, ISettingsVewModel
     {
-        public ViewModel(Properties.Settings settings, IMediator mediator)
+        public ViewModel(Properties.Settings settings, IMediator mediator, IMessenger messenger)
         {
             _settings = settings;
             _mediator = mediator;
+            _messenger = messenger;
             HasChangesObject = new HasChangesObject(() => SaveCommand.NotifyCanExecuteChanged());
         }
 
@@ -34,6 +36,20 @@ namespace Halaqat.Features.Settings
 
         [ObservableProperty]
         private object _currentView;
+
+        [RelayCommand]
+        private async Task TestConnection()
+        {
+            bool canConnect = await _messenger.Send(new Messages.App.TestConnectionRequestMessageAsync());
+            if (canConnect)
+            {
+                _messenger.Send(new Shared.Messages.Notifications.SuccessNotification("تم الاتصال"));
+            }
+            else
+            {
+                _messenger.Send(new Shared.Messages.Notifications.FailureNotification("فشل في الاتصال"));
+            }
+        }
 
         [RelayCommand]
         private async Task BackupDatabase()
@@ -57,5 +73,6 @@ namespace Halaqat.Features.Settings
 
         private readonly Properties.Settings _settings;
         private readonly IMediator _mediator;
+        private readonly IMessenger _messenger;
     }
 }

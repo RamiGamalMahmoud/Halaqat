@@ -16,6 +16,7 @@ namespace Halaqat.Shared
         {
             public record SuccessNotification(string Message = "عملية ناجحة");
             public record FailureNotification(string Message = "عملية فاشلة");
+            public record WarningNotification(string Message = "تحذير");
             public record Notification(string Message);
         }
 
@@ -39,7 +40,8 @@ namespace Halaqat.Shared
 
         public static class App
         {
-            public class TestConnectionRequestMessage : AsyncRequestMessage<bool>;
+            public class TestConnectionRequestMessageAsync : AsyncRequestMessage<bool>;
+            public class TestConnectionRequestMessageWitoutDatabaseAsync : AsyncRequestMessage<bool>;
         }
     }
 }

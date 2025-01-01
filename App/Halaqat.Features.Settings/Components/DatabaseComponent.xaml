@@ -56,11 +56,11 @@
                 Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineCheckBox}" />
 
             <StackPanel
-                Grid.Row="2"
-                Grid.Column="0"
+                Grid.Row="1"
+                Grid.Column="1"
                 MinWidth="200"
                 Margin="5"
-                IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
+                IsEnabled="{Binding IsLocalDatabase}"
                 Orientation="Vertical">
                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="السيرفر" />
                 <TextBox
@@ -71,7 +71,7 @@
 
             <StackPanel
                 Grid.Row="2"
-                Grid.Column="1"
+                Grid.Column="0"
                 MinWidth="200"
                 Margin="5"
                 IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -84,8 +84,8 @@
             </StackPanel>
 
             <StackPanel
-                Grid.Row="3"
-                Grid.Column="0"
+                Grid.Row="2"
+                Grid.Column="1"
                 MinWidth="200"
                 Margin="5"
                 IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -99,7 +99,7 @@
 
             <StackPanel
                 Grid.Row="3"
-                Grid.Column="1"
+                Grid.Column="0"
                 MinWidth="200"
                 Margin="5"
                 IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -112,8 +112,8 @@
             </StackPanel>
 
             <StackPanel
-                Grid.Row="4"
-                Grid.Column="0"
+                Grid.Row="3"
+                Grid.Column="1"
                 MinWidth="200"
                 Margin="5"
                 IsEnabled="{Binding IsLocalDatabase, Converter={StaticResource InvertBooleanConverter}}"
@@ -137,6 +137,13 @@
                     Margin="5,0"
                     Command="{Binding BackupDatabaseCommand}"
                     Content="النسخ الاحتياطي"
+                    FontWeight="Bold"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" />
+
+                <Button
+                    Margin="5,0,0,0"
+                    Command="{Binding TestConnectionCommand}"
+                    Content="اتصال"
                     FontWeight="Bold"
                     Style="{StaticResource MaterialDesignOutlinedButton}" />
 

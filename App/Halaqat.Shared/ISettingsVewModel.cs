@@ -7,6 +7,7 @@
 
     public interface IDatabaseSettings
     {
+        public string Server { get; }
         public bool IsLocalDatabase { get; }
         public string UserId { get; }
         public string Password { get; }

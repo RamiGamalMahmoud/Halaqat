@@ -143,16 +143,25 @@ namespace Halaqat
 
         protected override async void OnStartup(StartupEventArgs e)
         {
-            if (!(await _appHelper.CanConnect()))
+            MainWindow = new Window();
+            _messenger.Send(new Messages.Notifications.Notification("جاري التحقق من الاتصال بقاعدة البيانات"));
+
+            if (!(await _messenger.Send(new Messages.App.TestConnectionRequestMessageAsync())))
             {
-                _messenger.Send(new Messages.Notifications.FailureNotification("لا يمكن الاتصال بقاعدة البيانات"));
-                await Task.Delay(3000);
+                _messenger.Send(new Messages.Notifications.FailureNotification("لم يتم الاتصال بقاعدة البيانات"));
+
+                if ((await _messenger.Send(new Messages.App.TestConnectionRequestMessageWitoutDatabaseAsync())))
+                {
+                    _messenger.Send(new Messages.Notifications.Notification("تم الاتصال بالخادم"));
+                    _messenger.Send(new Messages.Notifications.Notification("يجب ضبط بيانات الاتصال و انشاء قاعدة البيانات"));
+                }
+
                 RunConfiguration();
             }
 
             else
             {
-                _messenger.Send(new Messages.Notifications.SuccessNotification("تم الاتصال بقاعدة البيانات"));
+                _messenger.Send(new Messages.Notifications.SuccessNotification("تم الاتصال بقاعدة البيانات بنجاح"));
                 await Start();
             }
 

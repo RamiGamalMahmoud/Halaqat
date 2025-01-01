@@ -7,8 +7,8 @@
             string connectionString;
             if (settings.IsLocalDatabase)
             {
-                connectionString = @"
-                    Server=.\SQLEXPRESS;
+                connectionString = @$"
+                    Server=.\{settings.Server};
                     Integrated Security=SSPI;
                     TrustServerCertificate=True;
                     Trusted_Connection=True;";
@@ -31,8 +31,8 @@
             string connectionString;
             if (settings.IsLocalDatabase)
             {
-                connectionString = @"
-                    Server=.\SQLEXPRESS;
+                connectionString = @$"
+                    Server=.\{settings.Server};
                     Integrated Security=SSPI;
                     Initial Catalog=halaqat;
                     TrustServerCertificate=True;

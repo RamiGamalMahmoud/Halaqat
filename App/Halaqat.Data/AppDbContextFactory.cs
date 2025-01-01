@@ -13,5 +13,14 @@ namespace Halaqat.Data
                 .Options
                 );
         }
+
+        public AppDbContext CreateAppDbContextWithoutDatabase()
+        {
+            return new AppDbContext(
+                new DbContextOptionsBuilder()
+                .UseSqlServer(connectionStringFactory.GetConnectionStringWithNotDatabase())
+                .Options
+                );
+        }
     }
 }

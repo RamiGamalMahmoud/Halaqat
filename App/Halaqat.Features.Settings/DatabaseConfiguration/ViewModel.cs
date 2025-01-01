@@ -66,7 +66,7 @@ namespace Halaqat.Features.Settings.DatabaseConfiguration
         [RelayCommand]
         private async Task TestConnection()
         {
-            bool canConnect = await _messenger.Send(new Messages.App.TestConnectionRequestMessage());
+            bool canConnect = await _messenger.Send(new Messages.App.TestConnectionRequestMessageAsync());
             if (canConnect)
             {
                 _messenger.Send(new Shared.Messages.Notifications.SuccessNotification("تم الاتصال"));
