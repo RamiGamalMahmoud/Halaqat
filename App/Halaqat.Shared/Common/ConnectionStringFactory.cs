@@ -1,55 +1,44 @@
-﻿namespace Halaqat.Shared.Common
+﻿using System.Text;
+
+namespace Halaqat.Shared.Common
 {
     public class ConnectionStringFactory(ISettingsVewModel settings)
     {
-        public string GetConnectionStringWithNotDatabase()
+        public ConnectionStringFactory WithDatabase(bool withDatabase = true)
         {
-            string connectionString;
-            if (settings.IsLocalDatabase)
-            {
-                connectionString = @$"
-                    Server=.\{settings.Server};
-                    Integrated Security=SSPI;
-                    TrustServerCertificate=True;
-                    Trusted_Connection=True;";
-            }
-
-            else
-            {
-                connectionString = @$"
-                    Data Source={settings.IP},{settings.Port};
-                    User Id={settings.UserId};
-                    Password={settings.Password};
-                    TrustServerCertificate=True;";
-            }
-
-            return connectionString;
+            _withDatabase = withDatabase;
+            return this;
         }
 
         public string GetConnectionString()
         {
-            string connectionString;
+            StringBuilder connectionStringBuilder = new StringBuilder();
             if (settings.IsLocalDatabase)
             {
-                connectionString = @$"
-                    Server=.\{settings.Server};
-                    Integrated Security=SSPI;
-                    Initial Catalog=halaqat;
-                    TrustServerCertificate=True;
-                    Trusted_Connection=True;";
+                connectionStringBuilder.Append($"Server=.\\{settings.Server};");
+                connectionStringBuilder.Append("Integrated Security=SSPI;");
             }
-
             else
             {
-                connectionString = @$"
-                    Data Source={settings.IP},{settings.Port};
-                    User Id={settings.UserId};
-                    Password={settings.Password};
-                    Initial Catalog=halaqat;
-                    TrustServerCertificate=True;";
+                connectionStringBuilder.Append($"Server={settings.IP}{GetPort()};");
+                connectionStringBuilder.Append($"User Id={settings.UserId};");
+                connectionStringBuilder.Append($"Password={settings.Password};");
             }
 
-            return connectionString;
+            if (_withDatabase)
+            {
+                connectionStringBuilder.Append("Initial Catalog=halaqat;");
+            }
+
+            connectionStringBuilder.Append("TrustServerCertificate=True;");
+            return connectionStringBuilder.ToString();
         }
+
+        private string GetPort()
+        {
+            return string.IsNullOrEmpty(settings.Port.ToString()) ? "" : $",{settings.Port}";
+        }
+
+        private bool _withDatabase;
     }
 }

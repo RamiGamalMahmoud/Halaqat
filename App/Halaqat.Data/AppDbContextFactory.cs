@@ -9,7 +9,7 @@ namespace Halaqat.Data
         {
             return new AppDbContext(
                 new DbContextOptionsBuilder()
-                .UseSqlServer(connectionStringFactory.GetConnectionString())
+                .UseSqlServer(connectionStringFactory.WithDatabase().GetConnectionString())
                 .Options
                 );
         }
@@ -18,7 +18,7 @@ namespace Halaqat.Data
         {
             return new AppDbContext(
                 new DbContextOptionsBuilder()
-                .UseSqlServer(connectionStringFactory.GetConnectionStringWithNotDatabase())
+                .UseSqlServer(connectionStringFactory.WithDatabase(false).GetConnectionString())
                 .Options
                 );
         }

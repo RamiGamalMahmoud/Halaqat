@@ -7,7 +7,7 @@ namespace Halaqat.Data
     {
         public SqlConnection CreateSqlConnection()
         {
-            return new SqlConnection(connectionStringFactory.GetConnectionStringWithNotDatabase());
+            return new SqlConnection(connectionStringFactory.WithDatabase(false).GetConnectionString());
         }
     }
 }
