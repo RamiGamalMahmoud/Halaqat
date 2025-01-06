@@ -38,7 +38,7 @@ namespace Halaqat.Features.Settings.DatabaseConfiguration
             set => SetProperty(_settings.IP, value, _settings, (o, v) => o.IP = v);
         }
 
-        public int Port
+        public string Port
         {
             get => _settings.Port;
             set => SetProperty(_settings.Port, value, _settings, (o, v) => o.Port = v);

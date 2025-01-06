@@ -38,9 +38,9 @@ namespace Halaqat.Features.Settings.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1433")]
-        public int Port {
+        public string Port {
             get {
-                return ((int)(this["Port"]));
+                return ((string)(this["Port"]));
             }
             set {
                 this["Port"] = value;

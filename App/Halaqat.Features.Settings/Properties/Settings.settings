@@ -5,7 +5,7 @@
     <Setting Name="Server" Type="System.String" Scope="User">
       <Value Profile="(Default)">SQLEXPRESS</Value>
     </Setting>
-    <Setting Name="Port" Type="System.Int32" Scope="User">
+    <Setting Name="Port" Type="System.String" Scope="User">
       <Value Profile="(Default)">1433</Value>
     </Setting>
     <Setting Name="UserId" Type="System.String" Scope="User">
