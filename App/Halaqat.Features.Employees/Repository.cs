@@ -162,6 +162,7 @@ namespace Halaqat.Features.Employees
                 storedEmployee.AcademicQualificationId = dataModel.AcademicQualification.Id;
                 storedEmployee.JobTitleId = dataModel.JobTitle.Id;
                 storedEmployee.GenderId = dataModel.Gender.Id;
+                storedEmployee.DateCreated = dataModel.DateCreated;
 
                 dbContext.Employees.Update(storedEmployee);
                 await dbContext.SaveChangesAsync();

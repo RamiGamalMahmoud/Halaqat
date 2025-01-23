@@ -55,6 +55,7 @@ namespace Halaqat.Features.Students
             model.Program = Program;
             model.EducationalStage = EducationalStage;
             model.Class = Class;
+            model.DateCreated = DateCreated;
 
             foreach (Phone phone in Phones)
             {

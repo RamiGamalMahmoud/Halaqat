@@ -108,11 +108,10 @@
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="تاريخ التسجيل" />
-                                <TextBox
+                                <DatePicker
                                     Padding="5"
-                                    IsEnabled="False"
-                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    Text="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}" />
+                                    SelectedDate="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                             </StackPanel>
 
                             <StackPanel
@@ -286,16 +285,14 @@
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                     Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button
-                                    Width="auto"
-                                    Height="auto"
                                     Margin="10,0,0,0"
                                     Padding="5"
                                     HorizontalAlignment="Center"
                                     Command="{Binding InsertPhoneCommand}"
                                     CommandParameter="{Binding PhoneNumber}"
                                     Cursor="Hand"
-                                    Style="{StaticResource MaterialDesignOutlinedButton}">
-                                    <materialDesign:PackIcon Kind="PlusThick" />
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <materialDesign:PackIcon Kind="AddCircle" />
                                 </Button>
 
                             </StackPanel>

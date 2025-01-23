@@ -120,7 +120,7 @@
                 <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
                 <DataGridTextColumn Binding="{Binding JobTitle.Name}" Header="الوظيفة" />
                 <DataGridTextColumn Binding="{Binding AcademicQualification.Name}" Header="المؤهل" />
-                <DataGridTextColumn Binding="{Binding DateCreated}" Header="تاريخ التسجيل" />
+                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} - {1} - {2}">

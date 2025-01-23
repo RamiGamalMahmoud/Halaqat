@@ -100,11 +100,10 @@
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="تاريخ التسجيل" />
-                                <TextBox
+                                <DatePicker
                                     Padding="5"
-                                    IsEnabled="False"
-                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    Text="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}" />
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                                    SelectedDate="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}" />
                             </StackPanel>
 
                             <StackPanel

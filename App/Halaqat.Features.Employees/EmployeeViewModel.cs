@@ -53,6 +53,7 @@ namespace Halaqat.Features.Employees
             model.JobTitle = JobTitle;
             model.Gender = Gender;
             model.Phones.Clear();
+            model.DateCreated = DateCreated;
             if (model.User is not null)
             {
                 model.User.IsActive = IsActive;

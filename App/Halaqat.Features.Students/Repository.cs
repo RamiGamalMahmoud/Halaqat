@@ -160,6 +160,7 @@ namespace Halaqat.Features.Students
                 stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
                 stored.CircleId = dataModel.Circle.Id;
                 stored.ProgramId = dataModel.Program?.Id;
+                stored.DateCreated = dataModel.DateCreated;
                 dbContext.Entry(stored).Property<int?>("EducationalStageId").CurrentValue = dataModel.EducationalStage?.Id;
                 dbContext.Entry(stored).Property<int?>("ClassId").CurrentValue = dataModel.Class?.Id;
 
