@@ -24,11 +24,11 @@ namespace Halaqat.Data.Configurations
                 .HasForeignKey(x => x.AddressId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.Gender)
-                .WithMany()
-                .HasForeignKey(x => x.GenderId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(x => x.Gender)
+            //    .WithMany()
+            //    .HasForeignKey(x => x.GenderId)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.Phones)
                 .WithMany();

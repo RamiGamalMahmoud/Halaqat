@@ -57,7 +57,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
                             <Grid.RowDefinitions>
@@ -78,52 +77,52 @@
                                     Text="{Binding DataModel.Name, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
 
-                            <StackPanel
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                MinWidth="200"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="النوع" />
-                                <ComboBox
-                                    Padding="5"
-                                    Cursor="Hand"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding Genders}"
-                                    SelectedItem="{Binding DataModel.Gender}"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
-                            </StackPanel>
+                            <!--<StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            MinWidth="200"
+                            Margin="5"
+                            Orientation="Vertical">
+                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="النوع" />
+                            <ComboBox
+                            Padding="5"
+                            Cursor="Hand"
+                            DisplayMemberPath="Name"
+                            ItemsSource="{Binding Genders}"
+                            SelectedItem="{Binding DataModel.Gender}"
+                            Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                            </StackPanel>-->
 
                             <StackPanel
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="تاريخ التسجيل" />
                                 <DatePicker
                                     Padding="5"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}"
-                                    SelectedDate="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}" />
+                                    SelectedDate="{Binding DataModel.DateCreated, StringFormat={}{0:yyyy-MM-dd}}"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                             </StackPanel>
+
+                            <!--<StackPanel
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            MinWidth="200"
+                            Margin="5"
+                            Orientation="Vertical">
+                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="تاريخ الميلاد" />
+                            <DatePicker
+                            Padding="5"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            DisplayDate="{x:Static System:DateTime.Now}"
+                            SelectedDate="{Binding DataModel.DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat={}{0:yyyy-MM-dd}}"
+                            Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            </StackPanel>-->
 
                             <StackPanel
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                MinWidth="200"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="تاريخ الميلاد" />
-                                <DatePicker
-                                    Padding="5"
-                                    materialDesign:TextFieldAssist.HasClearButton="True"
-                                    DisplayDate="{x:Static System:DateTime.Now}"
-                                    SelectedDate="{Binding DataModel.DateOfBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat={}{0:yyyy-MM-dd}}"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-                            </StackPanel>
-
-                            <StackPanel
-                                Grid.Row="1"
-                                Grid.Column="1"
                                 MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
@@ -139,7 +138,7 @@
 
                             <StackPanel
                                 Grid.Row="1"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 MinWidth="200"
                                 Margin="5"
                                 IsEnabled="{Binding CanChangeProgram}"
@@ -201,23 +200,14 @@
                         <Grid>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock
-                                Margin="5,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="18"
-                                Foreground="{StaticResource BlackBrush}"
-                                Text="العنوان" />
-
                             <StackPanel
-                                Grid.Column="1"
-                                MinWidth="100"
+                                Grid.Column="0"
+                                MinWidth="150"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المدينة" />
@@ -231,8 +221,8 @@
                             </StackPanel>
 
                             <StackPanel
-                                Grid.Column="2"
-                                MinWidth="100"
+                                Grid.Column="1"
+                                MinWidth="150"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الحي" />
@@ -243,8 +233,8 @@
                             </StackPanel>
 
                             <StackPanel
-                                Grid.Column="3"
-                                MinWidth="100"
+                                Grid.Column="2"
+                                MinWidth="150"
                                 Margin="5"
                                 Orientation="Vertical">
                                 <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الشارع" />
@@ -298,7 +288,7 @@
                                     CommandParameter="{Binding PhoneNumber}"
                                     Cursor="Hand"
                                     Style="{StaticResource MaterialDesignOutlinedButton}">
-                                    <materialDesign:PackIcon Kind="PlusThick" />
+                                    <materialDesign:PackIcon Kind="AddCircle" />
                                 </Button>
 
                             </StackPanel>
