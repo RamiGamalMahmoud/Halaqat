@@ -29,10 +29,6 @@ namespace Halaqat.Shared.Models
         }
         private Address _address;
 
-        public int? GenderId { get; set; }
-        public Gender Gender { get => _gender; set => SetProperty(ref _gender, value); }
-        private Gender _gender;
-
         public User User { get; set; }
 
         public Collection<Phone> Phones { get; } = [];

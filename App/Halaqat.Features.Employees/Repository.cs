@@ -22,7 +22,6 @@ namespace Halaqat.Features.Employees
             {
                 IEnumerable<Employee> employees = await dbContext
                     .Employees
-                    .Include(x => x.Gender)
                     .Include(x => x.AcademicQualification)
                     .Include(x => x.JobTitle)
                     .Include(x => x.Address)
@@ -44,7 +43,6 @@ namespace Halaqat.Features.Employees
                 {
                     IEnumerable<Employee> employees = await dbContext
                         .Employees
-                        .Include(x => x.Gender)
                         .Include(x => x.AcademicQualification)
                         .Include(x => x.JobTitle)
                         .Include(x => x.Address)
@@ -82,7 +80,6 @@ namespace Halaqat.Features.Employees
                     DateCreated = dataModel.DateCreated,
                     AcademicQualificationId = dataModel.AcademicQualification.Id,
                     JobTitleId = dataModel.JobTitle.Id,
-                    GenderId = dataModel.Gender.Id,
                     Address = new Address()
                     {
                         CityId = dataModel.City.Id,
@@ -161,7 +158,6 @@ namespace Halaqat.Features.Employees
                 storedEmployee.Name = dataModel.Name;
                 storedEmployee.AcademicQualificationId = dataModel.AcademicQualification.Id;
                 storedEmployee.JobTitleId = dataModel.JobTitle.Id;
-                storedEmployee.GenderId = dataModel.Gender.Id;
                 storedEmployee.DateCreated = dataModel.DateCreated;
 
                 dbContext.Employees.Update(storedEmployee);
@@ -195,7 +191,6 @@ namespace Halaqat.Features.Employees
             {
                 IEnumerable<Employee> employees = await dbContext
                     .Employees
-                    .Include(x => x.Gender)
                     .Include(x => x.AcademicQualification)
                     .Include(x => x.JobTitle)
                     .Include(x => x.Address)

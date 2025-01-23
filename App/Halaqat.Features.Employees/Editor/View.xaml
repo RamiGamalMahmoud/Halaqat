@@ -114,22 +114,6 @@
                                     Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                             </StackPanel>
 
-                            <StackPanel
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                MinWidth="200"
-                                Margin="5"
-                                Orientation="Vertical">
-                                <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="النوع" />
-                                <ComboBox
-                                    Padding="5"
-                                    Cursor="Hand"
-                                    DisplayMemberPath="Name"
-                                    ItemsSource="{Binding Genders}"
-                                    SelectedItem="{Binding DataModel.Gender}"
-                                    Style="{StaticResource MaterialDesignOutlinedComboBox}" />
-                            </StackPanel>
-
                         </Grid>
 
                     </Border>
@@ -145,21 +129,12 @@
                         <Grid>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock
-                                Margin="5,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="18"
-                                Foreground="{StaticResource BlackBrush}"
-                                Text="العنوان" />
-
-                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <StackPanel
                                     Grid.Column="1"
                                     MinWidth="200"
@@ -186,7 +161,7 @@
                             </StackPanel>
 
                             <StackPanel
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
@@ -198,7 +173,7 @@
                             </StackPanel>
 
                             <StackPanel
-                                Grid.Column="3"
+                                Grid.Column="2"
                                 MinWidth="200"
                                 Margin="5"
                                 Orientation="Vertical">
