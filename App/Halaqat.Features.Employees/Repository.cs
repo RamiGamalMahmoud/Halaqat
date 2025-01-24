@@ -27,6 +27,7 @@ namespace Halaqat.Features.Employees
                     .Include(x => x.Address)
                     .ThenInclude(x => x.City)
                     .Include(x => x.Phones)
+                    .OrderBy(x => x.Name)
                     .Where(x => !x.IsDeleted)
                     .Where(x => x.Name.Contains(name))
                     .ToArrayAsync();
@@ -49,6 +50,7 @@ namespace Halaqat.Features.Employees
                         .ThenInclude(x => x.City)
                         .Include(x => x.Phones)
                         .Include(x => x.User)
+                        .OrderBy(x => x.Name)
                         .Where(x => !x.IsDeleted)
                         .ToArrayAsync();
                     SetEntities(employees);
@@ -198,6 +200,7 @@ namespace Halaqat.Features.Employees
                     .Include(x => x.Phones)
                     .Where(x => !x.IsDeleted)
                     .Where(x => x.JobTitle.Name == "معلم")
+                    .OrderBy(x => x.Name)
                     .ToArrayAsync();
 
                 return employees;

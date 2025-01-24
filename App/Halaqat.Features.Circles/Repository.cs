@@ -22,6 +22,7 @@ namespace Halaqat.Features.Circles
                         .Circles
                         .Include(x => x.Teacher)
                         .Include(x => x.Students)
+                        .OrderBy(x => x.Name)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
                     SetEntities(circles);
