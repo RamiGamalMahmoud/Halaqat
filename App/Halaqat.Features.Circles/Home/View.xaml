@@ -13,6 +13,10 @@
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="models" Source="{Binding Models}" />
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -83,20 +87,24 @@
             Grid.Row="1"
             d:ItemsSource="{d:SampleData}"
             materialDesign:DataGridAssist.CornerRadius="5"
+            AlternationCount="{Binding Models.Count}"
             AutoGenerateColumns="False"
             Background="Transparent"
+            ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
+            HeadersVisibility="All"
             IsReadOnly="True"
-            ItemsSource="{Binding Models}">
+            ItemsSource="{Binding Models}"
+            LoadingRow="DataGrid_LoadingRow">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
                 <DataGridTextColumn Binding="{Binding Teacher.Name}" Header="المعلم" />
                 <DataGridTextColumn Binding="{Binding Students.Count}" Header="عدد الطلبة" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
 
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
