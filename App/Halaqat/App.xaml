@@ -2,6 +2,7 @@
     x:Class="Halaqat.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Halaqat.Resources.Converters;assembly=Halaqat.Resources"
     xmlns:local="clr-namespace:Halaqat"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
@@ -13,7 +14,9 @@
             <sys:Boolean x:Key="True">True</sys:Boolean>
             <sys:Boolean x:Key="False">False</sys:Boolean>
 
+            <converters:RowIndexConverter x:Key="RowIndexConverter" />
             <ResourceDictionary.MergedDictionaries>
+
 
                 <materialDesign:BundledTheme
                     BaseTheme="Light"
@@ -21,10 +24,13 @@
                     SecondaryColor="Lime" />
 
                 <ResourceDictionary Source="/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
-
                 <ResourceDictionary Source="pack://application:,,,/Halaqat.Resources;component/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Halaqat.Resources;component/Styles/DataGridColumnHeader.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Halaqat.Resources;component/Styles/DataGridStyle.xaml" />
+
 
             </ResourceDictionary.MergedDictionaries>
+
 
         </ResourceDictionary>
 
