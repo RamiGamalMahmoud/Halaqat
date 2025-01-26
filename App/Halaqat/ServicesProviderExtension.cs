@@ -10,6 +10,7 @@ using Serilog;
 using System;
 using System.Data.Common;
 using System.IO;
+using System.Reflection;
 
 namespace Halaqat
 {
@@ -38,7 +39,7 @@ namespace Halaqat
             {
                 return logger.CreateLogger("logging");
             });
-
+            services.AddTransient<Services.ConfirmationService>();
             services.AddSingleton<AppHelper>();
             services.AddTransient<ConnectionStringFactory>();
             services.AddSingleton<SqlConnectionFactory>();
