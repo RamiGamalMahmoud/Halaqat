@@ -34,6 +34,8 @@ namespace Halaqat.Shared.Common
         [RelayCommand(CanExecute = nameof(CanDoModelAction))]
         protected async Task Remove(TModel model)
         {
+            bool result = await _mediator.Send(new Shared.Commands.Common.ConfirmCommand("هل تريد حذف هذا العنصر؟"));
+            if (!result) return;
             await _mediator.Send(new Shared.Commands.Common.RemoveModelCommand<TModel>(model));
         }
 
