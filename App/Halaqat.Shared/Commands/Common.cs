@@ -21,5 +21,6 @@ namespace Halaqat.Shared.Commands
         public record ShowSettingsViewCommand() : IRequest;
         public record ShowPrintCommand(string ReportName, Dictionary<string, string> Parameters = null, Dictionary<string, object> DataSources = null) : IRequest;
         public record DirectPrintCommand(string ReportName, string PrinterName, Dictionary<string, string> Parameters = null, Dictionary<string, object> DataSources = null) : IRequest;
+        public record ConfirmCommand(string Message) : IRequest<bool>;
     }
 }
