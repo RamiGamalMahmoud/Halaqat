@@ -17,6 +17,7 @@ namespace Halaqat
     {
         public static IServiceCollection ConfigureAppService(this IServiceCollection services)
         {
+            services.AddMediatR((cfg) => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             ILoggerFactory logger = LoggerFactory.Create(builder =>
             {
                 string logsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "halaqat");
