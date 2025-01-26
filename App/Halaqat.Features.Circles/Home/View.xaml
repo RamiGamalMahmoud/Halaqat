@@ -104,15 +104,17 @@
                 <DataGridTextColumn Binding="{Binding Students.Count}" Header="عدد الطلبة" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
 
-                <DataGridTemplateColumn Width="*">
+                <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
+                                    Foreground="#6c5ce7"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
@@ -121,6 +123,57 @@
                                             VerticalAlignment="Center"
                                             FontWeight="Bold"
                                             Text="تعديل" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Foreground="#6c5ce7"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Eye" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="عرض" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Foreground="#6c5ce7"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="People" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="حضور" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Foreground="#6c5ce7"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Brain" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="تسميع" />
                                     </StackPanel>
                                 </Button>
 

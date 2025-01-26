@@ -16,8 +16,11 @@ namespace Halaqat.Features.Circles.Home
         }
         public override async Task LoadDataAsync(bool isReload)
         {
-            _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
-            Models = _all;
+            using (BusyWorkRunner.CreateBusyWork(DoBusyWork))
+            {
+                _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
+                Models = _all;
+            }
         }
 
         protected override void OnSearch()
