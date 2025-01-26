@@ -18,6 +18,7 @@ namespace Halaqat.Features.Circles.Home
         {
             using (BusyWorkRunner.CreateBusyWork(DoBusyWork))
             {
+                await Task.Delay(5000);
                 _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
                 Models = _all;
             }

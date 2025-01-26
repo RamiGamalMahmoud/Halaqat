@@ -43,8 +43,6 @@ namespace Halaqat
             services.AddSingleton<SqlConnectionFactory>();
             services.AddSingleton<Halaqat.Data.IAppDbContextFactory, AppDbContextFactory>();
 
-            services.AddSingleton<MainWindow.AdministrativeOfficers.ViewModel>();
-            services.AddSingleton<MainWindow.AdministrativeOfficers.View>();
 
             services.AddSingleton<MainWindow.Teachers.ViewModel>();
             services.AddSingleton<MainWindow.Teachers.View>();

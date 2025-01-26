@@ -114,7 +114,6 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Foreground="#6c5ce7"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
@@ -131,7 +130,6 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Foreground="#6c5ce7"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
@@ -148,7 +146,6 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Foreground="#6c5ce7"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
@@ -165,7 +162,6 @@
                                     Padding="5"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
                                     CommandParameter="{Binding}"
-                                    Foreground="#6c5ce7"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
@@ -186,12 +182,13 @@
         </DataGrid>
 
         <ProgressBar
-            Grid.Row="1"
-            Height="10"
-            VerticalAlignment="Bottom"
-            Foreground="White"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Width="50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             IsIndeterminate="True"
-            Style="{StaticResource MaterialDesignLinearProgressBar}"
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
             Visibility="{Binding DoBusyWork.IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     </Grid>
