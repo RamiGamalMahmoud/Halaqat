@@ -127,8 +127,8 @@
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
-                                    CommandParameter="{Binding}"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowCircleDetailsCommand}"
+                                    CommandParameter="{Binding Id}"
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <StackPanel Orientation="Horizontal">
