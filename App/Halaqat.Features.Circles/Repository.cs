@@ -52,6 +52,24 @@ namespace Halaqat.Features.Circles
             }
         }
 
+        public async Task<Circle> GetById(int id)
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Circles
+                    .Include(x => x.Teacher)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.EducationalStage)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.Class)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.Address)
+                    .ThenInclude(x => x.City)
+                    .SingleOrDefaultAsync(x => x.Id == id);
+            }
+        }
+
         public override async Task<Result<Circle>> Create(CircleDataModel dataModel)
         {
             using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
