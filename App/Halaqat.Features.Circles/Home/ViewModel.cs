@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Shared.Common;
 using Halaqat.Shared.Models;
 using MediatR;
@@ -21,6 +22,12 @@ namespace Halaqat.Features.Circles.Home
                 _all = await _mediator.Send(new Shared.Commands.Common.GetAllCommand<Circle>(isReload));
                 Models = _all;
             }
+        }
+
+        [RelayCommand]
+        private async Task ShowCircleDetails(int id)
+        {
+            await _mediator.Send(new Shared.Commands.Circles.ShowCircleDetailsCommand(id));
         }
 
         protected override void OnSearch()
