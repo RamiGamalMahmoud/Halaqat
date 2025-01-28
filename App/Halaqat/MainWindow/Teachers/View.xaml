@@ -84,13 +84,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
-                <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
                 <DataGridTextColumn Binding="{Binding Circle.Name}" Header="الحلقة" />
                 <DataGridTextColumn Binding="{Binding Circle.Teacher.Name}" Header="المعلم" />
                 <DataGridTextColumn Binding="{Binding EducationalStage.Name}" Header="المرحلة الدراسية" />
                 <DataGridTextColumn Binding="{Binding Class.Name}" Header="الصف الدراسي" />
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
-                <DataGridTextColumn Binding="{Binding DateOfBirth, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ الميلاد" />
 
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>

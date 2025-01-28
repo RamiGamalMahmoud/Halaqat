@@ -129,6 +129,7 @@
             materialDesign:DataGridAssist.CornerRadius="5"
             AutoGenerateColumns="False"
             Background="Transparent"
+            ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">
