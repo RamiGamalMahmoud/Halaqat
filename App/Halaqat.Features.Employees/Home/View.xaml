@@ -118,11 +118,17 @@
             LoadingRow="DataGrid_LoadingRow">
 
             <DataGrid.Columns>
+
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
+
                 <DataGridTextColumn Binding="{Binding JobTitle.Name}" Header="الوظيفة" />
+
                 <DataGridTextColumn Binding="{Binding AcademicQualification.Name}" Header="المؤهل" />
+
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
+
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} - {1} - {2}">
@@ -171,8 +177,11 @@
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
+
                     </DataGridTemplateColumn.CellTemplate>
+
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
 
         </DataGrid>
