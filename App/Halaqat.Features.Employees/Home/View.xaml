@@ -129,6 +129,8 @@
 
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
 
+                <DataGridTextColumn Header="اسم المستخدم" Binding="{Binding User.UserName}" />
+
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} - {1} - {2}">
