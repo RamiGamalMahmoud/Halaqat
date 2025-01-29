@@ -15,8 +15,8 @@ namespace Halaqat.Features.Management
             services.AddSingleton<Cities.Home.View>();
             services.AddSingleton<Cities.Home.ViewModel>();
 
-            services.AddSingleton<Shared.Abstraction.Features.Management.IHomeView, Homde.View>();
-            services.AddSingleton<Homde.ViewModel>();
+            services.AddSingleton<Shared.Abstraction.Features.Management.IHomeView, Home.View>();
+            services.AddSingleton<Home.ViewModel>();
 
             return services;
         }
