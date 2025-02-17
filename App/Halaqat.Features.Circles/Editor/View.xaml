@@ -64,7 +64,7 @@
                             MinWidth="200"
                             Margin="5"
                             Orientation="Vertical">
-                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الاسم" />
+                            <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الحلقة" />
                             <TextBox
                                 Padding="5"
                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"

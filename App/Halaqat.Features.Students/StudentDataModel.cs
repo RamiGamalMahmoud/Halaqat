@@ -19,7 +19,7 @@ namespace Halaqat.Features.Students
             {
                 Model = model;
                 Name = model.Name;
-                DateOfBirth = model.DateOfBirth;
+                //DateOfBirth = model.DateOfBirth;
                 DateCreated = model.DateCreated;
                 Address = model.Address;
                 City = model.Address.City;
@@ -27,7 +27,7 @@ namespace Halaqat.Features.Students
                 Street = Address.Street;
                 Circle = model.Circle;
                 Phones = new ObservableCollection<Phone>(model.Phones);
-                Gender = model.Gender;
+                //Gender = model.Gender;
                 Program = model.Program;
                 EducationalStage = model.EducationalStage;
                 Class = model.Class;
@@ -48,10 +48,10 @@ namespace Halaqat.Features.Students
             model.Address.City = City;
             model.Address.District = District;
             model.Address.Street = Street;
-            model.Gender = Gender;
+            //model.Gender = Gender;
             model.Circle = Circle;
             model.Phones.Clear();
-            model.DateOfBirth =(DateTime) DateOfBirth;
+            //model.DateOfBirth =(DateTime) DateOfBirth;
             model.Program = Program;
             model.EducationalStage = EducationalStage;
             model.Class = Class;
@@ -79,11 +79,11 @@ namespace Halaqat.Features.Students
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private DateOnly _dateCreated;
 
-        [ObservableProperty]
-        [Required(ErrorMessage = "حقل مطلوب")]
-        [NotifyDataErrorInfo]
-        [NotifyPropertyChangedFor(nameof(IsValid))]
-        private DateTime? _dateOfBirth = null;
+        //[ObservableProperty]
+        //[Required(ErrorMessage = "حقل مطلوب")]
+        //[NotifyDataErrorInfo]
+        //[NotifyPropertyChangedFor(nameof(IsValid))]
+        //private DateTime? _dateOfBirth = null;
 
         [ObservableProperty]
         private Address _address;
@@ -106,11 +106,11 @@ namespace Halaqat.Features.Students
         [NotifyPropertyChangedFor(nameof(IsValid))]
         private string _street;
 
-        [ObservableProperty]
-        [Required(ErrorMessage = "حقل مطلوب")]
-        [NotifyDataErrorInfo]
-        [NotifyPropertyChangedFor(nameof(IsValid))]
-        private Gender _gender;
+        //[ObservableProperty]
+        //[Required(ErrorMessage = "حقل مطلوب")]
+        //[NotifyDataErrorInfo]
+        //[NotifyPropertyChangedFor(nameof(IsValid))]
+        //private Gender _gender;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsValid))]

@@ -32,7 +32,6 @@ namespace Halaqat.Features.Employees.Teachers
                     DateCreated = dataModel.DateCreated,
                     AcademicQualificationId = dataModel.AcademicQualification.Id,
                     JobTitleId = dataModel.JobTitle.Id,
-                    GenderId = dataModel.Gender.Id,
                     Address = new Address()
                     {
                         CityId = dataModel.City.Id,
@@ -65,7 +64,6 @@ namespace Halaqat.Features.Employees.Teachers
                 {
                     IEnumerable<Teacher> teachers = await dbContext
                         .Teachers
-                        .Include(x => x.Gender)
                         .Include(x => x.AcademicQualification)
                         .Include(x => x.JobTitle)
                         .Include(x => x.Address)
@@ -86,7 +84,18 @@ namespace Halaqat.Features.Employees.Teachers
             {
                 Teacher teacher = await dbContext
                     .Teachers
-                    .Include(x => x.Circles).ThenInclude(c => c.Students).ThenInclude(s => s.Program)
+                    .Include(x => x.Circles)
+                        .ThenInclude(c => c.Students)
+                        .ThenInclude(s => s.Program)
+                    .Include(x => x.Circles)
+                        .ThenInclude(c => c.Students)
+                        .ThenInclude(s => s.EducationalStage)
+                    .Include(x => x.Circles)
+                        .ThenInclude(c => c.Students)
+                        .ThenInclude(s  => s.Class)
+                    .Include(x => x.Circles)
+                        .ThenInclude(c => c.Students)
+                        .ThenInclude(s => s.Address)
                     .Where(x => x.User.Id == userId)
                     .FirstOrDefaultAsync();
 

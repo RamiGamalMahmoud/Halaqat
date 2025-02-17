@@ -4,6 +4,7 @@ using Halaqat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123200418_RemoveGenderFromEmployeesTable")]
+    partial class RemoveGenderFromEmployeesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -500,30 +503,6 @@ namespace Halaqat.Data.Migrations
                             Id = 2,
                             DateCreated = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "إداري"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "معلمة"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "إدارية"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "مشرف"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "مشرفة"
                         });
                 });
 

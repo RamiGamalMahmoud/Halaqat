@@ -1,6 +1,5 @@
 ﻿using Halaqat.Data;
 using Halaqat.Shared;
-using Halaqat.Shared.Commands;
 using Halaqat.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,7 +42,6 @@ namespace Halaqat.Features.Students
                     IEnumerable<Student> students = await dbContext.Students
                         .Include(x => x.Address)
                         .ThenInclude(x => x.City)
-                        .Include(x => x.Gender)
                         .Include(x => x.Phones)
                         .Include(x => x.Circle)
                         .ThenInclude(x => x.Teacher)
@@ -51,6 +49,7 @@ namespace Halaqat.Features.Students
                         .Include(x => x.EducationalStage)
                         .Include(x => x.Class)
                         .Where(x => !x.IsDeleted)
+                        .OrderBy(x => x.Name)
                         .ToListAsync();
 
                     SetEntities(students);
@@ -82,7 +81,7 @@ namespace Halaqat.Features.Students
             {
                 IEnumerable<Student> students = await dbContext
                     .Students
-                    .Include(x => x.Gender)
+                    //.Include(x => x.Gender)
                     .Include(x => x.Address)
                     .ThenInclude(x => x.City)
                     .Include(x => x.Circle)
@@ -108,9 +107,9 @@ namespace Halaqat.Features.Students
 
                 Student student = Activator.CreateInstance(typeof(Student), true) as Student;
                 student.Name = dataModel.Name;
-                student.DateOfBirth = (DateTime)dataModel.DateOfBirth;
+                //student.DateOfBirth = (DateTime)dataModel.DateOfBirth;
                 student.DateCreated = dataModel.DateCreated;
-                student.GenderId = dataModel.Gender.Id;
+                //student.GenderId = dataModel.Gender.Id;
                 student.Address = studentAddress;
                 student.CircleId = dataModel.Circle?.Id;
                 student.ProgramId = dataModel.Program?.Id;
@@ -156,8 +155,8 @@ namespace Halaqat.Features.Students
                 }
 
                 stored.Name = dataModel.Name;
-                stored.GenderId = dataModel.Gender.Id;
-                stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
+                //stored.GenderId = dataModel.Gender.Id;
+                //stored.DateOfBirth = (DateTime)dataModel.DateOfBirth;
                 stored.CircleId = dataModel.Circle.Id;
                 stored.ProgramId = dataModel.Program?.Id;
                 stored.DateCreated = dataModel.DateCreated;

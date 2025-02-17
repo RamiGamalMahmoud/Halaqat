@@ -81,6 +81,7 @@
             d:ItemsSource="{d:SampleData}"
             AutoGenerateColumns="False"
             Background="Transparent"
+            ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
             IsReadOnly="True"
             ItemsSource="{Binding Models}">

@@ -15,7 +15,7 @@ namespace Halaqat.Features.Employees.Editor
 
         protected override async Task Save()
         {
-            if (DataModel.JobTitle.Name == "معلم")
+            if (DataModel.JobTitle.Name.Contains("معلم"))
             {
                 Result<Teacher> teacherResult = await _mediator.Send(new Shared.Commands.Common.CreateModelCommand<Teacher, EmployeeViewModel>(DataModel));
                 if (teacherResult.IsSuccess)

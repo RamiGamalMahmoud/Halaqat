@@ -2,13 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Halaqat.Resources;
-using Halaqat.Shared;
 using Halaqat.Shared.Models;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,15 +24,6 @@ namespace Halaqat.MainWindow.Teachers
             _serviceProvider = serviceProvider;
             _mediator = mediator;
             _messenger = messenger;
-
-            IEnumerable<ViewItem> viewItems = new ObservableCollection<ViewItem>()
-            {
-                new ViewItem("خروج",
-                true,
-                () => messenger.Send<Messages.Users.LogoutMessage>())
-            };
-            ViewItems = viewItems.Where(x => x.IsEnabled);
-
         }
 
         public async Task LoadData()

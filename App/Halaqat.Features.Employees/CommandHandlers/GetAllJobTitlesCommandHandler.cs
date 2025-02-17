@@ -4,6 +4,7 @@ using Halaqat.Shared.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace Halaqat.Features.Employees.CommandHandlers
         {
             using (AppDbContext dbContext = dbContextFactory.CreateAppDbContext())
             {
-                return await dbContext.JobTitles.ToListAsync();
+                return await dbContext.JobTitles.OrderBy(x => x.Name).ToListAsync();
             }
         }
     }

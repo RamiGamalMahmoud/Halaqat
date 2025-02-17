@@ -2,5 +2,5 @@
 
 namespace Halaqat.MainWindow
 {
-    public record ViewItem(string Title, bool IsEnabled = true, Action Action = null);
+    public record ViewItem(string Title, Action Action = null, bool IsEnabled = true);
 }

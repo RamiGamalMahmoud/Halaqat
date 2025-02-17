@@ -36,7 +36,7 @@
                     CornerRadius="5">
 
                     <StackPanel MinWidth="200" Orientation="Vertical">
-                        <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="الاسم" />
+                        <TextBlock Foreground="{StaticResource MaterialDesign.Brush.Primary}" Text="المؤهل" />
                         <TextBox
                             Padding="5"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"

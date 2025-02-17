@@ -10,6 +10,7 @@ using Serilog;
 using System;
 using System.Data.Common;
 using System.IO;
+using System.Reflection;
 
 namespace Halaqat
 {
@@ -17,6 +18,7 @@ namespace Halaqat
     {
         public static IServiceCollection ConfigureAppService(this IServiceCollection services)
         {
+            services.AddMediatR((cfg) => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             ILoggerFactory logger = LoggerFactory.Create(builder =>
             {
                 string logsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "halaqat");
@@ -37,14 +39,12 @@ namespace Halaqat
             {
                 return logger.CreateLogger("logging");
             });
-
+            services.AddTransient<Services.ConfirmationService>();
             services.AddSingleton<AppHelper>();
             services.AddTransient<ConnectionStringFactory>();
             services.AddSingleton<SqlConnectionFactory>();
             services.AddSingleton<Halaqat.Data.IAppDbContextFactory, AppDbContextFactory>();
 
-            services.AddSingleton<MainWindow.AdministrativeOfficers.ViewModel>();
-            services.AddSingleton<MainWindow.AdministrativeOfficers.View>();
 
             services.AddSingleton<MainWindow.Teachers.ViewModel>();
             services.AddSingleton<MainWindow.Teachers.View>();

@@ -4,6 +4,7 @@ using Halaqat.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Halaqat.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250123194524_RemoveGenderAndDateofBirth")]
+    partial class RemoveGenderAndDateofBirth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -405,6 +408,9 @@ namespace Halaqat.Data.Migrations
                     b.Property<DateTime?>("DateDeleted")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -425,6 +431,8 @@ namespace Halaqat.Data.Migrations
                     b.HasIndex("AcademicQualificationId");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("GenderId");
 
                     b.HasIndex("JobTitleId");
 
@@ -500,30 +508,6 @@ namespace Halaqat.Data.Migrations
                             Id = 2,
                             DateCreated = new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "إداري"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "معلمة"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "إدارية"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "مشرف"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DateCreated = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "مشرفة"
                         });
                 });
 
@@ -983,6 +967,11 @@ namespace Halaqat.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Halaqat.Shared.Models.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("Halaqat.Shared.Models.JobTitle", "JobTitle")
                         .WithMany()
                         .HasForeignKey("JobTitleId")
@@ -997,6 +986,8 @@ namespace Halaqat.Data.Migrations
                     b.Navigation("AcademicQualification");
 
                     b.Navigation("Address");
+
+                    b.Navigation("Gender");
 
                     b.Navigation("JobTitle");
 

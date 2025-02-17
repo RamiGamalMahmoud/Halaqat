@@ -21,7 +21,99 @@
         <Grid>
             <commonComponents:QuranBackground />
             <Border Padding="5">
-                <ContentControl Content="{Binding Dashboard}" />
+                <Border FlowDirection="RightToLeft">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Column="0"
+                            Background="#ecf0f1"
+                            BorderBrush="LightGray"
+                            BorderThickness="1"
+                            CornerRadius="0 5 5 0">
+                            <Grid Grid.Column="0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <Border
+                                    Margin="0,10,0,0"
+                                    Padding="5"
+                                    HorizontalAlignment="Center"
+                                    BorderBrush="LightGray"
+                                    BorderThickness="1"
+                                    CornerRadius="5">
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Height="64"
+                                        Cursor="Hand"
+                                        Opacity="0.5"
+                                        Source="/Halaqat.Resources;Component/Images/quran-64.png" />
+                                </Border>
+
+                                <ListBox
+                                    x:Name="Views"
+                                    Grid.Row="1"
+                                    Cursor="Hand"
+                                    ItemsSource="{Binding ViewItems}"
+                                    SelectedItem="{Binding ViewItem}"
+                                    Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
+
+                                    <ListBox.ItemContainerStyle>
+                                        <Style BasedOn="{StaticResource MaterialDesignNavigationPrimaryListBoxItem}" TargetType="ListBoxItem">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsEnabled}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock
+                                                    FontSize="20"
+                                                    FontWeight="Bold"
+                                                    Text="{Binding Title}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+
+                                </ListBox>
+
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Height="50"
+                                    HorizontalAlignment="Center"
+                                    Foreground="{StaticResource BlueBrush}"
+                                    Text="{Binding UserName}" />
+
+                            </Grid>
+                        </Border>
+
+                        <Grid Grid.Column="1">
+                            <Border Padding="5">
+                                <ContentControl Content="{Binding CurrentView}" />
+                            </Border>
+                        </Grid>
+
+
+                    </Grid>
+
+                </Border>
             </Border>
         </Grid>
 

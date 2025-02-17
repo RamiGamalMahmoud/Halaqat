@@ -22,6 +22,7 @@ namespace Halaqat.Features.Circles
                         .Circles
                         .Include(x => x.Teacher)
                         .Include(x => x.Students)
+                        .OrderBy(x => x.Name)
                         .Where(x => !x.IsDeleted)
                         .ToListAsync();
                     SetEntities(circles);
@@ -48,6 +49,24 @@ namespace Halaqat.Features.Circles
                     .Include(x => x.Students)
                     .Where(x => !x.IsDeleted)
                     .Where(x => x.Name.Contains(searchTerm)).ToListAsync();
+            }
+        }
+
+        public async Task<Circle> GetById(int id)
+        {
+            using (AppDbContext dbContext = _dbContextFactory.CreateAppDbContext())
+            {
+                return await dbContext
+                    .Circles
+                    .Include(x => x.Teacher)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.EducationalStage)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.Class)
+                    .Include(x => x.Students)
+                    .ThenInclude(x => x.Address)
+                    .ThenInclude(x => x.City)
+                    .SingleOrDefaultAsync(x => x.Id == id);
             }
         }
 

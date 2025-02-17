@@ -13,6 +13,10 @@
     Loaded="UserControl_Loaded"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="models" Source="{Binding Models}" />
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -83,23 +87,27 @@
             Grid.Row="1"
             d:ItemsSource="{d:SampleData}"
             materialDesign:DataGridAssist.CornerRadius="5"
+            AlternationCount="{Binding Models.Count}"
             AutoGenerateColumns="False"
             Background="Transparent"
+            ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
+            HeadersVisibility="All"
             IsReadOnly="True"
-            ItemsSource="{Binding Models}">
+            ItemsSource="{Binding Models}"
+            LoadingRow="DataGrid_LoadingRow">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+                <DataGridTextColumn Binding="{Binding Name}" Header="اسم الحلقة" />
                 <DataGridTextColumn Binding="{Binding Teacher.Name}" Header="المعلم" />
                 <DataGridTextColumn Binding="{Binding Students.Count}" Header="عدد الطلبة" />
-                <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy-MM-dd}}" Header="تاريخ التسجيل" />
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+
                                 <Button
                                     Margin="5,0"
                                     Padding="5"
@@ -116,6 +124,54 @@
                                     </StackPanel>
                                 </Button>
 
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowCircleDetailsCommand}"
+                                    CommandParameter="{Binding Id}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Eye" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="عرض" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="People" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="حضور" />
+                                    </StackPanel>
+                                </Button>
+
+                                <Button
+                                    Margin="5,0"
+                                    Padding="5"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor}, Path=DataContext.ShowEditCommand}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.Privileges.CanUpdate, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Margin="0,0,5,0" Kind="Brain" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontWeight="Bold"
+                                            Text="تسميع" />
+                                    </StackPanel>
+                                </Button>
+
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -125,12 +181,13 @@
         </DataGrid>
 
         <ProgressBar
-            Grid.Row="1"
-            Height="10"
-            VerticalAlignment="Bottom"
-            Foreground="White"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Width="50"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             IsIndeterminate="True"
-            Style="{StaticResource MaterialDesignLinearProgressBar}"
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
             Visibility="{Binding DoBusyWork.IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     </Grid>

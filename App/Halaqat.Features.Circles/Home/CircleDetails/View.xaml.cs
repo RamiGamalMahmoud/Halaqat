@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
 
-namespace Halaqat.MainWindow.AdministrativeOfficers
+namespace Halaqat.Features.Circles.Home.CircleDetails
 {
-    internal partial class View : UserControl
+    internal partial class View : Window
     {
         public View(ViewModel viewModel)
         {

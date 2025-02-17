@@ -77,7 +77,7 @@ namespace Halaqat.Features.Programs
                         .Include(x => x.ProgramDays)
                         .ThenInclude(x => x.ProgramDayItems)
                         .ThenInclude(x => x.VerseTo)
-
+                        .OrderBy(x => x.Name)
                         .ToListAsync();
                     SetEntities(programs);
                 }

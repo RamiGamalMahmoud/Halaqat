@@ -110,17 +110,67 @@
             d:ItemsSource="{d:SampleData}"
             AutoGenerateColumns="False"
             Background="Transparent"
+            ColumnHeaderStyle="{StaticResource MyDataGridColumnHeader}"
             FontWeight="Bold"
+            HeadersVisibility="All"
             IsReadOnly="True"
-            ItemsSource="{Binding Employees}">
+            ItemsSource="{Binding Employees}"
+            LoadingRow="DataGrid_LoadingRow">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" Header="مسلسل" />
+
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" />
+
                 <DataGridTextColumn Binding="{Binding Name}" Header="الاسم" />
-                <DataGridTextColumn Binding="{Binding Gender.Name}" Header="النوع" />
+
                 <DataGridTextColumn Binding="{Binding JobTitle.Name}" Header="الوظيفة" />
+
                 <DataGridTextColumn Binding="{Binding AcademicQualification.Name}" Header="المؤهل" />
+
                 <DataGridTextColumn Binding="{Binding DateCreated, StringFormat={}{0:yyyy/MM/dd}}" Header="تاريخ التسجيل" />
+
+                <!--<DataGridTemplateColumn Header="الحالة">
+
+                <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                <Border Padding="5" CornerRadius="3">
+
+                <Border.Style>
+                <Style TargetType="Border">
+                <Style.Triggers>
+                <DataTrigger Binding="{Binding User.IsActive}" Value="True">
+                <Setter Property="Background" Value="#c8e6c9" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding User.IsActive}" Value="False">
+                <Setter Property="Background" Value="#ffcdd2" />
+                </DataTrigger>
+                </Style.Triggers>
+                </Style>
+                </Border.Style>
+
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                <Style.Triggers>
+                <DataTrigger Binding="{Binding User.IsActive}" Value="True">
+                <Setter Property="Text" Value="نشط" />
+                <Setter Property="Foreground" Value="#1b5e20" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding User.IsActive}" Value="False">
+                <Setter Property="Text" Value="غير نشط" />
+                <Setter Property="Foreground" Value="#d32f2f" />
+                </DataTrigger>
+                </Style.Triggers>
+                </Style>
+                </TextBlock.Style>
+                </TextBlock>
+                </Border>
+                </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+
+                <DataGridTextColumn Binding="{Binding User.UserName}" Header="اسم المستخدم" />
+
                 <DataGridTextColumn Header="العنوان">
                     <DataGridTextColumn.Binding>
                         <MultiBinding StringFormat="{}{0} - {1} - {2}">
@@ -169,8 +219,11 @@
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
+
                     </DataGridTemplateColumn.CellTemplate>
+
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
 
         </DataGrid>
